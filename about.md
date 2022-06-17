@@ -2,6 +2,6 @@
 layout: default
 title: About
 ---
-# About page
+# About
 
-This page tells you a little bit about me.
+My name is Vaclav Elias. I am a programmer. I am interested in C# and .NET (Core) coding.
