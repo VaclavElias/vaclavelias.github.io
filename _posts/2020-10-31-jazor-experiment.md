@@ -2,7 +2,8 @@
 layout: post
 title:  "Jazor Experiment"
 excerpt: "Jazor is a JavaScript helper library for ASP.NET Core websites which takes common and repeated workflow scenarios to simple actions. It is crossing some Blazor and SPA functionality as well. It is useful if you are using intensively ASP.NET Core Views and Partial Views, avoiding any JSON."
-tags: TypeScript ASP.NET
+categories: dotnet
+tags: TypeScript ASP.NET-Core
 ---
 
 This experiment library helps with very common actions on the website which involve repeating JavaScript code across multiple different projects. Click a button or a link, do something in the backend and UI. This library takes an approach rather updating whole HTML blocks than granular tags with JSON and JavaScript libraries, so there is no need fiddling and mapping JSON objects to whatever UI you have.
@@ -36,10 +37,9 @@ _Note: Jazor name is just temporary name_
 - Make prompts and spinners plugable
 
 ## Examples
-I will be heavily using [Bootstrap](https://getbootstrap.com/) in my examples.
+I will be using [Bootstrap](https://getbootstrap.com/) in my examples.
 
-
-## Example 1
+### Example 1
 Load multiple delayed HTML / Partial Views.
 
  - Load News part
@@ -51,7 +51,7 @@ Load multiple delayed HTML / Partial Views.
     <div jazor-url="@((nameof(ExamplesController), nameof(ExamplesController.TopNews), null))" jazor-delay="1">Loading...</div>
 ```
 
-## Example 2
+### Example 2
 
 Click a button or link to load HTML / Partial Views to your target element.
 
