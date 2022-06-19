@@ -1,15 +1,22 @@
 ---
 layout: post
-title:  "Stride3D Minimal API or Code Only Approach"
+title:  "Stride3D Minimal API / Code Only Approach"
 categories: dotnet
 tags: C# Stride3D .NET Game
 ---
-I love the concept of .NET 6 minimal API (thanks @davidfowl and @aspnet!), with a bit of help from the @stridedotnet community, we are also experimenting. 12 lines of code. Coming soon with Stride 4.1 release. 
+12 lines of code, this is what it takes to run Stride 3D example below. I have mentioned also [here](https://twitter.com/VasoElias/status/1525162302487543809).
 
 ```csharp
-public class EFConfigurationValue
+using var game = new Game();
+
+game.Run(start: (Scene rootScene) =>
 {
-    public string Id { get; set; }
-    public string Value { get; set; }
-}
+    game.SetupBase3DScene();
+
+    var entity = new Entity(new Vector3(1f, 0.5f, 3f));
+
+    entity.Add(new ModelComponent(new CubeProceduralModel().Generate(game.Services)));
+
+    entity.Scene = rootScene;
+});
 ```

@@ -111,8 +111,7 @@
 }
 
 .highlight .k, .highlight .kv {
-    color: #000000;
-    font-weight: bold;
+    color: rgb(194,111,219);
 }
 
 .highlight .mf {
@@ -192,6 +191,11 @@
     color: #d14;
 }
 
+.highlight .n {
+    color: rgb(255,120,17);
+    font-weight: bold;
+}
+
 .highlight .na {
     color: #008080;
 }
@@ -228,7 +232,7 @@
 }
 
 .highlight .nf, .highlight .fm {
-    color: #990000;
+    color: rgb(232,6,119);
     font-weight: bold;
 }
 
@@ -238,7 +242,7 @@
 }
 
 .highlight .nn {
-    color: #555555;
+    color: rgb(194,111,219);
 }
 
 .highlight .nt {

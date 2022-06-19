@@ -6,6 +6,8 @@ title: About Me - Vaclav Elias
 <img class="img-fluid rounded-circle img-thumbnail w-25" alt="Vaclav Elias" src="/assets/img/vaso-profile.jpg">
 </div>
 
+Thanks for visiting my site. My name is Vaclav Elias (Vašo), and this is my weblog about various technical subjects.
+
 I live in London and work at [twentyAI](https://www.twentyai.com/) as the T360 Principal Engineer.
 
 I am a programmer. I am interested in C# and .NET (Core) coding.

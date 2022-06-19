@@ -1,6 +1,14 @@
 plugins:
   - jekyll-sitemap
 
+title: Code or not to code
+email: vaclavelias@gmail.com
+description: Blog about coding in .NET and C#.
+baseurl: ""
+#url: "https://mycutejekyllblog.com"
+twitter_username: VasoElias
+github_username:  VaclavElias
+
 #markdown: kramdown
 #highlighter: rouge
 

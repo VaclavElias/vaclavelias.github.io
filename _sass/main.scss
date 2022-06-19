@@ -6,17 +6,17 @@ body {
     background-color: #fff !important;
 }
 
-h3.entry-title a {
+a {
     text-decoration: none;
 }
 
-h3.entry-title a:hover {
+a:hover {
     text-decoration: underline;
 }
 
 .postcontent {
     margin: 30px 0;
-    /*margin-bottom: 2px;*/
+    box-shadow: 2px 2px 8px #0000001a;
     padding-top: 60px;
     padding-left: 16%;
     padding-right: 16%;
@@ -27,14 +27,26 @@ h3.entry-title a:hover {
     h1 {
         text-align: center;
     }
+
+    a {
+        text-decoration: underline;
+    }
 }
 
 .search-main {
     background: #fff;
-    /*box-shadow: 2px 2px 8px rgb(0 0 0 / 10%);*/
+    box-shadow: 2px 2px 8px #0000001a;
     border-radius: 4px;
     padding: 0.5em 1.25em;
     margin-bottom: 1.5em;
+}
+
+.box-style {
+    padding: 20px;
+    margin-bottom: 25px;
+    background: #fff;
+    box-shadow: 2px 2px 8px #0000001a;
+    border-radius: 4px;
 }
 
 @media screen and (max-width: 768px) {

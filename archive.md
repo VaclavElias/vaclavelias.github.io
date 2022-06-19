@@ -8,17 +8,11 @@ title: Archive
 {% for year in postsByYear %}
   <h3>{{ year.name }}</h3>
   {% assign postsByMonth = year.items | group_by_exp:"post", "post.date | date: '%B'" %}
-
-{% for month in postsByMonth %}
-<h4>{{ month.name }}</h4>
 <ul>
-  {% for post in month.items %}
-    <li>
+  {% for post in year.items %}
+    <li>{{ post.date | date: "%b %d" }}
       <a href="{{ post.url }}">{{ post.title }}</a>
-      <br>{{ post.excerpt }}
     </li>
   {% endfor %}
 </ul>
-
-{% endfor %}
 {% endfor %}

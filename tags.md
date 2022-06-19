@@ -2,7 +2,10 @@
 layout: page
 title: Tags
 ---
-{% for tag in site.tags %}
+# Tags
+
+{% assign sorted_tags = site.tags | sort %}
+{% for tag in sorted_tags %}
   <h3>{{ tag[0] | replace: "-"," " }}</h3>
   <ul>
     {% for post in tag[1] %}
