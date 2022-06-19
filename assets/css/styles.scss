@@ -2,29 +2,3 @@
 ---
 @import "custom";
 @import "main";
-@import "_syntax-highlighting";
-
-body {
-    background-color: #f4f4f4;
-}
-
-.navbar.bg-light {
-    background-color: #fff !important;
-}
-
-.postcontent {
-    margin: 30px 0;
-    /*margin-bottom: 2px;*/
-    padding-top: 60px;
-    padding-left: 16%;
-    padding-right: 16%;
-    background-color: #fff;
-    border-radius: 4px 4px 0 0;
-}
-
-@media screen and (max-width: 768px) {
-    .postcontent {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
