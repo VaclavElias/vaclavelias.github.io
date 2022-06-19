@@ -6,6 +6,14 @@ body {
     background-color: #fff !important;
 }
 
+h3.entry-title a {
+    text-decoration: none;
+}
+
+h3.entry-title a:hover {
+    text-decoration: underline;
+}
+
 .postcontent {
     margin: 30px 0;
     /*margin-bottom: 2px;*/
@@ -15,6 +23,10 @@ body {
     padding-bottom: 30px;
     background-color: #fff;
     border-radius: 4px 4px 0 0;
+
+    h1 {
+        text-align: center;
+    }
 }
 
 .search-main {
