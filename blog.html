@@ -1,0 +1,23 @@
+---
+layout: default
+title: Blog
+---
+<h1 id="blog">Blog</h1>
+<div class="row">
+    <div class="col-lg-9 col-md-8 col-sm-12 landing-content-wrapper landing-site">
+        {% for post in site.posts %}
+        <article class="search-main">
+            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+            <p>{{ post.date | date_to_string: "ordinal", "UK" }}</p>
+            <p>{{ post.excerpt }}
+            </p>
+            <p>
+                {% for post in post.tags %}
+                    <span class="badge rounded-pill text-bg-success" href="{{ post }}">{{ post }}</span>
+                {% endfor %}
+            </p>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+

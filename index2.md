@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>layout: default
+title: Blog</title>
+</head>
+<body>
+
+    <hr />
+<h2 id="layout-default-title-blog">layout: default
+
+title: Blog</h2>
+<h1 id="blog">Blog</h1>
+<p>{% for post in site.posts %}
+<div class="row postcontent">
+<a href="{{ post.url }}">{{ post.title }}</a>
+{{ post.excerpt }}
+</div>
+{% endfor %}</p>
+
+
+</body>
+</html>
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/VaclavElias/vaclavelias.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
