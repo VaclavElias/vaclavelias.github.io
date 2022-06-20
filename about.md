@@ -3,7 +3,7 @@ layout: page
 title: About Me - Vaclav Elias
 ---
 <div class="text-center mb-4">
-<img class="img-fluid rounded-circle img-thumbnail w-25" alt="Vaclav Elias" src="/assets/img/vaso-profile.jpg">
+<img class="img-fluid rounded-circle img-thumbnail w-25" alt="Vaclav Elias" src="/assets/img/vaso-profile-photo.jpg">
 </div>
 
 Thanks for visiting my site. My name is Vaclav Elias (Vašo), and this is my weblog about various technical subjects.
