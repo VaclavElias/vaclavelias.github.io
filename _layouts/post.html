@@ -23,7 +23,7 @@
                     <hr />
                     <p>
                         {% for tag in page.tags %}
-                        <span class="badge rounded-pill text-bg-success" href="{{ tag }}">{{ tag | replace: "-"," " }}</span>
+                        <span class="badge rounded-pill text-bg-success">{{ tag | replace: "-"," " }}</span>
                         {% endfor %}
                     </p>
                 </article>

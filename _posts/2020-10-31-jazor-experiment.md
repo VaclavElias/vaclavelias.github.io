@@ -4,6 +4,7 @@ title:  "Jazor Experiment"
 excerpt: "Jazor is a JavaScript helper library for ASP.NET Core websites which takes common and repeated workflow scenarios to simple actions. It is crossing some Blazor and SPA functionality as well. It is useful if you are using intensively ASP.NET Core Views and Partial Views, avoiding any JSON."
 categories: dotnet
 tags: TypeScript ASP.NET-Core
+image: /assets/img/dotnet-bot_scene_juggling-small.png
 ---
 
 This experiment library helps with very common actions on the website which involve repeating JavaScript code across multiple different projects. Click a button or a link, do something in the backend and UI. This library takes an approach rather updating whole HTML blocks than granular tags with JSON and JavaScript libraries, so there is no need fiddling and mapping JSON objects to whatever UI you have.

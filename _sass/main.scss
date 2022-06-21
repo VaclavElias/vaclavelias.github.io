@@ -6,6 +6,14 @@ body {
     background-color: #fff !important;
 }
 
+#navbar-toggle-cbox {
+    display: none
+}
+
+#navbar-toggle-cbox:checked ~ .collapse {
+    display: block;
+}
+
 a {
     text-decoration: none;
 }
