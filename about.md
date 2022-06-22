@@ -10,12 +10,12 @@ Thanks for visiting my site. My name is Vaclav Elias (Vašo), and this is my web
 
 I live in London and work at [twentyAI](https://www.twentyai.com/) as the T360 Principal Engineer.
 
-I am a programmer. I am interested in C# and .NET (Core) coding.
+I am a programmer 💻. I am interested in C# and .NET (Core) coding.
 
 ## Random Facts About Me
 1. I am from Slovakia, Martin
-2. I practise Yoga
-3. I did PADI Open Water, PADI Rescue Diver and PADI Dive Master training 
+2. I practise Yoga 🧘‍♂️
+3. I did PADI Open Water 🤿, PADI Rescue Diver ⛑ and PADI Dive Master 🌊 training 
 
 ## Connect
 
