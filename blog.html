@@ -12,7 +12,7 @@ title: Blog
                     <img class="mt-2 p-4 lazyloaded img-fluid" loading="lazy" src="{{ post.image }}" data-src="{{ post.image }}" alt="">
                 </div>
                 <div class="col-lg-8 col-md-12 post-card-header">
-                    <h3 class="entry-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <h4 class="entry-title"><a href="{{ post.url }}">{{ post.title }}</a></h4>
                     <p>{{ post.date | date_to_long_string: "ordinal" }}</p>
                     <p>
                         {{ post.excerpt }}

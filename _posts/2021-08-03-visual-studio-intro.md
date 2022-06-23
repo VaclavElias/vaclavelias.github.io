@@ -2,7 +2,7 @@
 layout: post
 title:  "Visual Studio Intro"
 categories: dotnet
-tags: C# Visual-Studio
+tags: C# Visual-Studio Beginner
 image: /assets/img/dotnet-bot_scene_juggling-small.png
 ---
 
@@ -61,3 +61,28 @@ You can edit in 2 ways
 
 - Solution Explorer → Select your project → Right Click → Select Edit Project File
 - Solution Explorer → Double click on the project name
+
+## 9. Project Packages (nuget)
+An essential tool for any modern development platform is a mechanism through which developers can create, share, and consume useful code. Often such code is bundled into "packages" that contain compiled code (as DLLs) along with other content needed in the projects that consume these packages (source An introduction to Nuget).
+
+For .NET (including .NET Core), the Microsoft-supported mechanism for sharing code is **NuGet** (essentially a single ZIP file) with the **.nupkg** extension.
+
+- Solution Explorer → Right click on Project→ Manage Nuget Packages
+  - Browse - Search for new packages
+  - Installed - See your installed packages
+  - Updates - See current updates for your installed packages (mind minor vs major updates)
+
+## 10. Visual Studio Extensions
+Extensions allow you to customize and enhance your experience in Visual Studio by adding new features or integrating existing tools (Amazon, Azure, ..). The main purpose is to increase **your productivity** and cater to your workflow.
+
+- Top Menu → Extensions → Manage Extensions
+  - Installed - All installed and pre-installed extensions
+  - Online - Search for new extensions
+  - Updates - Update extensions, some extensions update automatically
+  - Roaming Extensions Manager - If you are logged into Visual Studio with your Microsoft account you can sync your extensions to other devices with Visual Studio
+- Top free extensions for development
+  - CodeMaid
+  - Productivity Power Tools 2019/2022 - Installs a few individual extensions for your productivity
+  - Live Share - Real-time collaborative development in Visual Studio and Visual Studio Code
+  - Web Essentials 2019/2022 -  Installs a few individual extensions for your web development
+  - AWS Toolkit - If you work/deploy to AWS
