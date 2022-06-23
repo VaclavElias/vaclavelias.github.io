@@ -8,6 +8,7 @@ baseurl: ""
 #url: "https://mycutejekyllblog.com"
 twitter_username: VasoElias
 github_username:  VaclavElias
+google_analytics: G-E0VDFZERRK
 
 #markdown: kramdown
 #highlighter: rouge
