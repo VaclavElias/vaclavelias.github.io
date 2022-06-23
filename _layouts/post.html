@@ -29,6 +29,24 @@
                 </article>
             </div>
         </div>
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                {% if page.previous.url %}
+                <div class="post-card">
+                    <h5>Previous Post</h5>
+                    <a class="prev" href="{{page.previous.url}}">{{page.previous.title}}</a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 text-md-end">
+                {% if page.next.url %}
+                <div class="post-card">
+                    <h5>Next Post</h5>
+                    <a class="next" href="{{page.next.url}}">{{page.next.title}}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </body>
 </html>

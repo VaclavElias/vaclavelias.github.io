@@ -6,17 +6,11 @@
     <title>{{ page.title }}</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
     <link rel="stylesheet" href="/assets/css/styles-post.css">
-    <!--<link rel="stylesheet" href="/assets/css/styles.css">-->
 </head>
 <body>
     {% include navigation.html %}
     <div class="container">
         {{ content }}
-        <!--<div class="row postcontent">
-            <div class="col-12">
-                {% include recent-posts.html %}
-            </div>
-        </div>-->
     </div>
 </body>
 </html>

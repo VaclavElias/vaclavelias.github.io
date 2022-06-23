@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Visual Studio Intro"
+description: "10 Must Things to Know for Visual Studio Beginners"
 categories: dotnet
 tags: C# Visual-Studio Beginner
 image: /assets/img/dotnet-bot_scene_juggling-small.png
@@ -49,8 +50,8 @@ The **Go To Definition** feature navigates to the source of a type or member, an
 
 ## 7. dotnet command
 - It provides commands for working with .NET projects
-  - e.g. **dotnet build** builds a project
-  - e.g. **dotnet --info** shows detailed information about a .NET installation 
+  - e.g. ```dotnet build``` builds a project
+  - e.g. ```dotnet --info``` shows detailed information about a .NET installation 
 - It runs .NET applications
   - e.g. **dotnet myApplication.exe** or **dotnet myApplication.dll**
 
