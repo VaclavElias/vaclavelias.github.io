@@ -6,11 +6,12 @@ categories: stride3d
 tags: C# Stride3D .NET Game
 image: https://www.stride3d.net/images/svg/logo.svg
 ---
-You can programm in C# and you are now curious about game engines or any way how to code and present something in 3D. There are some C# options out there ([Unity](https://unity.com/), ..) but there is one in particular which might impress you if you found game engines overwhelming or you don't want to install too many things. 
+You can programm in C# and you are now curious about game engines or any way how to code and present something in 3D. There are some C# options out there ([Unity®](https://unity.com/), ..) but there is one in particular which might impress you if you found game engines overwhelming or you don't want to install too many things. 
 
 [Stride](https://www.stride3d.net) is a **free and open source 2D and 3D cross-platform game engine** ([wiki](https://en.wikipedia.org/wiki/Stride_(game_engine))). With the release of version 4.1 you can start playing and be creative just with a few lines of code and without installation of the game engine editor.
 
-*Note: You do need to install certain prerequisites (Visual C++ Redistributable) and anything else comes from NuGet packages.*
+{% include alert-svg.html %}
+{% include alert.html type='warning' title='You do need to install certain prerequisites (Visual C++ Redistributable) and anything else comes from NuGet packages' %}
 
 ## Why code only approach and not game editor?
 
@@ -23,4 +24,78 @@ You can programm in C# and you are now curious about game engines or any way how
 - Easy and quick prototyping
 - Easy to learn game development concepts and steps
 - Performance and feature evaluation
-- Any other reason? Suggest here [GitHub Discussion](https://github.com/VaclavElias/vaclavelias.github.io/discussions). 
+- Any other reason? Suggest here [GitHub Discussion](https://github.com/VaclavElias/vaclavelias.github.io/discussions).
+
+## Prerequisites
+
+1. Install Visual Studio 2022 (Community version is free)
+2. Install Visual C++ Redistributable
+
+## Let's start in 4 steps
+
+1. Create a C# console application (.NET 6) in your editor of choice
+2. Reference this preview NuGet package [CodeCapital.Stride.GameDefaults](https://www.nuget.org/packages/CodeCapital.Stride.GameDefaults/)
+    - This packages contains C# helpers and extensions to run Stride easily without the editor
+3. Paste the code below
+4. Run and have a fun
+
+{% include alert.html type='info' title='CodeCapital.Stride.GameDefaults is currently in preview and it is intended to be moved to Stride git repository' %}
+
+```c#
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.GameDefaults;
+using Stride.GameDefaults.Extensions;
+
+using var game = new Game();
+
+game.Run(start: (Scene rootScene) =>
+{
+    game.SetupBase3DScene();
+
+    var entity = game.CreatePrimitive(PrimitiveModelType.Cube);
+
+    entity.Transform.Position = new Vector3(1f, 0.5f, 3f);
+
+    entity.Scene = rootScene;
+});
+```
+
+Let's go line by line.
+
+1. Referencing Stride NuGet packages
+```c#
+using Stride...
+``` 
+2. Creating a disposable game object
+```c#
+using var game = new Game();
+``` 
+3. Starting game applicaion with a delegate
+```c#
+game.Run();
+```
+4. Setting up 3D Scene, read below more
+```c#
+game.SetupBase3DScene();
+```
+5. Creating a cube, which is added to entity
+```c#
+var entity = game.CreatePrimitive(PrimitiveModelType.Cube);
+```
+6. Positioning entity in 3D
+```c#
+entity.Transform.Position = new Vector3(1f, 0.5f, 3f);
+```
+7. Adding our entity to the main scene
+```c#
+entity.Scene = rootScene;
+```
+
+### SetupBase3DScene()
+
+### What is Entity in Stride
+
+## Are you coming from Unity?
+
+- Check this post - [Stride for Unity® developers](https://doc.stride3d.net/latest/en/manual/stride-for-unity-developers/index.html)
