@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Stride3D Minimal API / Code Only Approach
+title:  Stride minimal API / Code only approach
 description: Stride3D with minimal code approach
 categories: stride3d
 tags: C# Stride3D .NET Game

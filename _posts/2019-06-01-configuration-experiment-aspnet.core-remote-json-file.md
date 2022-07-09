@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Configuration Experiment in ASP.NET Core – RemoteJsonFile"
+title:  "Configuration experiment in ASP.NET Core – RemoteJsonFile"
 categories: dotnet
 tags: C# ASP.NET-Core
 image: /assets/img/dotnet-bot_scene_juggling-small.png
