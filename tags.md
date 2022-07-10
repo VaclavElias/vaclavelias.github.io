@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Tags
+title: Blog Tags - Vaclav Elias
 ---
 # Tags
 

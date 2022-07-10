@@ -1,5 +1,6 @@
 plugins:
   - jekyll-sitemap
+  - jekyll-paginate
 
 title: Code or not to code
 email: vaclavelias@gmail.com
@@ -9,6 +10,8 @@ baseurl: ""
 twitter_username: VasoElias
 github_username:  VaclavElias
 google_analytics: G-E0VDFZERRK
+paginate: 10
+paginate_path: "/blog/page:num"
 
 #markdown: kramdown
 #highlighter: rouge

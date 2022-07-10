@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Archive
+title: Blog Archive - Vaclav Elias
 ---
 # Archive
 
