@@ -13,6 +13,15 @@ You can programm in C# and you are now curious about game engines or any way how
 {% include alert-svg.html %}
 {% include alert.html type='warning' title='You do need to install certain prerequisites (Visual C++ Redistributable) and anything else comes from NuGet packages' %}
 
+**Content**
+
+- Why code only approach and not game editor?
+- Prerequisites
+- Let's start in 4 steps
+  - SetupBase3DScene()
+- Let's move the box 
+- Are you coming from Unity?
+
 ## Why code only approach and not game editor?
 
 - You don't want to install anything on your computer (no Stride installation required)
@@ -55,11 +64,14 @@ game.Run(start: (Scene rootScene) =>
 
     var entity = game.CreatePrimitive(PrimitiveModelType.Cube);
 
-    entity.Transform.Position = new Vector3(1f, 0.5f, 3f);
+    entity.Transform.Position = new Vector3(1f, 0.5f, 0);
 
     entity.Scene = rootScene;
 });
 ```
+![Stride Code Only Example](/assets/img/2022/stride-code-only-example-box.jpg){: .img-fluid}
+
+The camera entity can be moved using W, A, S, D, Q and E, arrow keys, a gamepad's left stick or dragging/scaling using multi-touch. Rotation is achieved using the Numpad, the mouse while holding the right mouse button, a gamepad's right stick, or dragging using single-touch.
 
 Let's go line by line.
 
@@ -85,7 +97,7 @@ var entity = game.CreatePrimitive(PrimitiveModelType.Cube);
 ```
 6. Positioning entity in 3D
 ```c#
-entity.Transform.Position = new Vector3(1f, 0.5f, 3f);
+entity.Transform.Position = new Vector3(1f, 0.5f, 0);
 ```
 7. Adding our entity to the main scene
 ```c#
@@ -94,7 +106,23 @@ entity.Scene = rootScene;
 
 ### SetupBase3DScene()
 
-### What is Entity in Stride
+This extension method adds bare minimum, similar to the Empty Project created through Stride Editor. See below
+```c#
+public static void SetupBase3DScene(this Game game)
+{
+    game.AddGraphicsCompositor();
+
+    game.AddMouseLookCamera(game.AddCamera());
+
+    game.AddDirectionalLight();
+
+    game.AddSkybox();
+
+    game.AddGround();
+}
+```
+
+## Let's move the box
 
 ## Are you coming from Unity?
 
