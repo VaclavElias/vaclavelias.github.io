@@ -26,6 +26,7 @@ You can programm in C# and you are now curious about game engines or any way how
 
 - You don't want to install anything on your computer (no Stride installation required)
 - You want to start very quickly
+- You want to have fun learning C# or game development
 - You want to learn C# programming with a nice visual 2D/3D output instead of console
 - You want to learn game programming gradually, in the simplest way, without using the game editor
 - You find coding and coding tools very complex to understand and navigate around
@@ -83,7 +84,7 @@ using Stride...
 ```c#
 using var game = new Game();
 ``` 
-3. Starting game applicaion with a delegate
+3. Starting game application with a delegate
 ```c#
 game.Run();
 ```
