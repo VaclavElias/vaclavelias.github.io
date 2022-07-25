@@ -27,7 +27,64 @@ Initial notes:
 - [Q&A](#qa)
 
 ## 1. Solution vs Project
+Depends on your circumstances and your team workflow, you might find different (sometimes confusing) folder structure patterns. 
+
+Projects can be in different physical locations on your drive and your solution is referencing them wherever the projets are. You can have also multiple solutions **.sln* if you need to reference/view projects in different ways. Many projects will be grouped together is their parent folder.
+
+Your solution projects might be independent from each other or some of them might have depencies. The circular dependencies are not allowed and it is an anti-pattern.
+
+Note: Visual Studio 2022+ supports managing multiple repositories from one solution.
+
 ToDo: Explain projects physical location and relationship in between projects and good practises + project dependencies hierarchy
+
+There are many ways how to organise your solution. If you work in the team the consistency is important.
+
+See some basic folder structure examples:
+
+**Example 1 - Projects in one repository - Mono-repo**
+
+This example is showing independant projects with no dependencies, which are grouped together in the *api-bureau.sln* solution. The intention might be to extract a common library which will be used by all projects. 
+```
+/api-bureau
+/api-bureau/api-bureau.sln
+/api-bureau/.gitignore
+
+/api-bureau/src/ApiBureau.CloudCall.Api
+/api-bureau/src/ApiBureau.Confluence.Api
+/api-bureau/src/ApiBureau.SharePoint.Api
+
+/api-bureau/test/ApiBureau.CloudCall.Api.UnitTests
+/api-bureau/test/ApiBureau.Confluence.Api.UnitTests
+/api-bureau/test/ApiBureau.SharePoint.Api.UnitTests
+
+```
+
+**Example 2 - Projects in multipe repositories**
+
+This example is showing projects, which are grouped together in the *ApiBureau.AllApis.sln* solution. The only dependency is that *all-apis* project is depending on all other APIs.
+
+```
+/api-bureau
+/api-bureau/all-apis/.gitignore
+/api-bureau/all-apis/ApiBureau.AllApis.sln
+/api-bureau/all-api/src/ApiBureau.AllApis.Console
+
+/api-bureau/cloudcall-api/.gitignore
+/api-bureau/cloudcall-api/ApiBureau.CloudCall.sln
+/api-bureau/cloudcall-api/src/ApiBureau.CloudCall.Api
+/api-bureau/cloudcall-api/test/ApiBureau.CloudCall.Api.UnitTests
+
+/api-bureau/confluence-api/.gitignore
+/api-bureau/confluence-api/ApiBureau.Confluence.sln
+/api-bureau/confluence-api/src/ApiBureau.Confluence.Api
+/api-bureau/confluence-api/test/ApiBureau.Confluence.Api.UnitTests
+
+/api-bureau/sharepoint-api/.gitignore
+/api-bureau/sharepoint-api/ApiBureau.SharePoint.sln
+/api-bureau/sharepoint-api/src/ApiBureau.SharePoint.Api
+/api-bureau/sharepoint-api/test/ApiBureau.SharePoint.Api.UnitTests
+
+```
 
 ## 2. Solution Explorer
 ToDo: Explain hidden files, (un)pin Solution Explorer
