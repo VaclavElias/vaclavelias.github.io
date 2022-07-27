@@ -7,7 +7,7 @@ tags: C# Visual-Studio Advance
 image: /assets/img/visual-studio.png
 ---
 
-This post should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality. The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.  
+This post is a **quick reference** and should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality. The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.  
 
 Initial notes: 
 
@@ -29,17 +29,17 @@ Initial notes:
 ## 1. Solution vs Project
 Depends on your circumstances and your team workflow, you might find different (sometimes confusing) folder structure patterns. 
 
-Projects can be in different physical locations on your drive and your solution is referencing them wherever the projects are. You can have also multiple solutions ***.sln** if you need to reference/view projects in different ways. Many projects will be grouped together is their parent folder.
+VS Projects can be in different physical locations on your drive and your VS Solution is referencing them wherever the projects are. You can also have multiple solutions ***.sln** if you need to reference/view projects in different ways. Many projects will be grouped together in their parent folder.
 
 Your solution projects might be independent from each other or some of them might have dependencies. The circular dependencies are not allowed and it is an anti-pattern.
 
-There are many ways how to organise your solution. If you work in the team or alone the consistency is important.
+There are many ways to organise your solution. If you work in a team or alone, consistency is important.
 
 See some basic folder structure examples:
 
-**Example 1 - Projects in one repository - Mono-repo**
+### Example 1 - Projects in one repository - Mono-repo
 
-This example is showing independant projects with no dependencies, which are grouped together in the **api-bureau.sln** solution. The intention might be to extract a common library which will be used by all projects. All projects are in the same repository to simplify a workflow for the small team who needs to work across all projects. 
+This example is showing independent projects with no project dependencies, which are grouped together in the **api-bureau.sln** solution. The intention might be to extract a common library which will be used by all projects. All projects are in the same repository to simplify a workflow for the small team who needs to work across all projects. 
 ```
 /api-bureau
 /api-bureau/api-bureau.sln
@@ -55,9 +55,9 @@ This example is showing independant projects with no dependencies, which are gro
 
 ```
 
-**Example 2 - Projects in multiple repositories**
+### Example 2 - Projects in multiple repositories
 
-This example is showing projects, which are grouped together in the *ApiBureau.AllApis.sln* solution. The only dependency is that *all-apis* project is depending on all other APIs. The teams are working mostly independently are prefer to have their repos separated.
+This example is showing projects, which are grouped together in the *ApiBureau.AllApis.sln* solution. The only dependency is that *all-apis* project is dependent on all other APIs. The teams working mostly independently prefer to have their repos separated.
 
 Note: Visual Studio 2022+ supports managing multiple repositories from one solution.
 
@@ -86,17 +86,21 @@ Note: Visual Studio 2022+ supports managing multiple repositories from one solut
 
 ## 2. Solution Explorer
 
-By default your Solution Explorer is showing only the most relevant files. And some files e.g., ***.cs** will automatically appear in your Solution Explorer when you copy a file to your project folder or create a new file.
+By default your Solution Explorer is showing only the most relevant files. And some files e.g., ***.cs** will automatically appear in your Solution Explorer when you copy a file to your project folder or create a new C# file.
 
 Some files e.g., *.gitignore* are hidden in the Solution Explorer so they don't distract you. It is good to familiarise yourself with the project folders and files. You can toggle these files by: 
 
 - Solution Explorer Toolbar → Click Show All Files
 
-Or you can see all files:
+Or you can see all files on your drive through File Explorer:
 
 - Solution Explorer → Right click on Solution -> Open Folder in File Explorer
 
-If you don't use Solution Explorer, you can click the Auto Hide pin icon in the Solution Explorer to collapse this window, which will collapse to a vertical bar on the side of your screen.
+If you don't use Solution Explorer, you can collapse this window to a vertical bar on the side of your screen. It is helpful when you share a screen, to get more visibility of your code.
+
+- Solution Explorer → Click the Auto Hide **pin icon**
+
+To reverse, click the vertical bar, then Solution Explorer and then pin icon again.
 
 More [Solutio Explorer resources](https://docs.microsoft.com/en-us/visualstudio/ide/use-solution-explorer?view=vs-2022).
 

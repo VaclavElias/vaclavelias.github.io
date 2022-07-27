@@ -7,7 +7,7 @@ tags: C# Visual-Studio Beginner
 image: /assets/img/visual-studio.png
 ---
 
-This Intro should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality. The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS.  
+This Intro is a **quick reference** and it should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality. The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.
 
 Initial notes: 
 
@@ -116,6 +116,6 @@ A2: Top Menu → File → Add → New project or Existing Project
 
 ### Q: How to change the .NET version?
 
-A1: Double click on the project file to open the project as XML and edit ```<TargetFramework>net5.0</TargetFramework>``` tag.
+A1: Double click on the project file to open the project as XML and edit the ```<TargetFramework>net5.0</TargetFramework>``` tag.
 
 A2: Solution Explorer → Right Click on the Project → Click Properties → Click Application → Change Target Framework
