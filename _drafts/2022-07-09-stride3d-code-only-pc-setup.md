@@ -6,7 +6,7 @@ categories: stride3d
 tags: C# Stride3D .NET Game
 image: https://www.stride3d.net/images/svg/logo.svg
 ---
-You can programm in C# and you are now curious about game engines or any way how to code and present something in 3D. There are some C# options out there ([Unity®](https://unity.com/), ..) but there is one in particular which might impress you if you found game engines overwhelming or you don't want to install too many things. 
+You can programm in C# and you are now curious about game engines or any way how to code and visualise something in 3D. There are some C# options out there ([Unity®](https://unity.com/), Godot, ..) but there is one in particular which might impress you if you found game engines overwhelming or you don't want to install too many things. 
 
 [Stride](https://www.stride3d.net) is a **free and open source 2D and 3D cross-platform game engine** ([wiki](https://en.wikipedia.org/wiki/Stride_(game_engine))). With the release of version 4.1 you can start playing and be creative just with a few lines of code and without installation of the game engine editor.
 

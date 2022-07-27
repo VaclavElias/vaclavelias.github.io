@@ -14,6 +14,7 @@ Initial notes:
 - You should already be familiar with any coding/development IDE
 - This is not a tutorial, this is a quick reference on what is the most important or helpful to know when you start working with Visual Studio. Do check any available material to familiarise and learn if you don't understand this guide 
 - If you don't know certain terms just google them
+- [Visual Studio Advance]({% link _posts/2021-05-24-visual-studio-advance.md %})
 
 ## Content
 
