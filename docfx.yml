@@ -1,0 +1,23 @@
+template: https://github.com/VaclavElias/template.git
+template2: ../template
+defaultLocale: ''
+blogUrl: "/blog/"
+paginate: 2
+email: vaclavelias@gmail.com
+description: Blog about coding in .NET and C#.
+twitter_username: VasoElias
+github_username:  VaclavElias
+google_analytics: G-E0VDFZERRK
+exclude: [
+    "README.md",
+    "compilerconfig.json.defaults",
+    "compilerconfig.json",
+    "vaclavelias.github.io.csproj",
+    "vaclavelias.github.io.sln",
+    "_drafts/*.*",
+    "obj/*.*",
+    "properties/*.*",
+]
+globalMetadata:
+  titleSuffix: Code or not to code
+  menu_path: "/toc.json"

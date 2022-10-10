@@ -69,6 +69,16 @@ a:hover :not(.navbar a)  {
     word-break: break-word;
 }
 
+.post-date {
+    text-align: center;
+    font-size: 14px;
+    color: #616161;
+    margin-top: 20px;
+    padding-top: 6px;
+    border-top: 2px solid #979593;
+    display: inline-block;
+}
+
 @media screen and (max-width: 768px) {
     .postcontent {
         padding-left: 10px;
