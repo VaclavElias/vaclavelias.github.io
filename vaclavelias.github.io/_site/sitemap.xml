@@ -34,9 +34,6 @@
     <loc>https://www.vaclavelias.com/archive/</loc>
   </url>
   <url>
-    <loc>https://www.vaclavelias.com/assets/scripts/search.js</loc>
-  </url>
-  <url>
     <loc>https://www.vaclavelias.com/blog/</loc>
   </url>
   <url>
@@ -50,5 +47,8 @@
   </url>
   <url>
     <loc>https://www.vaclavelias.com/tags/</loc>
+  </url>
+  <url>
+    <loc>https://www.vaclavelias.com/assets/scripts/search.js</loc>
   </url>
 </urlset>

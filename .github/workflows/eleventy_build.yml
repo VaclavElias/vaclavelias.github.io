@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies & build
         working-directory: ./vaclavelias.github.io
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Deploy
