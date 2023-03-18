@@ -13,7 +13,7 @@ image: /assets/img/11ty-logo-400x400.png
 We write blog posts and we want to reference our GitHub project C# code or any code from our projects in 11ty. This is a great way to share and maintain code snippets with the community.
 <!-- excerpt -->
 
-## 11ty and remote code
+## 11ty and remote source code
 
 I am new to 11ty so I asked the 11ty community here at [GitHub Discussions](https://github.com/11ty/eleventy/discussions/2862) and [@pehann](https://github.com/pdehaan) helped me out.
 
