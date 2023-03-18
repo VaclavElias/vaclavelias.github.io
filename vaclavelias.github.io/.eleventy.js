@@ -14,7 +14,8 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("favicon.ico");
     eleventyConfig.addPassthroughCopy({
         "node_modules/lunr/lunr.min.js": "assets/scripts/lunr.min.js",
-        "../CNAME": "CNAME"
+        "../CNAME": "CNAME",
+        "../web.config": "web.config"
     });
 
     eleventyConfig.exc
