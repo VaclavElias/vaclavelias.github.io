@@ -1,13 +1,12 @@
 name: Eleventy Build
 on: [push]
 
-defaults:
-  run:
-    working-directory: ./vaclavelias.github.io
-
 jobs:
   build_deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./vaclavelias.github.io
     steps:
       - uses: actions/checkout@master
       - name: Build
