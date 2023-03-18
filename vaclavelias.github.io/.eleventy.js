@@ -15,7 +15,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({
         "node_modules/lunr/lunr.min.js": "assets/scripts/lunr.min.js",
         "../CNAME": "CNAME",
-        "../web.config": "web.config"
+        "web.config": "web.config"
     });
 
     eleventyConfig.exc
