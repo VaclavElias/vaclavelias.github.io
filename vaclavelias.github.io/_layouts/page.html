@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<div class="row postcontent">
+    <div class="col-12">
+        {% if page.url != '/' %}
+        <h1>{{ title }}</h1>
+        {% endif %}
+        {{ content }}
+    </div>
+</div>

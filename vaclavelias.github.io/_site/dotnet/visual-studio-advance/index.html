@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark-v">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Studio Advance</title>
+    <meta name="author" content="Vaclav Elias">
+    <meta name="description" content="11 Must Things to Know for Visual Studio Beginners, Part 2">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0VDFZERRK"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-E0VDFZERRK');
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <input type="checkbox" id="navbar-toggle-cbox">
+        <a class="navbar-brand" href="/">Václav Eliáš</a>
+        <label for="navbar-toggle-cbox" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </label>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tags/">Tags</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/archive/">Archive</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about/">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/VasoElias">Twitter</a>
+                </li>
+            </ul>
+            <!--<form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        <div class="row postcontent">
+    <div class="col-12">
+        <article>
+            <h1>Visual Studio Advance</h1>
+            <div class="entry-meta entry-meta-layoutt text-center">
+                <p class="x-hidden-focus mt-4 pt-1 small text-muted date d-inline-block">
+                    May 24, 2021
+                </p>
+            </div>
+            <p>This post is a <strong>quick reference</strong> and should help you to familiarise quickly with the key and essential <strong>Visual Studio</strong> (VS) functionality.</p>
+<p>The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.</p>
+<p>Initial notes:</p>
+<ul>
+<li>You should already be familiar with any coding/development IDE</li>
+<li>This is not a tutorial, this is a quick reference on what is the most important or helpful to know when you start working with Visual Studio. Do check any available material to familiarise and learn if you don't understand this guide</li>
+<li>If you don't know certain terms just google them</li>
+</ul>
+<h2 id="content" tabindex="-1">Content <a class="direct-link" href="#content">🔗</a></h2>
+<ul>
+<li><a href="#1.-solution-vs-project">1. Solution vs Project</a></li>
+<li><a href="#2.-solution-explorer">2. Solution Explorer</a></li>
+<li><a href="#3.-live-sharing-your-code---collaborative-coding">3. Sharing your Code</a></li>
+<li><a href="#4.-default-configuration---appsettings.cs-%2F-appsettings.json">4. Default Configuration - AppSettings.cs / appsettings.json</a></li>
+<li><a href="#5.-manage-user-secrets">5. Manage User Secrets</a></li>
+<li><a href="#6.-editorconfig">6. editorconfig</a></li>
+<li><a href="#q%26a">Q&amp;A</a></li>
+</ul>
+<h2 id="1.-solution-vs-project" tabindex="-1">1. Solution vs Project <a class="direct-link" href="#1.-solution-vs-project">🔗</a></h2>
+<p>Depends on your circumstances and your team workflow, you might find different (sometimes confusing) folder structure patterns.</p>
+<p>VS projects can be in different physical locations on your drive and your VS solution is referencing them wherever the projects are. You can also have multiple solutions *<strong>.sln</strong> if you need to reference/view projects in different ways. Many projects will be grouped together in their parent folder.</p>
+<p>Your solution projects might be independent from each other or some of them might have dependencies. The circular dependencies are not allowed and it is an anti-pattern.</p>
+<p>There are many ways to organise your solution. If you work in a team or alone, consistency is important.</p>
+<p>See some basic folder structure examples:</p>
+<h3 id="example-1---projects-in-one-repository---mono-repo" tabindex="-1">Example 1 - Projects in one repository - Mono-repo <a class="direct-link" href="#example-1---projects-in-one-repository---mono-repo">🔗</a></h3>
+<p>This example is showing independent projects with no project dependencies, which are grouped together in the <strong>api-bureau.sln</strong> solution. The intention might be to extract a common library which will be used by all projects. All projects are in the same repository to simplify a workflow for the small team who needs to work across all projects.</p>
+<pre class="language-text"><code class="language-text">/api-bureau<br>/api-bureau/api-bureau.sln<br>/api-bureau/.gitignore<br><br>/api-bureau/src/ApiBureau.CloudCall.Api<br>/api-bureau/src/ApiBureau.Confluence.Api<br>/api-bureau/src/ApiBureau.SharePoint.Api<br><br>/api-bureau/test/ApiBureau.CloudCall.Api.UnitTests<br>/api-bureau/test/ApiBureau.Confluence.Api.UnitTests<br>/api-bureau/test/ApiBureau.SharePoint.Api.UnitTests<br></code></pre>
+<h3 id="example-2---projects-in-multiple-repositories" tabindex="-1">Example 2 - Projects in multiple repositories <a class="direct-link" href="#example-2---projects-in-multiple-repositories">🔗</a></h3>
+<p>This example is showing projects, which are grouped together in the <em>ApiBureau.AllApis.sln</em> solution. The only dependency is that <em>all-apis</em> project is dependent on all other APIs. The teams working mostly independently prefer to have their repos separated.</p>
+<p>Note: Visual Studio 2022+ supports managing multiple repositories from one solution.</p>
+<pre class="language-text"><code class="language-text">/api-bureau<br>/api-bureau/all-apis/.gitignore<br>/api-bureau/all-apis/ApiBureau.AllApis.sln<br>/api-bureau/all-api/src/ApiBureau.AllApis.Console<br><br>/api-bureau/cloudcall-api/.gitignore<br>/api-bureau/cloudcall-api/ApiBureau.CloudCall.sln<br>/api-bureau/cloudcall-api/src/ApiBureau.CloudCall.Api<br>/api-bureau/cloudcall-api/test/ApiBureau.CloudCall.Api.UnitTests<br><br>/api-bureau/confluence-api/.gitignore<br>/api-bureau/confluence-api/ApiBureau.Confluence.sln<br>/api-bureau/confluence-api/src/ApiBureau.Confluence.Api<br>/api-bureau/confluence-api/test/ApiBureau.Confluence.Api.UnitTests<br><br>/api-bureau/sharepoint-api/.gitignore<br>/api-bureau/sharepoint-api/ApiBureau.SharePoint.sln<br>/api-bureau/sharepoint-api/src/ApiBureau.SharePoint.Api<br>/api-bureau/sharepoint-api/test/ApiBureau.SharePoint.Api.UnitTests<br></code></pre>
+<h2 id="2.-solution-explorer" tabindex="-1">2. Solution Explorer <a class="direct-link" href="#2.-solution-explorer">🔗</a></h2>
+<p>By default your Solution Explorer is showing only the most relevant files. And some files e.g., *<strong>.cs</strong> will automatically appear in your Solution Explorer when you copy a file to your project folder or create a new C# file.</p>
+<p>Some files e.g., <em>.gitignore</em> are hidden in the Solution Explorer so they don't distract you. It is good to familiarise yourself with the project folders and files. You can toggle these files by:</p>
+<ul>
+<li>Solution Explorer Toolbar → Click Show All Files</li>
+</ul>
+<p>Or you can see all files on your drive through File Explorer:</p>
+<ul>
+<li>Solution Explorer → Right click on Solution -&gt; Open Folder in File Explorer</li>
+</ul>
+<p>If you don't use Solution Explorer, you can collapse this window to a vertical bar on the side of your screen. This is helpful when you share a screen, to get more visibility of your code.</p>
+<ul>
+<li>Solution Explorer → Click the Auto Hide <strong>pin icon</strong></li>
+</ul>
+<p>To reverse, click the vertical bar, then Solution Explorer and then pin icon again.</p>
+<p>More <a href="https://docs.microsoft.com/en-us/visualstudio/ide/use-solution-explorer?view=vs-2022">Solution Explorer resources</a>.</p>
+<h2 id="3.-live-sharing-your-code---collaborative-coding" tabindex="-1">3. Live Sharing your Code - Collaborative Coding <a class="direct-link" href="#3.-live-sharing-your-code---collaborative-coding">🔗</a></h2>
+<p>You are becoming familiar with VS and one day you need a help with your code. Your colleague or friend doesn't have the project you are working on, maybe they don't have VS but they have Visual Studio Code. Now you can share your VS session with anyone. Your colleagues will see exactly what you see, or they can navigate independently without downloading your project.</p>
+<p>Live Share lets you collaboratively explore, edit and debug with others in real time, regardless of what programming languages you're using or app types you're building.</p>
+<p>Read more about <a href="https://docs.microsoft.com/en-us/visualstudio/liveshare/quickstart/share">Live Sharing</a>.</p>
+<h2 id="4.-default-configuration---appsettings.cs-%2F-appsettings.json" tabindex="-1">4. Default Configuration - AppSettings.cs / appsettings.json <a class="direct-link" href="#4.-default-configuration---appsettings.cs-%2F-appsettings.json">🔗</a></h2>
+<p>Application configuration is a huge subject. If you are working with <a href="http://ASP.NET">ASP.NET</a> Core, get familiar with <strong>appsettings.json</strong> and also with <strong>AppSettings.cs</strong>. <code>IOptions&lt;AppSettings&gt;</code> will let you use your configuration through strongly typed settings and dependency injection.</p>
+<p>.NET has lots of helpers and methods which will simplify access to your configuration and you can use them also outside of <a href="http://ASP.NET">ASP.NET</a> Core applications, e.g., Console Application.</p>
+<p>Very important is the sequence of configuration providers:</p>
+<ol>
+<li>appsettings.json</li>
+<li>appsettings.{Environment}.json</li>
+<li>User secrets</li>
+<li>Environment variables</li>
+<li>Command-line arguments</li>
+</ol>
+<p>Lots of reading on this subject here <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0">Application Configuration</a>.</p>
+<h2 id="5.-manage-user-secrets" tabindex="-1">5. Manage User Secrets <a class="direct-link" href="#5.-manage-user-secrets">🔗</a></h2>
+<p>Any passwords, secrets, any information you don't want to share has to be secured and not committed to your source control system like <strong>Git</strong>. How do you do it in VS? Very easily.</p>
+<ul>
+<li>Solution Explorer → Select your project → Right Click → Select Manage User Secrets
+<ul>
+<li>VS might ask to install this NuGet <code>Microsoft.Extensions.Configuration.UserSecrets</code> or it will open file <code>secrets.json</code>.</li>
+</ul>
+</li>
+<li>You can use also .NET CLI to manage this file</li>
+</ul>
+<p>File <code>secrets.json</code> is kept outside of your VS projects and solution and it is never pushed to your git repository. Note, that this file <strong>is not encrypted</strong>. It is a plain text file, still hanging on your computer in this location:</p>
+<pre><code>%APPDATA%\Microsoft\UserSecrets\&lt;user_secrets_id&gt;\secrets.json
+</code></pre>
+<p>Read more about <a href="https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&amp;tabs=linux">Secrets in development</a> subject.</p>
+<h2 id="6.-editorconfig" tabindex="-1">6. editorconfig <a class="direct-link" href="#6.-editorconfig">🔗</a></h2>
+<p>If you work alone or in a team, code consistency is very important in each project.</p>
+<p>You can add an EditorConfig file to your project or codebase to enforce consistent coding styles for everyone that works in the codebase. Do ask your colleagues and propose this process if it is not in place. Consistency helps with readability across all projects.</p>
+<p>More about this subject here <a href="https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2022">Settings with EditorConfig</a>.</p>
+<h2 id="q%26a" tabindex="-1">Q&amp;A <a class="direct-link" href="#q%26a">🔗</a></h2>
+<h3 id="q%3A-how-to-change-the-.net-version%3F" tabindex="-1">Q: How to change the .NET version? <a class="direct-link" href="#q%3A-how-to-change-the-.net-version%3F">🔗</a></h3>
+<p>A1: Double click on the project file to open the project as XML and edit the <code>&lt;TargetFramework&gt;net5.0&lt;/TargetFramework&gt;</code> tag. You can also target multiple frameworks by replacing this tag with <code>&lt;TargetFrameworks&gt;net5.0;net6.0&lt;/TargetFrameworks&gt;</code> tag.</p>
+
+            <hr />
+            <p><span class="badge rounded-pill text-bg-success me-1">C#</span><span class="badge rounded-pill text-bg-success me-1">Visual Studio</span><span class="badge rounded-pill text-bg-success me-1">Advance</span></p>
+            <p>
+                Any comments? You can start 🗨 at <a href="https://github.com/VaclavElias/vaclavelias.github.io/discussions" target="_blank" rel="noreferrer">GitHub Discussion</a>. <a href="https://github.com/VaclavElias/vaclavelias2.github.io/blob/main/vaclavelias.github.io/./posts/2021-05-24-visual-studio-advance.md" target="_blank" rel="noreferrer">Edit</a> this page on <svg style="margin-top: -6px;" width="16" height="16" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#1B1F23" />
+                </svg>.
+            </p>
+        </article>
+    </div>
+</div>
+<div class="row mb-5">
+    
+    
+    <div class="col-md-6 mb-4">
+        
+        <div class="post-card">
+            <h5>Previous Post</h5>
+            <a class="prev stretched-link" href="/dotnet/visual-studio-intro/">Visual Studio Intro</a>
+        </div>
+        
+    </div>
+    <div class="col-md-6 text-md-end">
+        
+        <div class="post-card">
+            <h5>Next Post</h5>
+            <a class="next stretched-link" href="/stride3d/stride3d-minimal-api-code-only/">Stride minimal API / Code only approach</a>
+        </div>
+        
+    </div>
+</div>
+    </div>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
+</body>
+</html>

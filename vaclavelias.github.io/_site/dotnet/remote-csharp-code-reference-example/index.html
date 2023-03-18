@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark-v">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to reference remote C# code in 11ty</title>
+    <meta name="author" content="Vaclav Elias">
+    <meta name="description" content="Referencing remote C# code or any programming language code in 11ty">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0VDFZERRK"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-E0VDFZERRK');
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <input type="checkbox" id="navbar-toggle-cbox">
+        <a class="navbar-brand" href="/">Václav Eliáš</a>
+        <label for="navbar-toggle-cbox" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </label>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tags/">Tags</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/archive/">Archive</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about/">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/VasoElias">Twitter</a>
+                </li>
+            </ul>
+            <!--<form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        <div class="row postcontent">
+    <div class="col-12">
+        <article>
+            <h1>How to reference remote C# code in 11ty</h1>
+            <div class="entry-meta entry-meta-layoutt text-center">
+                <p class="x-hidden-focus mt-4 pt-1 small text-muted date d-inline-block">
+                    March 15, 2023
+                </p>
+            </div>
+            <p>We write blog posts and we want to reference our GitHub project C# code or any code from our projects in 11ty. This is a great way to share and maintain code snippets with the community.</p>
+<h2 id="11ty-and-remote-code" tabindex="-1">11ty and remote code <a class="direct-link" href="#11ty-and-remote-code">🔗</a></h2>
+<p>I am new to 11ty so I asked the 11ty community here at <a href="https://github.com/11ty/eleventy/discussions/2862">GitHub Discussions</a> and <a href="https://github.com/pdehaan">@pehann</a> helped me out.</p>
+<p>I have modified the original implementation for this post so it is more generic.</p>
+<pre class="language-javascript"><code class="language-javascript">eleventyConfig<span class="token punctuation">.</span><span class="token function">addAsyncShortcode</span><span class="token punctuation">(</span><span class="token string">"remote_include"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">urlPath</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br><br>    <span class="token keyword">const</span> sample <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">EleventyFetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">{</span><br>        <span class="token literal-property property">duration</span><span class="token operator">:</span> <span class="token string">"1d"</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token keyword">return</span> sample<span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Example remote C# code reference in markup.</p>
+<pre><code>```csharp
+{% remote_include 'https://raw.githubusercontent.com/stride3d/stride/master/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/01_UI-Basics/UIByEditor.cs' %}
+```
+</code></pre>
+<p>Result:</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token comment">// Copyright (c) .NET Foundation and Contributors (https://dotnetfoundation.org/ &amp; https://stride3d.net)</span><br><span class="token comment">// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.</span><br><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>Engine</span><span class="token punctuation">;</span><br><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>Graphics</span><span class="token punctuation">;</span><br><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>UI</span><span class="token punctuation">;</span><br><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>UI<span class="token punctuation">.</span>Controls</span><span class="token punctuation">;</span><br><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>UI<span class="token punctuation">.</span>Events</span><span class="token punctuation">;</span><br><br><span class="token keyword">namespace</span> <span class="token namespace">CSharpIntermediate<span class="token punctuation">.</span>Code</span><br><span class="token punctuation">{</span><br>    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UIByEditor</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">StartupScript</span></span><br>    <span class="token punctuation">{</span><br>        <span class="token keyword">public</span> <span class="token class-name">SpriteFont</span> Font<span class="token punctuation">;</span><br><br>        <span class="token keyword">private</span> <span class="token class-name">TextBlock</span> textBlock<span class="token punctuation">;</span><br>        <span class="token keyword">private</span> <span class="token class-name">EditText</span> editText<span class="token punctuation">;</span><br><br>        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br>        <span class="token punctuation">{</span><br>            <span class="token comment">// Retrieve the page property from the UI component</span><br>            <span class="token class-name"><span class="token keyword">var</span></span> page <span class="token operator">=</span> Entity<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Get</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>UIComponent<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Page<span class="token punctuation">;</span><br><br>            <span class="token comment">// Retrieve UI elements by Type and name</span><br>            textBlock <span class="token operator">=</span> page<span class="token punctuation">.</span>RootElement<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">FindVisualChildOfType</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TextBlock<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token string">"MyTextBlock"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>            editText <span class="token operator">=</span> page<span class="token punctuation">.</span>RootElement<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">FindVisualChildOfType</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>EditText<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token string">"MyEditText"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>            <span class="token comment">// When the text changes, update the textblock</span><br>            editText<span class="token punctuation">.</span>TextChanged <span class="token operator">+=</span> <span class="token punctuation">(</span>s<span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token operator">=></span><br>            <span class="token punctuation">{</span><br>                textBlock<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">"My name is: "</span> <span class="token operator">+</span> editText<span class="token punctuation">.</span>Text<span class="token punctuation">;</span><br>            <span class="token punctuation">}</span><span class="token punctuation">;</span><br><br>            <span class="token comment">// When the button is clicked, we execute a method that clears the textbox</span><br>            <span class="token class-name"><span class="token keyword">var</span></span> button <span class="token operator">=</span> page<span class="token punctuation">.</span>RootElement<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">FindVisualChildOfType</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Button<span class="token punctuation">></span></span></span><span class="token punctuation">(</span><span class="token string">"MyButton"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>            button<span class="token punctuation">.</span>Click <span class="token operator">+=</span> ButtonClicked<span class="token punctuation">;</span><br>        <span class="token punctuation">}</span><br><br>        <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ButtonClicked</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">RoutedEventArgs</span> e<span class="token punctuation">)</span><br>        <span class="token punctuation">{</span><br>            <span class="token comment">// Changing the text triggers the TextChanged event again</span><br>            editText<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span><br><br>            <span class="token comment">// We also want to reset the text in the textblock</span><br>            textBlock<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">"..."</span><span class="token punctuation">;</span><br>        <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br><span class="token punctuation">}</span><br></code></pre>
+
+            <hr />
+            <p><span class="badge rounded-pill text-bg-success me-1">C#</span><span class="badge rounded-pill text-bg-success me-1">.NET</span><span class="badge rounded-pill text-bg-success me-1">11ty</span><span class="badge rounded-pill text-bg-success me-1">Advance</span></p>
+            <p>
+                Any comments? You can start 🗨 at <a href="https://github.com/VaclavElias/vaclavelias.github.io/discussions" target="_blank" rel="noreferrer">GitHub Discussion</a>. <a href="https://github.com/VaclavElias/vaclavelias2.github.io/blob/main/vaclavelias.github.io/./posts/2023-03-15-remote-csharp-code-reference-example.md" target="_blank" rel="noreferrer">Edit</a> this page on <svg style="margin-top: -6px;" width="16" height="16" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#1B1F23" />
+                </svg>.
+            </p>
+        </article>
+    </div>
+</div>
+<div class="row mb-5">
+    
+    
+    <div class="col-md-6 mb-4">
+        
+        <div class="post-card">
+            <h5>Previous Post</h5>
+            <a class="prev stretched-link" href="/stride3d/stride3d-minimal-api-code-only/">Stride minimal API / Code only approach</a>
+        </div>
+        
+    </div>
+    <div class="col-md-6 text-md-end">
+        
+    </div>
+</div>
+    </div>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>-->
+</body>
+</html>

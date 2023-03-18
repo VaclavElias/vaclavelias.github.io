@@ -1,0 +1,20 @@
+---
+title: Vaclav Elias - Code or not to code
+description: All about C# and .NET coding from Vaclav Elias
+layout: page
+---
+<article>
+    {% assign posts = collections.blog | reverse %}
+    {% for post in posts limit:1 %}
+    <h1>{{ post.data.title }}</h1>
+    <div class="entry-meta entry-meta-layoutt text-center">
+        <p class="x-hidden-focus mt-4 pt-1 small text-muted date d-inline-block">
+            {% include _day.html date: post.date %}
+        </p>
+    </div>
+    {{ post.templateContent | md }}
+    <hr />
+    <p>{% include _tags.html tags: post.data.tags %}</p>
+    {% endfor %}
+</article>
+{% include _recent-posts.html %}
