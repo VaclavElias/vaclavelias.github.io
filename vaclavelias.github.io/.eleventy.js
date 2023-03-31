@@ -3,6 +3,7 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const path = require("node:path");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItToc = require("markdown-it-table-of-contents");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const EleventyFetch = require("@11ty/eleventy-fetch");
 
@@ -12,13 +13,11 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addPassthroughCopy("assets/img");
     eleventyConfig.addPassthroughCopy("favicon.ico");
+    eleventyConfig.addPassthroughCopy("CNAME");
+    eleventyConfig.addPassthroughCopy("web.config");
     eleventyConfig.addPassthroughCopy({
-        "node_modules/lunr/lunr.min.js": "assets/scripts/lunr.min.js",
-        "../CNAME": "CNAME",
-        "web.config": "web.config"
+        "node_modules/lunr/lunr.min.js": "assets/scripts/lunr.min.js"
     });
-
-    eleventyConfig.exc
 
     //eleventyConfig.addCollection("posts", (collection) => {
     //    return collection.getFilteredByTag("blog");
@@ -55,30 +54,8 @@ module.exports = function (eleventyConfig) {
         }
     });
 
-    eleventyConfig.addFilter('jsonify', function (variable) {
-        return JSON.stringify(variable);
-    });
-
-    eleventyConfig.addFilter('normalize_whitespace', function (text) {
-
-        //Remove tabs
-        text = text.replace(/\t/g, '');
-
-        text = text.replace(/\r/g, '');
-
-        //Remove big spaces and punctuation
-        text = text.replace(/\n/g, ' ');
-
-        //remove repeated spaces
-        text = text.replace(/ +(?= )/g, '');
-
-        return text;
-    });
-
     eleventyConfig.setFrontMatterParsingOptions({
         excerpt: true,
-        // Optional, default is "---"
-        excerpt_separator: "<!-- excerpt -->"
     });
 
     eleventyConfig.addCollection('tagList', (collections) => {
@@ -99,8 +76,52 @@ module.exports = function (eleventyConfig) {
         return Array.from(new Set(uniqueyears));
     });
 
+    eleventyConfig.addFilter('jsonify', function (variable) {
+        return JSON.stringify(variable);
+    });
+
+    eleventyConfig.addFilter('normalize_whitespace', function (text) {
+
+        //Remove tabs
+        text = text.replace(/\t/g, '');
+
+        text = text.replace(/\r/g, '');
+
+        //Remove big spaces and punctuation
+        text = text.replace(/\n/g, ' ');
+
+        //remove repeated spaces
+        text = text.replace(/ +(?= )/g, '');
+
+        return text;
+    });
+
     eleventyConfig.addFilter("md", function (content = "") {
         return markdownIt({ html: true }).render(content);
+    });
+
+    eleventyConfig.addShortcode("img", function (title, url) {
+        return `<img alt="${title}" src="${url}" class="img-fluid mb-2" loading="lazy" data-src="${url}">`;
+    });
+
+    eleventyConfig.addShortcode("img-click", function (title, url, destinationUrl) {
+        return `<a href="${destinationUrl ?? url}" title="${title}" class="mb-2"><img alt="${title}" src="${url}" class="img-fluid" loading="lazy" data-src="${url}"></a>`;
+    });
+
+    eleventyConfig.addShortcode("youtube", function (id) {
+        return `<div class="ratio ratio-16x9 mb-2"><iframe src="https://www.youtube.com/embed/${id}" title="YouTube video" allowfullscreen></iframe></div>`;
+    });
+
+    eleventyConfig.addShortcode("youtube-playlist", function (id) {
+        return `<div class="ratio ratio-16x9 mb-2"><iframe src="https://www.youtube.com/embed/videoseries?list=${id}" title="YouTube video" allowfullscreen></iframe></div>`;
+    });
+
+    eleventyConfig.addShortcode("video", function (url) {
+        return `<div class="ratio ratio-16x9 mb-2"><video autoplay controls loop preload="none" poster="${url.replace(".mp4", ".jpg") }"><source src="${url}" type="video/mp4"></video></div>`;
+    });
+
+    eleventyConfig.addShortcode("video-fluid", function (url) {
+        return `<video class="mb-2 img-fluid" autoplay controls loop preload="none" poster="${url.replace(".mp4", ".jpg")}"><source src="${url}" type="video/mp4"></video>`;
     });
 
     let markdownLibrary = markdownIt({
@@ -112,7 +133,8 @@ module.exports = function (eleventyConfig) {
             symbol: "🔗",
             class: "direct-link"
         })
-    });
+    }).use(markdownItToc, { includeLevel: [2, 3] });
+
     eleventyConfig.setLibrary("md", markdownLibrary);
 
     eleventyConfig.addPlugin(pluginRss);

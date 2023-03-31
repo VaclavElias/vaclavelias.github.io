@@ -11,7 +11,8 @@ image: /assets/img/visual-studio.png
 ---
 
 This post is a **quick reference** and should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality.
-<!-- excerpt -->
+
+---
 
 The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.  
 

@@ -11,7 +11,8 @@ image: /assets/img/visual-studio.png
 ---
 
 This intro is a **quick reference** and it should help you to familiarise quickly with the key and essential **Visual Studio** (VS) functionality.
-<!-- excerpt -->
+
+---
 
 The VS Integrated Development Environment (IDE) might look overwhelming in the beginning but there is no need to know everything. More you work with VS you will start discovering what you need and you will eventually understand the complexity of VS by passive learning.
 
@@ -49,9 +50,9 @@ Note: If you cannot see it go to Menu → View → Click Solution Explorer (firs
 
 ## 4. Windows Management
 You might use these options below frequently to arrange your windows. More info about [customising layouts](https://docs.microsoft.com/en-us/visualstudio/ide/customizing-window-layouts-in-visual-studio?view=vs-2022).
-- Vertical Document Group - If you need to see different files next to each other ![Document Groups](/assets/img/2021/Visual-Studio-Document-Group.webp){: .img-fluid}
+- Vertical Document Group - If you need to see different files next to each other {% img 'Document Groups' '/assets/img/2021/Visual-Studio-Document-Group.webp' %}
 - Horizontal Document Group - If you need to see different files horizontally
-- Split Window - You can split horizontally the edition of a file through Window → Split. This is especially useful when visualizing or editing two locations in a large file ![Split Window](/assets/img/2021/Visual-Studio-Horizontal-Split-Code-Editor.gif){: .img-fluid} ![Split Window](/assets/img/2021/Visual-Studio-Vertical-Split-Code-Editor.gif){: .img-fluid}
+- Split Window - You can split horizontally the edition of a file through Window → Split. This is especially useful when visualizing or editing two locations in a large file {% img 'Split Window' '/assets/img/2021/Visual-Studio-Horizontal-Split-Code-Editor.gif' %}{% img 'Split Window' '/assets/img/2021/Visual-Studio-Vertical-Split-Code-Editor.gif' %}
 
 - New Window - Open an instance of the same file in a separate window, Window → New Window
 

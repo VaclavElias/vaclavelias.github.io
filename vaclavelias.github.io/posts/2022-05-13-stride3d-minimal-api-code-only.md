@@ -10,8 +10,10 @@ tags:
   - Game
 image: https://www.stride3d.net/images/svg/logo.svg
 ---
+
 **12 lines** of code, this is what it takes to run Stride 3D example below (plus some `usings` on the top).
-<!-- excerpt -->
+
+---
 
 This works only with [Stride](https://www.stride3d.net/) **4.1+**.
 

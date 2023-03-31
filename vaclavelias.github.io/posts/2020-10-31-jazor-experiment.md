@@ -11,7 +11,8 @@ image: /assets/img/dotnet-bot_scene_juggling-small.png
 ---
 
 This experiment library helps with very common actions on the website which involve repeating JavaScript code across multiple different projects.
-<!-- excerpt -->
+
+---
 
 Click a button or a link, do something in the backend and UI. This library takes an approach rather updating whole HTML blocks than granular tags with JSON and JavaScript libraries, so there is no need fiddling and mapping JSON objects to whatever UI you have.
 

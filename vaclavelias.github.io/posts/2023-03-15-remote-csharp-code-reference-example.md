@@ -10,8 +10,10 @@ tags:
   - Advance
 image: /assets/img/11ty-logo-400x400.png
 ---
+
 We write blog posts and we want to reference our GitHub project C# code or any code from our projects in 11ty. This is a great way to share and maintain code snippets with the community.
-<!-- excerpt -->
+
+---
 
 ## 11ty and remote source code
 
@@ -31,10 +33,10 @@ eleventyConfig.addAsyncShortcode("remote_include", async function (urlPath) {
 ```
 Example remote C# code reference in markup.
 
-````
-```csharp{% raw %}
-{% remote_include 'https://raw.githubusercontent.com/stride3d/stride/master/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/01_UI-Basics/UIByEditor.cs' %}{% endraw %}
-```
+````liquid{% raw %}
+```csharp
+{% remote_include 'https://raw.githubusercontent.com/stride3d/stride/master/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/01_UI-Basics/UIByEditor.cs' %}
+```{% endraw %}
 ````
 Result:
 
