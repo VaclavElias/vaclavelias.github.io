@@ -13,7 +13,7 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addPassthroughCopy("assets/img");
     eleventyConfig.addPassthroughCopy("favicon.ico");
-    eleventyConfig.addPassthroughCopy("CNAME");
+    eleventyConfig.addPassthroughCopy("version.txt");
     eleventyConfig.addPassthroughCopy("web.config");
     eleventyConfig.addPassthroughCopy({
         "node_modules/lunr/lunr.min.js": "assets/scripts/lunr.min.js"

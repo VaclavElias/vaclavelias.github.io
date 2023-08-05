@@ -30,6 +30,9 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy CNAME to _site folder
+        run: cp CNAME ./vaclavelias.github.io/_site/
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3.9.2
         with:
