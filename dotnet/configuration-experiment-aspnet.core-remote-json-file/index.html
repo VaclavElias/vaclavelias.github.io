@@ -61,7 +61,10 @@
             <p>This is an experiment project to access <strong>appsettings.json</strong> from Azure Blob or any remote url.</p>
 <p>I will use public access to this Azure file considering no user secrets are included in this file. You would need to add additional options to secure your link if any user secrets are transmitted.</p>
 <p>Example url: <a href="https://your-storage.blob.core.windows.net/your-blob/appsettings.json">https://your-storage.blob.core.windows.net/your-blob/appsettings.json</a></p>
-<pre class="language-csharp"><code class="language-csharp">services<span class="token punctuation">.</span><span class="token function">AddRemoteJsonFile</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">,</span> <span class="token string">"AppSettings:Url:RemoteUrl"</span><span class="token punctuation">,</span> options <span class="token operator">=></span><br><span class="token punctuation">{</span><br>    Configuration <span class="token operator">=</span> options<span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class="language-csharp"><code class="language-csharp">services<span class="token punctuation">.</span><span class="token function">AddRemoteJsonFile</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">,</span> <span class="token string">"AppSettings:Url:RemoteUrl"</span><span class="token punctuation">,</span> options <span class="token operator">=></span>
+<span class="token punctuation">{</span>
+    Configuration <span class="token operator">=</span> options<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>Source here <a href="https://github.com/codecapital/CodeCapital.AspNetCore/tree/net5.0/src/CodeCapital.AspNetCore.Extensions.Configuration.Json">CodeCapital.AspNetCore.Extensions.Configuration.Json</a>.</p>
 
             <hr />

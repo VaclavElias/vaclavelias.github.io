@@ -84,11 +84,41 @@
 <p>See some basic folder structure examples:</p>
 <h3 id="example-1---projects-in-one-repository---mono-repo" tabindex="-1">Example 1 - Projects in one repository - Mono-repo <a class="direct-link" href="#example-1---projects-in-one-repository---mono-repo">🔗</a></h3>
 <p>This example is showing independent projects with no project dependencies, which are grouped together in the <strong>api-bureau.sln</strong> solution. The intention might be to extract a common library which will be used by all projects. All projects are in the same repository to simplify a workflow for the small team who needs to work across all projects.</p>
-<pre class="language-text"><code class="language-text">/api-bureau<br>/api-bureau/api-bureau.sln<br>/api-bureau/.gitignore<br><br>/api-bureau/src/ApiBureau.CloudCall.Api<br>/api-bureau/src/ApiBureau.Confluence.Api<br>/api-bureau/src/ApiBureau.SharePoint.Api<br><br>/api-bureau/test/ApiBureau.CloudCall.Api.UnitTests<br>/api-bureau/test/ApiBureau.Confluence.Api.UnitTests<br>/api-bureau/test/ApiBureau.SharePoint.Api.UnitTests<br></code></pre>
+<pre class="language-text"><code class="language-text">/api-bureau
+/api-bureau/api-bureau.sln
+/api-bureau/.gitignore
+
+/api-bureau/src/ApiBureau.CloudCall.Api
+/api-bureau/src/ApiBureau.Confluence.Api
+/api-bureau/src/ApiBureau.SharePoint.Api
+
+/api-bureau/test/ApiBureau.CloudCall.Api.UnitTests
+/api-bureau/test/ApiBureau.Confluence.Api.UnitTests
+/api-bureau/test/ApiBureau.SharePoint.Api.UnitTests
+</code></pre>
 <h3 id="example-2---projects-in-multiple-repositories" tabindex="-1">Example 2 - Projects in multiple repositories <a class="direct-link" href="#example-2---projects-in-multiple-repositories">🔗</a></h3>
 <p>This example is showing projects, which are grouped together in the <em>ApiBureau.AllApis.sln</em> solution. The only dependency is that <em>all-apis</em> project is dependent on all other APIs. The teams working mostly independently prefer to have their repos separated.</p>
 <p>Note: Visual Studio 2022+ supports managing multiple repositories from one solution.</p>
-<pre class="language-text"><code class="language-text">/api-bureau<br>/api-bureau/all-apis/.gitignore<br>/api-bureau/all-apis/ApiBureau.AllApis.sln<br>/api-bureau/all-api/src/ApiBureau.AllApis.Console<br><br>/api-bureau/cloudcall-api/.gitignore<br>/api-bureau/cloudcall-api/ApiBureau.CloudCall.sln<br>/api-bureau/cloudcall-api/src/ApiBureau.CloudCall.Api<br>/api-bureau/cloudcall-api/test/ApiBureau.CloudCall.Api.UnitTests<br><br>/api-bureau/confluence-api/.gitignore<br>/api-bureau/confluence-api/ApiBureau.Confluence.sln<br>/api-bureau/confluence-api/src/ApiBureau.Confluence.Api<br>/api-bureau/confluence-api/test/ApiBureau.Confluence.Api.UnitTests<br><br>/api-bureau/sharepoint-api/.gitignore<br>/api-bureau/sharepoint-api/ApiBureau.SharePoint.sln<br>/api-bureau/sharepoint-api/src/ApiBureau.SharePoint.Api<br>/api-bureau/sharepoint-api/test/ApiBureau.SharePoint.Api.UnitTests<br></code></pre>
+<pre class="language-text"><code class="language-text">/api-bureau
+/api-bureau/all-apis/.gitignore
+/api-bureau/all-apis/ApiBureau.AllApis.sln
+/api-bureau/all-api/src/ApiBureau.AllApis.Console
+
+/api-bureau/cloudcall-api/.gitignore
+/api-bureau/cloudcall-api/ApiBureau.CloudCall.sln
+/api-bureau/cloudcall-api/src/ApiBureau.CloudCall.Api
+/api-bureau/cloudcall-api/test/ApiBureau.CloudCall.Api.UnitTests
+
+/api-bureau/confluence-api/.gitignore
+/api-bureau/confluence-api/ApiBureau.Confluence.sln
+/api-bureau/confluence-api/src/ApiBureau.Confluence.Api
+/api-bureau/confluence-api/test/ApiBureau.Confluence.Api.UnitTests
+
+/api-bureau/sharepoint-api/.gitignore
+/api-bureau/sharepoint-api/ApiBureau.SharePoint.sln
+/api-bureau/sharepoint-api/src/ApiBureau.SharePoint.Api
+/api-bureau/sharepoint-api/test/ApiBureau.SharePoint.Api.UnitTests
+</code></pre>
 <h2 id="2.-solution-explorer" tabindex="-1">2. Solution Explorer <a class="direct-link" href="#2.-solution-explorer">🔗</a></h2>
 <p>By default your Solution Explorer is showing only the most relevant files. And some files e.g., *<strong>.cs</strong> will automatically appear in your Solution Explorer when you copy a file to your project folder or create a new C# file.</p>
 <p>Some files e.g., <em>.gitignore</em> are hidden in the Solution Explorer so they don't distract you. It is good to familiarise yourself with the project folders and files. You can toggle these files by:</p>
