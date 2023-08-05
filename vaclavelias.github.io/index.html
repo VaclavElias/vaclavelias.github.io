@@ -12,7 +12,7 @@ layout: page
             {% include _day.html date: post.date %}
         </p>
     </div>
-    {{ post.templateContent | md }}
+    {{ post.templateContent }}
     <hr />
     <p>{% include _tags.html tags: post.data.tags %}</p>
     {% endfor %}
