@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stride minimal API / Code only approach</title>
+    <title>Explore Stride's Minimal API: A Code-Only Approach</title>
     <meta name="author" content="Vaclav Elias">
-    <meta name="description" content="Stride3D with minimal code approach">
+    <meta name="description" content="Dive into a minimal code approach with Stride3D, unlocking the potential of game development with just 12 lines of code using the Stride Community Toolkit.">
     <link rel="stylesheet" href="/assets/css/styles.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0VDFZERRK"></script>
 <script>
@@ -52,25 +52,30 @@
         <div class="row postcontent">
     <div class="col-12">
         <article>
-            <h1>Stride minimal API / Code only approach</h1>
+            <h1>Explore Stride's Minimal API: A Code-Only Approach</h1>
             <div class="entry-meta entry-meta-layoutt text-center">
                 <p class="x-hidden-focus mt-4 pt-1 small text-muted date d-inline-block">
                     May 13, 2022
                 </p>
             </div>
-            <p><strong>12 lines</strong> of code, this is what it takes to run Stride 3D example below (plus some <code>usings</code> on the top).</p>
-<p>This works only with <a href="https://www.stride3d.net/">Stride</a> <strong>4.1+</strong>.</p>
-<p>Follow the steps in this <a href="https://github.com/VaclavElias/stride-code-only">stride-code-only</a> repository.</p>
-<p>Related <a href="https://twitter.com/VasoElias/status/1525162302487543809">tweet</a>.</p>
-<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token class-name"><span class="token keyword">var</span></span> game <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Game</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <p>With only <strong>12 lines of code</strong>, you can kickstart your game development journey in Stride 3D using the <a href="https://stride3d.github.io/stride-community-toolkit/index.html">Stride Community Toolkit</a>, as illustrated in the example below (plus some <code>usings</code> at the top).</p>
+<p>This method is compatible with <a href="https://www.stride3d.net/">Stride</a> version <strong>4.1</strong> and later.</p>
+<p>Follow the steps outlined in the <a href="https://stride3d.github.io/stride-community-toolkit/manual/code-only/create-project.html">Stride Community Toolkit</a> to get started.</p>
+<p>Check out the related <a href="https://twitter.com/VasoElias/status/1525162302487543809">tweet</a> for more insights.</p>
+<pre class="language-csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Extensions</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>ProceduralModels</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>Core<span class="token punctuation">.</span>Mathematics</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">Stride<span class="token punctuation">.</span>Engine</span><span class="token punctuation">;</span>
+
+<span class="token keyword">using</span> <span class="token class-name"><span class="token keyword">var</span></span> game <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Game</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 game<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token named-parameter punctuation">start</span><span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">Scene</span> rootScene<span class="token punctuation">)</span> <span class="token operator">=></span>
 <span class="token punctuation">{</span>
     game<span class="token punctuation">.</span><span class="token function">SetupBase3DScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token class-name"><span class="token keyword">var</span></span> entity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Entity</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">1f</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">,</span> <span class="token number">3f</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> entity <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreatePrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Capsule<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    entity<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">ModelComponent</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">CubeProceduralModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Generate</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>Services<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    entity<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     entity<span class="token punctuation">.</span>Scene <span class="token operator">=</span> rootScene<span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
