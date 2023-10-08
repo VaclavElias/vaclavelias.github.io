@@ -1,5 +1,5 @@
 ---
-title:  Explore Stride's Minimal API: A Code-Only Approach
+title: "Explore Stride's Minimal API: A Code-Only Approach"
 description: Dive into a minimal code approach with Stride3D, unlocking the potential of game development with just 12 lines of code using the Stride Community Toolkit.
 categories: stride3d
 date: 2022-05-13
