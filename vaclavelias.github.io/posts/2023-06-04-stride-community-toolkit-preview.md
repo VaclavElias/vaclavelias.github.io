@@ -27,12 +27,16 @@ The toolkit is still in the early stages of development but already includes a n
 
 This article assumes you have some .NET and C# programming experience.
 
-## Code-Only
+## Code-Only on Windows
 
 The toolkit allows you to create a game using a code-only approach. This means you can create a game without using the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very useful for onboarding into the Stride 3D engine and game development without having to dive into the Game Studio.
 
 Some other reasons for using the code-only approach are listed [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
-We will be using a standard .NET Core console application to create a simple game and adding some NuGet packages to get started.
+We will be using a standard .NET 8 **Console App** to create a simple game and adding some NuGet packages to get started.
 
 ### Prerequisites
+
+## Code-Only on other platforms
+
+This options is not yet available but is planned for the future.
