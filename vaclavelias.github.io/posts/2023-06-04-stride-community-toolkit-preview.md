@@ -50,36 +50,140 @@ These prerequisites were tested on clean Windows 11 installations.
 1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB)
 1. Install IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/) or Rider or any other IDE that supports .NET development
 
-### Step 1 - Create a new C# .NET 8 Console App
+### The story of the brave explorers
+
+🌍 Welcome, brave explorers of the digital wilderness! 🌲 Today, we embark on a thrilling journey into the heart of the Stride 3D game engine. 🎮 Our guide? None other than the Stride Community Toolkit. 🛠️
+
+In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 8 Console App. 🌑 Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life. 🌌
+
+As we venture further, we'll summon light into our world, transforming the black void into a mesmerizing blue expanse. 💡🔵 And what's a world without its inhabitants? We'll conjure a 3D capsule, our first digital lifeform, into existence. 🧙‍♂️🧊
+
+But beware, fellow adventurers! Our capsule is a wild creature, prone to falling into the void. 😱 Fear not, for we'll harness the power of a 3D camera controller to keep a watchful eye on our creation. 🎥👀
+
+So, strap on your virtual hiking boots, refresh your mouse agility skills 🖱️, and join us on this exhilarating expedition. Let's dive into the code! 🏊‍♂️💻
+
+
+### Step 1 - Create a new C# .NET 8 Console App - Nothingness
 
 1. Create a new C# .NET 8 Console App in your IDE.
 1. Add the following NuGet package
-     ```bash
-     dotnet add package Stride.CommunityToolkit.Windows --prerelease
-     ```
+    ```bash
+    dotnet add package Stride.CommunityToolkit.Windows --prerelease
+    ```
 1. Paste the following code into your `Program.cs` file
-     ```csharp
-    using Stride.CommunityToolkit.Engine;
-    using Stride.CommunityToolkit.Rendering.ProceduralModels;
-    using Stride.Core.Mathematics;
+    ```csharp
     using Stride.Engine;
 
     using var game = new Game();
 
-    game.Run(start: Start);
-
-    void Start(Scene rootScene)
-    {
-        game.SetupBase3DScene();
-
-        var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
-
-        entity.Transform.Position = new Vector3(0, 8, 0);
-
-        entity.Scene = rootScene;
-    }
-   ```
+    game.Run();
+    ```
 1. Run the application
+1. See the black void of nothingness 🙀
+
+### Step 2 - Let it be light - Or at least blue
+
+Once upon a time in a galaxy far far away, you should see a window with a black background. This is the Stride 3D game window. As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time we use the `Stride.CommunityToolkit.Engine` so we can reference some of the toolkit helper methods.
+
+```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.Engine;
+
+using var game = new Game();
+
+game.Run(start: Start);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera();
+}
+```
+We added a `Start` method that takes a `Scene` object as a parameter. We then added two helper methods to the `Game` object. The `AddGraphicsCompositor()` method adds a graphics compositor to the game, and the `Add3DCamera()` method adds a 3D camera to the game.
+
+- `AddGraphicsCompositor()` a [graphics compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) organizes how scenes are rendered in the Stride engine, allowing for extensive customization of the rendering pipeline.
+- `Add3DCamera()` a 3D camera is a component that allows you to view the scene from different angles.
+
+With these new additions, let's run the application again.
+
+Well, we have now blue screen, instead of black. Not very exciting. We are looking through camera but there is nothing to see.
+
+Let's add something to the scene. This time we will be utilising ` Stride.CommunityToolkit.Rendering.ProceduralModels`. 
+
+```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.Engine;
+
+using var game = new Game();
+
+game.Run(start: Start);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera();
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+}
+```
+
+We added a new line that creates a 3D primitive capsule. The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an `Entity` object. The `PrimitiveModelType` enum is an enumeration of primitive 3D models that can be created using the `Create3DPrimitive()` method.
+
+Let's run the application again.
+
+Surprise, nothing happened. We created an entity but we didn't add it to the scene. A typical beginners mistake 🤦‍♂️. Update the `Start` method to look like this below, by the way, now you see why we needed `rootScene`:
+
+```csharp
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera();
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Scene = rootScene;
+}
+```
+
+Now, let's run the application again.
+
+You should see now a capsule in the middle of the screen if you are lucky because it is falling down. Fast.
+
+Maybe, we could at least look around the scene and see the capsule from different angles. While it is falling down into the void 😠?
+
+Let's add a 3D camera controller to the game. This extension will add some basic functionality to the camera, with the instructions printed on the screen. Time to refresh your mouse 🖱️ agility skills.
+
+
+```csharp
+game.Add3DCamera().Add3DCameraController();
+```
+
+Now, let's run the application again and use right click to rotate the camera towards the capsule.
+
+Maybe a little bit more satisfying? Let's make the experience more interesting.
+
+Firstly, let's reposition the capsule, so we have a few more seconds of excitement looking at it.
+
+Update the `Start` method to look like this:
+
+
+```csharp
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+}
+
+```
+
+
+
+--------------------
+
 
 You should see a window with a capsule in the middle of the screen. You can move the camera around using the mouse and keyboard as instructed in the screen.
 
