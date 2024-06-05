@@ -21,9 +21,9 @@ Table of Contents:
 
 ## Introduction 🌱
 
-I would like to introduce the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html) preview, a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. The toolkit is a community-driven FOSS project that aims to provide tools to help developers create 2D/3D games or visualizations with Stride.
+I want to introduce the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html) preview, a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. The toolkit is a community-driven FOSS project that aims to provide tools to help developers create 2D/3D games or visualizations with Stride.
 
-The toolkit is still in the early stages of development but already includes a number of useful features. I will be focusing on the code-only approach in this post, which is one of the features that I found very useful.
+The toolkit is still in the early stages of development but already includes several useful features. I will be focusing on the code-only approach in this post, which is one of the features that I found very useful.
 
 This article assumes you have some .NET and C# programming experience.
 
@@ -48,7 +48,7 @@ These prerequisites were tested on clean Windows 11 installations.
 
 1. Install [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart if your system asks you to.
 1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB)
-1. Install IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/) or Rider or any other IDE that supports .NET development
+1. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/) or Rider or any other IDE that supports .NET development
 
 ### The story of the brave explorers 📘
 
@@ -106,7 +106,7 @@ We added a `Start` method that takes a `Scene` object as a parameter. We then ad
 
 With these new additions, let's run the application again.
 
-Well, we have now blue screen, instead of black. Not very exciting. We are looking through camera but there is nothing to see.
+Well, we have now a blue screen, instead of a black one. Not very exciting. We are looking through the camera but there is nothing to see.
 
 Let's add something to the scene. This time we will be utilising ` Stride.CommunityToolkit.Rendering.ProceduralModels`. 
 
@@ -149,7 +149,7 @@ Now, let's run the application again.
 
 You should see now a capsule in the middle of the screen if you are lucky because it is falling down. Fast.
 
-Maybe, we could at least look around the scene and see the capsule from different angles. While it is falling down into the void 😠?
+Maybe, we could at least look around the scene and see the capsule from different angles. While it is falling into the void 😠?
 
 Let's add a 3D camera controller to the game. This extension will add some basic functionality to the camera, with the instructions printed on the screen. Time to refresh your mouse 🖱️ agility skills.
 
@@ -158,7 +158,7 @@ Let's add a 3D camera controller to the game. This extension will add some basic
 game.Add3DCamera().Add3DCameraController();
 ```
 
-Now, let's run the application again and use right click to rotate the camera towards the capsule.
+Now, let's run the application again and use the right click to rotate the camera towards the capsule.
 
 Maybe a little bit more satisfying? Let's make the experience more interesting.
 
