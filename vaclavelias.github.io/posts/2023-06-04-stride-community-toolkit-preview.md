@@ -19,7 +19,7 @@ Table of Contents:
 
 [[TOC]]
 
-## Introduction
+## Introduction 🌱
 
 I would like to introduce the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html) preview, a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. The toolkit is a community-driven FOSS project that aims to provide tools to help developers create 2D/3D games or visualizations with Stride.
 
@@ -27,7 +27,7 @@ The toolkit is still in the early stages of development but already includes a n
 
 This article assumes you have some .NET and C# programming experience.
 
-## Code-Only on Windows
+## Code-Only on Windows 🪟
 
 The toolkit allows you to create a game using a code-only approach. This means you can create a game without using the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very useful for onboarding into the Stride 3D engine and game development without having to dive into the Game Studio.
 
@@ -42,7 +42,7 @@ I found the following process to be the easiest way to get started with the code
 1. Add interaction with mouse and keyboard
 1. Add output to the console or screen
 
-### Prerequisites
+### Prerequisites 🏠 
 
 These prerequisites were tested on clean Windows 11 installations.
 
@@ -50,7 +50,7 @@ These prerequisites were tested on clean Windows 11 installations.
 1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB)
 1. Install IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/) or Rider or any other IDE that supports .NET development
 
-### The story of the brave explorers
+### The story of the brave explorers 📘
 
 🌍 Welcome, brave explorers of the digital wilderness! 🌲 Today, we embark on a thrilling journey into the heart of the Stride 3D game engine. 🎮 Our guide? None other than the Stride Community Toolkit. 🛠️
 
@@ -65,7 +65,7 @@ So, strap on your virtual hiking boots, refresh your mouse agility skills 🖱�
 
 ### Step 1 - Create a new C# .NET 8 Console App - Nothingness
 
-1. Create a new C# .NET 8 Console App in your IDE.
+1. Create a new C# .NET 8 Console App in your IDE
 1. Add the following NuGet package
     ```bash
     dotnet add package Stride.CommunityToolkit.Windows --prerelease
