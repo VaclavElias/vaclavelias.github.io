@@ -21,9 +21,9 @@ Table of Contents:
 
 ## Introduction 🌱
 
-Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. This toolkit is a community-driven, open-source project designed to assist developers in creating 2D/3D games and visualizations using Stride.
+Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. This toolkit is a community-driven, [open-source project](https://github.com/stride3d/stride-community-toolkit) designed to assist developers in creating 2D/3D games and visualizations using [Stride](https://doc.stride3d.net/latest/en/manual/index.html).
 
-Though still in its early stages, the toolkit already offers several valuable features. In this post, I will focus on the code-only approach, which I found particularly useful.
+Though still in its early stages, the toolkit already offers several valuable features. In this post, I will focus on the [code-only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) approach, which I found particularly useful.
 
 This article assumes that you have some experience with .NET and C# programming.
 
@@ -39,7 +39,7 @@ Here is the process I found to be the easiest way to get started with the code-o
 
 1. Run the minimal possible code to get the game window running.
 2. Add primitives/objects to the scene.
-3. Add interaction with mouse and keyboard.
+3. Add interaction with keyboard and mouse.
 4. Add output to the console or screen.
 
 ### Prerequisites 🏠 
@@ -124,11 +124,11 @@ void Start(Scene rootScene)
     game.AddGraphicsCompositor();
     game.Add3DCamera();
 
-    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule); // This was added
 }
 ```
 
-We added a new line that creates a 3D primitive capsule. The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an `Entity` object. The `PrimitiveModelType` enum is an enumeration of primitive 3D models that can be created using the `Create3DPrimitive()` method.
+We added a new line that creates a 3D primitive capsule. The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an [`Entity`](https://doc.stride3d.net/latest/en/manual/game-studio/add-entities.html) object. The `PrimitiveModelType` enum is an enumeration of primitive 3D models that can be created using the `Create3DPrimitive()` method.
 
 Run the application again. Surprise, nothing happened! We created an entity but didn't add it to the scene. A typical beginner's mistake 🤦‍♂️. Update the `Start` method to look like this:
 
@@ -139,7 +139,7 @@ void Start(Scene rootScene)
     game.Add3DCamera();
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
-    entity.Scene = rootScene;
+    entity.Scene = rootScene; // This was added
 }
 ```
 
@@ -153,7 +153,7 @@ Let's add a 3D camera controller `Add3DCameraController()` to the game. This ext
 
 
 ```csharp
-game.Add3DCamera().Add3DCameraController();
+game.Add3DCamera().Add3DCameraController(); // This was updated
 ```
 
 Run the application again and use the right-click to rotate the camera towards the capsule. Maybe a little bit more satisfying? Let's make the experience more interesting.
@@ -169,7 +169,7 @@ void Start(Scene rootScene)
     game.Add3DCamera().Add3DCameraController();
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
-    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Transform.Position = new Vector3(0, 8, 0); // This was added
     entity.Scene = rootScene;
 }
 ```
@@ -187,7 +187,7 @@ void Start(Scene rootScene)
 {
     game.AddGraphicsCompositor();
     game.Add3DCamera().Add3DCameraController();
-    game.Add3DGround();
+    game.Add3DGround(); // This was added
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
     entity.Transform.Position = new Vector3(0, 8, 0);
@@ -208,7 +208,7 @@ void Start(Scene rootScene)
 {
     game.AddGraphicsCompositor();
     game.Add3DCamera().Add3DCameraController();
-    game.AddDirectionalLight();
+    game.AddDirectionalLight(); // This was added
 
     game.Add3DGround();
 
@@ -224,17 +224,17 @@ Run the application again. You should see a capsule falling down and landing on 
 
 Tedious work, but you just learned the very basics of game setup behind the scenes, which is usually done in the Game Studio for you automatically.
 
-- You need a Graphics Compositor to render the scene.
-- You need a Camera to view the scene.
+- You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene.
+- You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene.
 - You need a Camera Controller to move the camera around.
-- You need a Directional Light to illuminate the scene.
+- You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene.
 
 Once the basics are set up, you need to add entities to the scene. In our example, we added:
 
 - A 3D Ground, which is a primitive model.
 - A Capsule, which is also a primitive model.
 
-The toolkit added colliders for the ground and capsule, so the capsule doesn't fall through the ground.
+The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, so the capsule doesn't fall through the ground.
 
 ### Step 9: Illuminate the Scene - Add Skybox! 🌇
 
