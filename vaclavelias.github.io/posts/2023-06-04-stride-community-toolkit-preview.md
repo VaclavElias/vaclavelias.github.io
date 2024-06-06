@@ -38,7 +38,7 @@ We will be using a standard .NET 8 **Console App** to create a simple game and a
 Here is the process I found to be the easiest way to get started with the code-only approach:
 
 1. Run the minimal possible code to get the game window running.
-2. Add primitives/objects to the scene.
+2. Add entities/primitives to the scene.
 3. Add interaction with keyboard and mouse.
 4. Add output to the console or screen.
 
