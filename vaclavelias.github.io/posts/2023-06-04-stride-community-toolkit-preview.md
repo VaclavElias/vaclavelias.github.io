@@ -8,10 +8,10 @@ tags:
   - Stride3D
   - .NET
   - Game
-image: /assets/img/11ty-logo-400x400.png
+image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-C# and .NET developers can now create games using the Stride 3D engine with a code-only approach. The Stride Community Toolkit preview is a collection of extensions and helpers for the Stride 3D game engine. This toolkit is a community-driven FOSS project that aims to provide tools to help developers create 2D/3D games or visualizations with Stride.
+Discover the power of the Stride Community Toolkit, a collection of extensions and helpers for the Stride 3D game engine. This preview showcases the toolkit's code-only approach, enabling C# and .NET developers to create immersive 2D/3D games and visualizations. Dive into the world of game development with this community-driven, open-source project.
 
 ---
 
@@ -240,17 +240,66 @@ Once the basics are set up, you need to add entities to the scene. In our exampl
 
 The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, so the capsule doesn't fall through the ground.
 
-### Step 9: Illuminate the Scene - Add Skybox! 🌇
+### Step 9: Let's add Profiler - Performance! 📈
 
-### Step 10: Add Keyboard Interaction - Move the Capsule! ⌨️
+We love FPS = lot and we want to see it. The toolkit provides a `game.AddProfiler()` method that adds a performance profiler to the game. Update the `Start` method to look like this:
 
-### Step 11: Add Mouse Interaction - Catch the Capsule! 🖱️
+```csharp
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
 
-### Step 12: Add Output - Console or Screen! 📺
+    game.AddProfiler(); // This was added
 
-### Step 13: Break 2 - Let's Reflect 😅
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+}
+```
 
-### Step 14: Add More Primitives
+Run the application again. You should see a [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen showing the frames per second (FPS) and other performance metrics. Press F1 to loop through profile outputs. 
+
+### Step 10: Illuminate the Scene - Add Skybox! 🌇
+
+As much as I am already excited how things are looking, we can make our scene looking better. Let's add a skybox to the scene. The toolkit provides a `AddSkybox()` method that adds a skybox to the scene. Firstly, we need to add another NuGet package `Stride.CommunityToolkit.Skyboxes` which brings also some assets required for the skybox.
+
+```bash
+dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
+```
+
+Then update the `Start` method to look like this:
+
+```csharp
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
+
+    game.AddProfiler();
+    game.AddSkybox(); // This was added
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+}
+```
+
+Run the application again. You should see a skybox in the scene, making it look more realistic. The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is a 3D model that surrounds the scene and provides a background for the scene.
+
+### Step 11: Add Keyboard Interaction - Move the Capsule! ⌨️
+
+### Step 12: Add Mouse Interaction - Catch the Capsule! 🖱️
+
+### Step 13: Add Output - Console or Screen! 📺
+
+### Step 14: Break 2 - Let's Reflect 😅
+
+### Step 15: Add More Primitives - Let's go crazy! 🤪
 
 ## Code-Only on other platforms
 
