@@ -77,6 +77,10 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 
     game.Run();
     ```
+1. The first build on your computer requires running this below, thereafter just use your IDE.
+    ```bash
+    dotnet build --runtime win-x64
+    ``` 
 1. Run the application.
 1. See the black void of nothingness 🙀.
 
@@ -250,4 +254,4 @@ The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/
 
 ## Code-Only on other platforms
 
-This options is not yet available but is planned for the future ([Use CompilerApp crossplatform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, we can build the game on Windows and then run it on other platforms. One of the build gears called `Stride.Core.Assets.CompilerApp.exe` responsible for building the assets is currently only available on Windows.
+This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, we can build the game on Windows and then run it on other platforms. One of the build gears called `Stride.Core.Assets.CompilerApp.exe` responsible for building the assets is currently only available on Windows.
