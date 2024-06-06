@@ -270,17 +270,28 @@ As much as I am already excited how things are looking, we can make our scene lo
 dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
 ```
 
-Then update the `Start` method to look like this:
+Then update the code to look like this:
 
 ```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.CommunityToolkit.Skyboxes;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.Games;
+
+using var game = new Game();
+
+game.Run(start: Start);
+
 void Start(Scene rootScene)
 {
     game.AddGraphicsCompositor();
     game.Add3DCamera().Add3DCameraController();
     game.AddDirectionalLight();
     game.Add3DGround();
-
     game.AddProfiler();
+
     game.AddSkybox(); // This was added
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
@@ -291,7 +302,60 @@ void Start(Scene rootScene)
 
 Run the application again. You should see a skybox in the scene, making it look more realistic. The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is a 3D model that surrounds the scene and provides a background for the scene.
 
-### Step 11: Add Keyboard Interaction - Move the Capsule! ⌨️
+### Step 11: Add Keyboard Interaction - Move the Cube! ⌨️
+
+Let's add a box to the scene and move it around using the keyboard. Update the code to look like this:
+
+```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.CommunityToolkit.Skyboxes;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.Games;
+
+Entity? box;
+
+using var game = new Game();
+
+game.Run(start: Start, update: Update);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
+    game.AddProfiler();
+    game.AddSkybox();
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+
+    box = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Gold)
+    });
+    box.Transform.Position = new Vector3(0, 0, 0);
+    box.Scene = rootScene;
+}
+
+void Update(Scene scene, GameTime time)
+{
+
+}
+
+```
+
+- `CreateMaterial()` creates a new material with the specified color. You can color also the capsule if you wish 😉.
+- `Update()` is a callback that is called every frame. It takes a `Scene` object and a `GameTime` object as parameters.
+- The `GameTime` object contains information about the time elapsed since the last frame.
+
+We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this:
+
+```csharp
+```
 
 ### Step 12: Add Mouse Interaction - Catch the Capsule! 🖱️
 
