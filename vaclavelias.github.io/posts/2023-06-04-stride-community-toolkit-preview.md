@@ -11,7 +11,7 @@ tags:
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-Discover the power of the Stride Community Toolkit, a collection of extensions and helpers for the Stride 3D game engine. This preview showcases the toolkit's code-only approach, enabling C# and .NET developers to create immersive 2D/3D games and visualizations. Dive into the world of game development with this community-driven, open-source project.
+Discover the power of the Stride Community Toolkit, a collection of extensions and helpers for the Stride 3D game engine. This blog post showcases the toolkit's **code-only** approach, enabling C# and .NET developers to create immersive 2D/3D games and visualizations. Dive into the world of game development with this community-driven, open-source project.
 
 ---
 
@@ -37,18 +37,18 @@ We will be using a standard .NET 8 **Console App** to create a simple game and a
 
 Here is the process I found to be the easiest way to get started with the code-only approach:
 
-1. Run the minimal possible code to get the game window running.
-2. Add entities/primitives to the scene.
-3. Add interaction with keyboard and mouse.
-4. Add output to the console or screen.
+1. Run the minimal possible code to get the game window running
+2. Add entities/primitives to the scene
+3. Add interaction with keyboard and mouse
+4. Add output to the console or screen
 
 ### Prerequisites 🏠 
 
-These prerequisites were tested on clean Windows 11 installations.
+These prerequisites were tested on clean Windows 11 installation.
 
-1. Install [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart if your system asks you to.
-1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB).
-1. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/), Rider or any other IDE that supports .NET development.
+1. Install [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart if your system asks you to
+1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB)
+1. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/), Rider or any other IDE that supports .NET development
 
 ### The story of the brave explorers 📘
 
@@ -83,6 +83,9 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
     ``` 
 1. Run the application.
 1. See the black void of nothingness 🙀.
+
+{% include _alert-svg.html %}
+{% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
 ### Step 2: Let There Be Light - Or at Least Blue 🌌
 
@@ -164,9 +167,14 @@ Run the application again and use the right-click to rotate the camera towards t
 
 ### Step 5: Reposition the Capsule - More Excitement! 📍
 
-First, let's reposition the capsule so we have a few more seconds of excitement looking at it. Update the `Start` method to look like this:
+First, let's reposition the capsule so we have a few more seconds of excitement looking at it. Update the `Start` method to look like this, don't forget to add `Stride.Core.Mathematics`:
 
 ```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+
 void Start(Scene rootScene)
 {
     game.AddGraphicsCompositor();
@@ -179,6 +187,7 @@ void Start(Scene rootScene)
 ```
 
 - `entity.Transform.Position` sets the position of the entity in the scene. The `Vector3` object is a 3D vector representing the position of the entity in the scene. In this case, we set the position of the entity to (0, 8, 0), which is 8 units above the origin of the scene.
+- `Stride.Core.Mathematics` Stride is using currently its own `Vector3` implementation, so we need to add this namespace.
 
 Run the application again. You should see a capsule falling down from the top of the screen. I know, the capsule is black, but we will fix that later.
 
@@ -230,7 +239,7 @@ Tedious work, but you just learned the very basics of game setup behind the scen
 
 - You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene.
 - You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene.
-- You need a Camera Controller to move the camera around.
+- You need a Camera Controller to move the camera around. This is a C# script that controls the camera's position and orientation.
 - You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene.
 
 Once the basics are set up, you need to add entities to the scene. In our example, we added:
