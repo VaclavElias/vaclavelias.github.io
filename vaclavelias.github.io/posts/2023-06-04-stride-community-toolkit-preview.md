@@ -312,7 +312,19 @@ Run the application again. You should see a skybox in the scene, making it look 
 
 ### Step 11: Add Keyboard Interaction - Move the Cube! ⌨️
 
-Let's add a box to the scene and move it around using the keyboard. Update the code to look like this:
+Let's add a box to the scene and move it around using the keyboard. But before we start coding, let's consider the different ways we can move the box:
+
+1. **Moving Entities by Changing Their Position Directly (Without Colliders)**
+   - Simple movement without interaction with other entities.
+   - Non-physical movement that doesn't involve realistic physics or collisions.
+2. **Moving Entities Using Physics (With Colliders)**
+   - Realistic movement that interacts with the environment.
+   - Interaction with other entities, including collisions.
+   - Movement influenced by gravity and other forces.
+   - Physics-driven game mechanics.
+   - Environmental interaction, like bouncing, sliding, or responding to obstacles.
+
+For this step, we'll start with the first option: moving the box by directly changing its position. Update the code to look like this:
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -322,7 +334,8 @@ using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Games;
 
-Entity? box;
+float movementSpeed = 5f; // This was added
+Entity? box; // This was added
 
 using var game = new Game();
 
@@ -341,6 +354,9 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
     entity.Scene = rootScene;
 
+    // This was added
+    // Note that we are disabling the collider for the box and
+    // adding a material to it, so we could change the color of the box
     box = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold)
@@ -349,9 +365,15 @@ void Start(Scene rootScene)
     box.Scene = rootScene;
 }
 
+ // This was added
 void Update(Scene scene, GameTime time)
 {
+    if (box != null)
+    {
+        var deltaTime = (float)time.Elapsed.TotalSeconds;
 
+        box.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+    }
 }
 
 ```
@@ -359,6 +381,9 @@ void Update(Scene scene, GameTime time)
 - `CreateMaterial()` creates a new material with the specified color. You can color also the capsule if you wish 😉.
 - `Update()` is a callback that is called every frame. It takes a `Scene` object and a `GameTime` object as parameters.
 - The `GameTime` object contains information about the time elapsed since the last frame.
+- `deltaTime` is the time elapsed since the last frame in seconds.
+
+Run the application. You should see a box moving in X direction. 
 
 We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this:
 
