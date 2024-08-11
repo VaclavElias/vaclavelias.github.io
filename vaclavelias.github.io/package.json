@@ -21,7 +21,7 @@
     "lunr": "^2.3.9",
     "markdown-it-anchor": "^9.0.1",
     "markdown-it-table-of-contents": "^0.6.0",
-    "sass": "^1.77.4",
-    "terser": "^5.31.0"
+    "sass": "^1.77.6",
+    "terser": "^5.31.5"
   }
 }
