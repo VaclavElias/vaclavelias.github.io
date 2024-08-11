@@ -1,5 +1,5 @@
 ---
-title: Stride Community Toolkit Preview
+title: Stride Community Toolkit Preview - Code-Only Feature
 description: Explore the Stride Community Toolkit preview, a collection of extensions and helpers for the Stride 3D game engine.
 categories: stride3d
 date: 2024-06-04
@@ -281,6 +281,7 @@ dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
 
 Then update the code to look like this:
 
+
 ```csharp
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
@@ -310,7 +311,7 @@ void Start(Scene rootScene)
 
 Run the application again. You should see a skybox in the scene, making it look more realistic. The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is a 3D model that surrounds the scene and provides a background for the scene.
 
-### Step 11: Add Keyboard Interaction - Move the Cube! ⌨️
+### Step 11: Add Motion - Move the Cube! 
 
 Let's add a box to the scene and move it around using the keyboard. But before we start coding, let's consider the different ways we can move the box:
 
@@ -325,6 +326,7 @@ Let's add a box to the scene and move it around using the keyboard. But before w
    - Environmental interaction, like bouncing, sliding, or responding to obstacles.
 
 For this step, we'll start with the first option: moving the box by directly changing its position. Update the code to look like this:
+
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -350,13 +352,16 @@ void Start(Scene rootScene)
     game.AddProfiler();
     game.AddSkybox();
 
+    // This was added to see the axis directions
+    game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
+
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
     entity.Transform.Position = new Vector3(0, 8, 0);
     entity.Scene = rootScene;
 
     // This was added
     // Note that we are disabling the collider for the box and
-    // adding a material to it, so we could change the color of the box
+    // adding a material to it so that we can change the color of the box
     box = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold)
@@ -365,7 +370,7 @@ void Start(Scene rootScene)
     box.Scene = rootScene;
 }
 
- // This was added
+// This was added
 void Update(Scene scene, GameTime time)
 {
     if (box != null)
@@ -378,6 +383,9 @@ void Update(Scene scene, GameTime time)
 
 ```
 
+- `movementSpeed` is a constant that determines how fast the box moves.
+- `box` is an `Entity` object that represents the box in the scene.
+- `AddGroundGizmo()` adds a ground gizmo to the scene. The ground gizmo is a visual representation of the ground plane that shows the axis directions.
 - `CreateMaterial()` creates a new material with the specified color. You can color also the capsule if you wish 😉.
 - `Update()` is a callback that is called every frame. It takes a `Scene` object and a `GameTime` object as parameters.
 - The `GameTime` object contains information about the time elapsed since the last frame.
@@ -385,18 +393,54 @@ void Update(Scene scene, GameTime time)
 
 Run the application. You should see a box moving in X direction. 
 
-We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this:
+### Step 12: Add Keyboard Interaction - Move the Cube! ⌨️
+
+We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this, also make sure that `Stride.Input;` namespace was added:
+
+
+```csharp
+// This was updated
+void Update(Scene scene, GameTime time)
+{
+    if (box != null)
+    {
+        var deltaMovement = movementSpeed * (float)time.Elapsed.TotalSeconds;
+
+        if (game.Input.IsKeyDown(Keys.Z))
+        {
+            box.Transform.Position += new Vector3(-deltaMovement, 0, 0);
+        }
+        else if (game.Input.IsKeyDown(Keys.X))
+        {
+            box.Transform.Position += new Vector3(deltaMovement, 0, 0);
+        }
+    }
+}
+```
+
+- `game.Input.IsKeyDown()` checks if a key is pressed. It takes a `Keys` enum value as a parameter.
+
+Run the application. You should see the box moving in the X direction only, left and right when you press the Z and X keys, respectively. Note that the capsule is not colliding with the box because we disabled the collider for the box.
+
+### Step 13: Add Mouse Interaction - Catch the Capsule! 🖱️
 
 ```csharp
 ```
 
-### Step 12: Add Mouse Interaction - Catch the Capsule! 🖱️
+### Step 14: Add Output - Console or Screen! 📺
 
-### Step 13: Add Output - Console or Screen! 📺
+```csharp
+```
 
-### Step 14: Break 2 - Let's Reflect 😅
+### Step 15: Break 2 - Let's Reflect 😅
 
-### Step 15: Add More Primitives - Let's go crazy! 🤪
+```csharp
+```
+
+### Step 16: Add More Primitives - Let's go crazy! 🤪
+
+```csharp
+```
 
 ## Code-Only on other platforms
 
