@@ -2,7 +2,7 @@
 title: Stride Community Toolkit Preview - Code-Only Feature
 description: Explore the Stride Community Toolkit preview, a collection of extensions and helpers for the Stride 3D game engine.
 categories: stride3d
-date: 2024-06-04
+date: 2024-08-30
 tags:
   - C# 
   - Stride3D
@@ -167,7 +167,7 @@ Run the application again and use the right-click to rotate the camera towards t
 
 ### Step 5: Reposition the Capsule - More Excitement! 📍
 
-First, let's reposition the capsule so we have a few more seconds of excitement looking at it. Update the `Start` method to look like this, don't forget to add `Stride.Core.Mathematics`:
+First, let's reposition the capsule so we have a few more seconds of excitement looking at it. Update the `Start` method to look like this, don't forget to add `Stride.Core.Mathematics` namespace:
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -186,7 +186,7 @@ void Start(Scene rootScene)
 }
 ```
 
-- `entity.Transform.Position` sets the position of the entity in the scene. The `Vector3` object is a 3D vector representing the position of the entity in the scene. In this case, we set the position of the entity to (0, 8, 0), which is 8 units above the origin of the scene.
+- `entity.Transform.Position` sets the position of the entity in the scene. The `Vector3` object is a 3D vector representing the position of the entity in the scene. In this case, we set the position of the entity to `(0, 8, 0)`, which is 8 units above the origin of the scene.
 - `Stride.Core.Mathematics` Stride is using currently its own `Vector3` implementation, so we need to add this namespace.
 
 Run the application again. You should see a capsule falling down from the top of the screen. I know, the capsule is black, but we will fix that later.
@@ -239,7 +239,7 @@ Tedious work, but you just learned the very basics of game setup behind the scen
 
 - You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene.
 - You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene.
-- You need a Camera Controller to move the camera around. This is a C# script that controls the camera's position and orientation.
+- You need a Camera Controller to move the camera around. This is a [C# script](https://doc.stride3d.net/latest/en/manual/scripts/index.html) that controls the camera's position and orientation.
 - You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene.
 
 Once the basics are set up, you need to add entities to the scene. In our example, we added:
@@ -337,11 +337,11 @@ using Stride.Engine;
 using Stride.Games;
 
 float movementSpeed = 5f; // This was added
-Entity? box; // This was added
+Entity? box1; // This was added
 
 using var game = new Game();
 
-game.Run(start: Start, update: Update);
+game.Run(start: Start, update: Update); // This was updated
 
 void Start(Scene rootScene)
 {
@@ -362,22 +362,24 @@ void Start(Scene rootScene)
     // This was added
     // Note that we are disabling the collider for the box and
     // adding a material to it so that we can change the color of the box
-    box = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    // The box is hanging in the air, so it won't collide with the ground
+    box1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
-        Material = game.CreateMaterial(Color.Gold)
+        Material = game.CreateMaterial(Color.Gold),
+        IncludeCollider = false
     });
-    box.Transform.Position = new Vector3(0, 0, 0);
-    box.Scene = rootScene;
+    box1.Transform.Position = new Vector3(0, 0, 0);
+    box1.Scene = rootScene;
 }
 
 // This was added
 void Update(Scene scene, GameTime time)
 {
-    if (box != null)
+    if (box1 != null)
     {
         var deltaTime = (float)time.Elapsed.TotalSeconds;
 
-        box.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+        box1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 }
 
@@ -399,20 +401,83 @@ We will use the `Update` method to move the box around using the keyboard. Updat
 
 
 ```csharp
-// This was updated
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.CommunityToolkit.Skyboxes;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.Games;
+using Stride.Input;
+using Stride.Physics;
+
+float movementSpeed = 5f;
+Entity? box1 = null;
+Entity? box2 = null;
+RigidbodyComponent? rigidBody = null;
+
+using var game = new Game();
+
+game.Run(start: Start, update: Update);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
+    game.AddProfiler();
+    game.AddSkybox();
+
+    game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+
+    // Note that we are disabling the collider for the box and
+    // adding a material to it so that we can change the color of the box
+    // The box is hanging in the air, so it won't collide with the ground
+    box1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Gold),
+        IncludeCollider = false
+    });
+    box1.Transform.Position = new Vector3(0, 0, 0);
+    box1.Scene = rootScene;
+
+    // This was added
+    box2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.DarkKhaki),
+        IncludeCollider = false
+    });
+    box2.Transform.Position = new Vector3(0, 1, 0);
+    box2.Scene = rootScene;
+
+    rigidBody = box1.Get<RigidbodyComponent>();
+}
+
 void Update(Scene scene, GameTime time)
 {
-    if (box != null)
+    if (box1 != null)
+    {
+        var deltaTime = (float)time.Elapsed.TotalSeconds;
+
+        box1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+    }
+
+    // This was added
+    if (box2 != null)
     {
         var deltaMovement = movementSpeed * (float)time.Elapsed.TotalSeconds;
 
         if (game.Input.IsKeyDown(Keys.Z))
         {
-            box.Transform.Position += new Vector3(-deltaMovement, 0, 0);
+            box2.Transform.Position += new Vector3(-deltaMovement, 0, 0);
         }
         else if (game.Input.IsKeyDown(Keys.X))
         {
-            box.Transform.Position += new Vector3(deltaMovement, 0, 0);
+            box2.Transform.Position += new Vector3(deltaMovement, 0, 0);
         }
     }
 }
