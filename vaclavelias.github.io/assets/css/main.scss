@@ -94,6 +94,36 @@ a:hover :not(.navbar a) {
     position: relative;
 }
 
+/* Container for pre block */
+pre {
+    position: relative;
+    background: #f5f5f5;
+    overflow: auto;
+
+    :hover.copy-button {
+        background-color: lightgray;
+    }
+}
+
+/* Style for the copy button */
+.copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1px 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: none;
+
+}
+
+/* Show the button when the pre block is hovered */
+pre:hover .copy-button {
+    display: inline-block;
+}
+
+
 @media screen and (max-width: 768px) {
     .postcontent {
         padding-left: 10px;
