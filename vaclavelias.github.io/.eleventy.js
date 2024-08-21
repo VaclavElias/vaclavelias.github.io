@@ -12,6 +12,7 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPlugin(syntaxHighlight);
 
     eleventyConfig.addPassthroughCopy("assets/img");
+    eleventyConfig.addPassthroughCopy("assets/scripts/copy-code.js");
     eleventyConfig.addPassthroughCopy("favicon.ico");
     eleventyConfig.addPassthroughCopy("version.txt");
     eleventyConfig.addPassthroughCopy("web.config");
