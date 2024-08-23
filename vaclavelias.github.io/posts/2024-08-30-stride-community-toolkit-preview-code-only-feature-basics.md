@@ -1,21 +1,22 @@
 ---
 title: Stride Community Toolkit Preview - Code-Only Feature - Basics
-description: Explore the Stride Community Toolkit preview, a collection of extensions and helpers for the Stride 3D game engine.
+description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride 3D game engine.
+
 categories: stride3d
 date: 2024-08-30
 tags:
   - C# 
   - Stride3D
   - .NET
-  - Game
+  - Game Development
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-Discover the power of the Stride Community Toolkit, a collection of extensions and helpers for the Stride 3D game engine. This blog post showcases the toolkit's **code-only** approach, enabling C# and .NET developers to create immersive 2D/3D games and visualizations. Dive into the world of game development with this community-driven, open-source project.
+Discover the Stride Community Toolkit, a powerful collection of extensions and helpers designed for the Stride 3D game engine. In this blog post, we dive into the toolkit's **code-only** feature, empowering C# and .NET developers to create immersive 2D/3D games and visualizations with ease. Explore how this community-driven, open-source project can simplify your game development journey.
 
 ---
 
-This blog post is a part of 3 series:
+This blog post is part 1 of a 3-part series:
 
 - Stride Community Toolkit Preview - Code-Only Feature - Basics
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
@@ -27,50 +28,50 @@ Table of Contents:
 
 ## Introduction 🌱
 
-Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. This toolkit is a community-driven, [open-source project](https://github.com/stride3d/stride-community-toolkit) designed to assist developers in creating 2D/3D games and visualizations using [Stride](https://doc.stride3d.net/latest/en/manual/index.html).
+Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. This community-driven, [open-source project](https://github.com/stride3d/stride-community-toolkit) is designed to assist developers in creating 2D/3D games and visualizations using [Stride](https://doc.stride3d.net/latest/en/manual/index.html).
 
-Though still in its early stages, the toolkit already offers several valuable features. In this post, I will focus on the [code-only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) approach, which I found particularly useful.
+Although the toolkit is still in its early stages, it already offers several valuable features. In this post, I will focus on the [code-only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) approach, which I found particularly useful for development.
 
 This article assumes that you have some experience with .NET and C# programming.
 
-The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without using the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the Stride 3D engine and game development without diving into the Game Studio.
+The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the Stride 3D engine and game development, bypassing the need to work directly in the Game Studio.
 
-Additional reasons for using the code-only approach are detailed [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
+Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
-We will be using a standard .NET 8 **Console App** to create a simple game and adding some NuGet packages to get started.
+We will be using a standard .NET 8 **Console App** to create a simple game by adding some NuGet packages to get started.
 
-Here is the process I found to be the easiest way to get started with the code-only approach:
+Here’s the process I found to be the easiest way to begin with the code-only approach:
 
-1. Run the minimal possible code to get the game window running
+1. Run the minimal code to get the game window running
 2. Add entities/primitives to the scene
-3. Add interaction with keyboard and mouse
+3. Add interaction with the keyboard and mouse
 4. Add output to the console or screen
 
 ### Code-Only on Windows 🪟
 
-The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game using a code-only approach. 
+The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game without the need for the Game Studio.
 
-### Code-Only on other platforms 🐧 
+### Code-Only on Other Platforms 🐧 
 
-This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, we can build the game on Windows and then run it on other platforms. One of the build gears called `Stride.Core.Assets.CompilerApp.exe` responsible for building the assets is currently only available on Windows.
+This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
 
 ## Prerequisites 🏠 
 
-These prerequisites were tested on clean Windows 11 installation.
+These prerequisites were tested on a clean Windows 11 installation.
 
-1. Install [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart if your system asks you to
-1. Install [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB)
-1. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can use [Visual Studio Code](https://code.visualstudio.com/), Rider or any other IDE that supports .NET development
+1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart your system if prompted.
+2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can also use [Visual Studio Code](https://code.visualstudio.com/), Rider, or any other IDE that supports .NET development.
 
-## The story of the brave explorers 📘
+## The Story of the Brave Explorers 📘
 
 🌍 Welcome, brave explorers of the digital wilderness! Today, we embark on an exciting journey into the heart of the Stride 3D game engine. Our guide? None other than the Stride Community Toolkit.
 
 In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 8 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
 
-As we venture further, we'll bring light into our world, transforming the black void into a vibrant blue expanse. And what's a world without its inhabitants? We'll conjure a 3D capsule, our first digital lifeform, into existence.
+As we venture further, we'll bring light into our world, transforming the empty void into a vibrant blue expanse. But what's a world without inhabitants? We'll conjure a 3D capsule, our first digital lifeform, into existence.
 
-But beware, fellow adventurers! Our capsule is a wild creature, prone to falling into the void. Fear not, for we'll harness the power of a 3D camera 🎥 controller to keep a watchful eye 👁️ on our creation.
+Beware, fellow adventurers! Our capsule is a wild creature, prone to falling into the void. But fear not, for we'll harness the power of a 3D camera 🎥 controller to keep a watchful eye 👁️ on our creation.
 
 So, refresh your mouse agility skills 🖱️, and join us on this exhilarating expedition. Let's dive into the code! 💻
 
@@ -85,85 +86,108 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
     ```csharp
     using Stride.Engine;
 
+    // Create an instance of the game
     using var game = new Game();
 
+    // Start the game loop
     game.Run();
     ```
-1. The first build on your computer requires running this below, thereafter just use your IDE.
+1. The first build on your computer requires running the command below. Afterward, you can just use your IDE to build:
     ```bash
     dotnet build --runtime win-x64
     ``` 
 1. Run the application.
-1. See the black void of nothingness 🙀.
+1. Behold the black void of nothingness 🙀.
 
 {% include _alert-svg.html %}
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
 ## Step 2: Let There Be Light - Or at Least Blue 🌌
 
-Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods.
+Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods.
+
 
 ```csharp
-using Stride.CommunityToolkit.Engine;  // This was added
+using Stride.CommunityToolkit.Engine;  // This was added: Import the toolkit's helper methods
 using Stride.Engine;
 
+// Create an instance of the game
 using var game = new Game();
 
+// Start the game loop and provide the Start method as a callback
 game.Run(start: Start);  // This was updated
 
- // This was added
+// This was added
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera to the scene to allow viewing from different angles
     game.Add3DCamera();
 }
 ```
 The code above does the following:
 
-- `Start()` method is a callback that is called when the game starts. It takes a `Scene` object as a parameter.
-- `AddGraphicsCompositor()` organizes [how scenes are rendered](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) in the Stride engine, allowing for extensive customization of the rendering pipeline.
-- `Add3DCamera()` adds a 3D camera, allowing you to view the scene from different angles.
+- `Start()` method is a callback that is invoked when the game starts. It takes a `Scene` object as a parameter, representing the root scene of the game.
+- `AddGraphicsCompositor()` organizes [how scenes are rendered](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) in the Stride engine, enabling extensive customization of the rendering pipeline.
+- `Add3DCamera()` adds a 3D camera to the scene, allowing you to view it from various angles.
 
-Run the application again. Now we have a blue screen instead of a black one. Not very exciting, right? We're looking through the camera, but there's nothing to see.
+Run the application again. Now, instead of a black screen, you should see a blue screen. While not overly exciting, it’s a step in the right direction. We’re looking through the camera, but there’s nothing to see—yet.
 
 ## Step 3: Add Some Shapes - Capsule Time! 🎨
 
-Let's add something to the scene. This time we will be utilising `Stride.CommunityToolkit.Rendering.ProceduralModels` namespace. 
+Let's add something to the scene. This time, we will be utilizing the `Stride.CommunityToolkit.Rendering.ProceduralModels` namespace, which provides helper methods for generating procedural models like capsules, cubes, and spheres. We will add a capsule to the scene.
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
-using Stride.CommunityToolkit.Rendering.ProceduralModels;  // This was added
+using Stride.CommunityToolkit.Rendering.ProceduralModels;  // This was added: Import procedural model helpers
 using Stride.Engine;
 
+// Create an instance of the game
 using var game = new Game();
 
+// Start the game loop and provide the Start method as a callback
 game.Run(start: Start);
 
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera to the scene to allow viewing from different angles
     game.Add3DCamera();
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule); // This was added
 }
 ```
 
-We added a new line that creates a 3D primitive capsule. The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an [`Entity`](https://doc.stride3d.net/latest/en/manual/game-studio/add-entities.html) object. The `PrimitiveModelType` enum is an enumeration of primitive 3D models that can be created using the `Create3DPrimitive()` method.
+In this step, we added a new line that creates a 3D primitive capsule. The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an [`Entity`](https://doc.stride3d.net/latest/en/manual/game-studio/add-entities.html) object. The `PrimitiveModelType` enum defines the types of primitive 3D models that can be generated, such as capsules, cubes, and spheres.
 
-Run the application again. Surprise, nothing happened! We created an entity but didn't add it to the scene. A typical beginner's mistake 🤦‍♂️. Update the `Start` method to look like this:
+Run the application again. Surprise, nothing happened! We created an entity, but we didn't add it to the scene. This is a typical beginner's mistake 🤦‍♂️. To fix it, update the `Start` method to look like this:
 
 ```csharp
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera to the scene to allow viewing from different angles
     game.Add3DCamera();
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene; // This was added
 }
 ```
 
-Run the application again. You should see a capsule in the middle of the screen if you're lucky because it is falling down. Fast.
+Now, run the application again. You should see a capsule in the middle of the screen if you're lucky because it's falling down. Fast!
 
 ## Step 4: Control the Camera - Look Around! 🖱️
 
@@ -262,7 +286,7 @@ Once the basics are set up, you need to add entities to the scene. In our exampl
 
 The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, so the capsule doesn't fall through the ground.
 
-## Step 9: Let's add Profiler - Performance! 📈
+## Step 9: Add Profiler - Performance! 📈
 
 We love FPS = lot and we want to see it. The toolkit provides a `game.AddProfiler()` method that adds a performance profiler to the game. Update the `Start` method to look like this:
 
