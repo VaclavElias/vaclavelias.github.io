@@ -351,8 +351,8 @@ using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Games;  // This was added
 
-float movementSpeed = 5f; // This was added
-Entity? box1 = null; // This was added
+float movementSpeed = 1f; // This was added
+Entity? cube1 = null; // This was added
 
 using var game = new Game();
 
@@ -377,31 +377,39 @@ void Start(Scene rootScene)
     // This was added
     // Note that we are disabling the collider for the box and
     // adding a material to it so that we can change the color of the box
-    // The box is hanging in the air, so it won't collide with the ground
-    box1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    // The box is hanging in the default position Vector(0,0,0) in the air,
+    // so it won't collide with the ground
+    cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false
     });
-    box1.Transform.Position = new Vector3(0, 0, 0);
-    box1.Scene = rootScene;
+    cube1.Scene = rootScene;
 }
 
 // This was added
+// This method is called every frame to update the game state. It takes two parameters:
+// scene: The current scene being rendered.
+// time: An object representing the elapsed game time.
 void Update(Scene scene, GameTime time)
 {
-    if (box1 != null)
-    {
-        var deltaTime = (float)time.Elapsed.TotalSeconds;
+    // Calculates the time elapsed since the last frame in seconds.
+    // This is crucial for frame-independent movement, ensuring consistent
+    // behaviour regardless of frame rate.
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
 
-        box1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+    if (cube1 != null)
+    {
+        //Moves cube1 along the negative X-axis. The movement is scaled by movementSpeed
+        //and deltaTime to ensure smooth and consistent motion.
+        cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 }
 
 ```
 
 - `movementSpeed` is a constant that determines how fast the box moves.
-- `box1` is an `Entity` object that represents the box in the scene.
+- `cube1` is an `Entity` object that represents the box in the scene.
 - `AddGroundGizmo()` adds a ground gizmo to the scene. The ground gizmo is a visual representation of the ground plane that shows the axis directions.
 - `CreateMaterial()` creates a new material with the specified color. You can color also the capsule if you wish 😉.
 - `Update()` is a callback that is called every frame. It takes a `Scene` object and a `GameTime` object as parameters.
@@ -411,6 +419,91 @@ void Update(Scene scene, GameTime time)
 Run the application. You should see a box moving in X direction.
 
 ### Moving Entity With Colliders
+
+```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.CommunityToolkit.Skyboxes;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.Games;
+using Stride.Physics;
+
+float movementSpeed = 1f;
+Entity? cube1 = null;
+Entity? cube2 = null; // This was added
+float force = 3f; // This was added
+
+using var game = new Game();
+
+game.Run(start: Start, update: Update);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
+    game.AddProfiler();
+    game.AddSkybox();
+
+    game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+
+    cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Gold),
+        IncludeCollider = false
+    });
+    cube1.Scene = rootScene;
+
+    // This was added
+    // Collider is included be default in this extension
+    cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Orange)
+    });
+    cube2.Transform.Position = new Vector3(-3, 5, 0);
+    cube2.Scene = rootScene;
+}
+
+void Update(Scene scene, GameTime time)
+{
+    // Calculates the time elapsed since the last frame in seconds.
+    // This is crucial for frame-independent movement, ensuring consistent
+    // behaviour regardless of frame rate.
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
+
+    if (cube1 != null)
+    {
+        //Moves cube1 along the negative X-axis. The movement is scaled by movementSpeed
+        //and deltaTime to ensure smooth and consistent motion.
+        cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+    }
+
+    // This was added
+    if (cube2 != null)
+    {
+        // Retrieve the RigidbodyComponent from cube2, which handles physics-based interactions.
+        var rigidBody = cube2.Get<RigidbodyComponent>();
+
+        // Check if cube2 is stationary by verifying if its linear velocity is effectively zero.
+        if (Math.Round(rigidBody.LinearVelocity.Length()) == 0)
+        {
+            // Apply an impulse to cube2 along the X-axis, initiating movement.
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+
+            // Reverse the direction of the impulse for the next application,
+            // allowing cube2 to move back and forth along the X-axis.
+            force *= -1;
+        }
+    }
+}
+
+```
 
 ## Step 12: Add Keyboard Interaction - Move the Cube! ⌨️
 
