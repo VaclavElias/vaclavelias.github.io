@@ -329,69 +329,105 @@ Whew! 😅 Take a deep breath, and get ready for the next part of our journey. U
 
 ## Step 9: Add Profiler - Performance! 📈
 
-We love FPS = lot and we want to see it. The toolkit provides a `game.AddProfiler()` method that adds a performance profiler to the game. Update the `Start` method to look like this:
+As game developers, we love seeing those sweet FPS numbers! 🎮 The toolkit provides a `game.AddProfiler()` method that adds a performance profiler to the game, allowing us to monitor important metrics like frames per second (FPS).
+
+Update the `Start` method to look like this:
 
 ```csharp
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
+
+    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
+
+    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
 
+    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler(); // This was added
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 }
 ```
 
-Run the application again. You should see a [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen showing the frames per second (FPS) and other performance metrics. Press F1 to loop through profile outputs. 
+Run the application again. You should see [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen, showing the frames per second (FPS) and other performance metrics. 🚀 Press F1 to cycle through different profiler outputs and monitor various aspects of your game's performance. 📊
 
 ## Step 10: Illuminate the Scene - Add Skybox! 🌇
 
-As much as I am already excited how things are looking, we can make our scene looking better. Let's add a skybox to the scene. The toolkit provides a `AddSkybox()` method that adds a skybox to the scene. Firstly, we need to add another NuGet package `Stride.CommunityToolkit.Skyboxes` which brings also some assets required for the skybox.
+As exciting as things are looking, we can make our scene even better by adding a [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html). A skybox will enhance the overall atmosphere and give our scene a more polished, realistic look. 🌇
+
+The toolkit provides a `AddSkybox()` method that adds a skybox to the scene. First, we need to add another NuGet package, `Stride.CommunityToolkit.Skyboxes`, which includes assets required for the skybox.
 
 ```bash
 dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
 ```
 
-Then update the code to look like this:
+Then, update the code to look like this:
 
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
-using Stride.CommunityToolkit.Skyboxes;  // This was added
+using Stride.CommunityToolkit.Skyboxes;  // This was added: Import skybox helpers
 using Stride.Core.Mathematics;
 using Stride.Engine;
 
+// Create an instance of the game
 using var game = new Game();
 
+// Start the game loop and provide the Start method as a callback
 game.Run(start: Start);
 
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
+
+    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
+
+    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
+
+    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler();
 
+    // Add a skybox to enhance the scene's visuals
     game.AddSkybox(); // This was added
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 }
 ```
 
-Run the application again. You should see a skybox in the scene, making it look more realistic. The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is a 3D model that surrounds the scene and provides a background for the scene.
+Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
-## Step 11: Add Motion - Move the Cube! 📦 
+## Step 11: Add Motion without Physics - Move the Cube without Colliders! 📦 
 
-Let's add a box to the scene. But before we start coding, let's consider the different ways we can move the box:
+Let's add a box (or cube) to the scene! 🎉 But before we start coding, let's consider the different ways we can move the box:
 
 1. **Moving Entities by Changing Their Position Directly (Without Colliders)**
    - Simple movement without interaction with other entities.
@@ -400,12 +436,9 @@ Let's add a box to the scene. But before we start coding, let's consider the dif
    - Realistic movement that interacts with the environment.
    - Interaction with other entities, including collisions.
    - Movement influenced by gravity and other forces.
-   - Physics-driven game mechanics.
-   - Environmental interaction, like bouncing, sliding, or responding to obstacles.
-
-### Moving Entity Without Colliders
-      
-For this step, we'll start with the first option: moving the box by directly changing its position. Update the code to look like this:
+   - Physics-driven game mechanics like bouncing, sliding, or responding to obstacles.
+     
+We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this:
 
 
 ```csharp
@@ -419,71 +452,88 @@ using Stride.Games;  // This was added
 float movementSpeed = 1f; // This was added
 Entity? cube1 = null; // This was added
 
+// Create an instance of the game
 using var game = new Game();
 
+// Start the game loop and provide the Start and Update methods as callbacks
 game.Run(start: Start, update: Update); // This was updated
 
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
+
+    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
+
+    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
+
+    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler();
+
+    // Add a skybox to enhance the scene's visuals
     game.AddSkybox();
 
-    // This was added to see the axis directions
+    // Add a ground gizmo to visualize axis directions
     game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 
     // This was added
-    // Note that we are disabling the collider for the box and
-    // adding a material to it so that we can change the color of the box
-    // The box is hanging in the default position Vector(0,0,0) in the air,
-    // so it won't collide with the ground
+    // Create a cube with material, disable its collider, and add it to the scene
+    // The cube is hanging in the default position Vector(0,0,0) in the air,
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
-        IncludeCollider = false
+        IncludeCollider = false // No collider for non-physical movement
     });
     cube1.Scene = rootScene;
 }
 
 // This was added
-// This method is called every frame to update the game state. It takes two parameters:
-// scene: The current scene being rendered.
-// time: An object representing the elapsed game time.
+// Define the Update method, called every frame to update the game state
 void Update(Scene scene, GameTime time)
 {
-    // Calculates the time elapsed since the last frame in seconds.
+    // Calculate the time elapsed since the last frame for consistent movement
     // This is crucial for frame-independent movement, ensuring consistent
     // behaviour regardless of frame rate.
     var deltaTime = (float)time.Elapsed.TotalSeconds;
 
     if (cube1 != null)
     {
-        //Moves cube1 along the negative X-axis. The movement is scaled by movementSpeed
-        //and deltaTime to ensure smooth and consistent motion.
+         // Move the cube along the negative X-axis with frame-independent motion
         cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 }
 
 ```
 
-- `movementSpeed` is a constant that determines how fast the box moves.
-- `cube1` is an `Entity` object that represents the box in the scene.
-- `AddGroundGizmo()` adds a ground gizmo to the scene. The ground gizmo is a visual representation of the ground plane that shows the axis directions.
-- `CreateMaterial()` creates a new material with the specified color. You can color also the capsule if you wish 😉.
-- `Update()` is a callback that is called every frame. It takes a `Scene` object and a `GameTime` object as parameters.
-- The `GameTime` object contains information about the time elapsed since the last frame.
-- `deltaTime` is the time elapsed since the last frame in seconds.
+- `movementSpeed` determines how fast the cube moves.
+- `cube1` is an `Entity` object representing the cube in the scene.
+- `AddGroundGizmo()` adds a visual representation of the ground plane and axis directions.
+- `CreateMaterial()` allows you to color the cube (and even the capsule if you want 😉).
+- `Update()` is a callback method that is called every frame to update the game state.
 
-Run the application. You should see a box moving in X direction.
+Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
 
-### Moving Entity With Colliders
+## Step 12: Add Motion with Physics - Move the Cube with Colliders! 🧊
+
+Now that we've moved the cube without colliders, let's dive into the more realistic option: moving the cube using physics. With this approach, the cube will interact with the environment, responding to forces like gravity and colliding with other entities.
+
+Update the code to include physics-based movement:
+
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -492,67 +542,87 @@ using Stride.CommunityToolkit.Skyboxes;
 using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Games;
-using Stride.Physics;
+using Stride.Physics; // This was added
 
 float movementSpeed = 1f;
+float force = 3f; // This was added
 Entity? cube1 = null;
 Entity? cube2 = null; // This was added
-float force = 3f; // This was added
 
+// Create an instance of the game
 using var game = new Game();
 
-game.Run(start: Start, update: Update);
+// Start the game loop and provide the Start and Update methods as callbacks
+game.Run(start: Start, update: Update); // This was updated
 
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
+
+    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
+
+    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
+
+    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler();
+
+    // Add a skybox to enhance the scene's visuals
     game.AddSkybox();
 
+    // Add a ground gizmo to visualize axis directions
     game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 
+    // Create a cube without a collider and add it to the scene (non-physical movement)
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
-        IncludeCollider = false
+        IncludeCollider = false // No collider for simple movement
     });
     cube1.Scene = rootScene;
 
     // This was added
-    // Collider is included be default in this extension
+    // Create a second cube with a collider for physics-based interaction
     cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Orange)
     });
-    cube2.Transform.Position = new Vector3(-3, 5, 0);
+    cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the groun
     cube2.Scene = rootScene;
 }
 
+// Define the Update method, called every frame to update the game state
 void Update(Scene scene, GameTime time)
 {
-    // Calculates the time elapsed since the last frame in seconds.
-    // This is crucial for frame-independent movement, ensuring consistent
-    // behaviour regardless of frame rate.
+    // Calculate the time elapsed since the last frame for consistent movement
     var deltaTime = (float)time.Elapsed.TotalSeconds;
 
     if (cube1 != null)
     {
-        //Moves cube1 along the negative X-axis. The movement is scaled by movementSpeed
-        //and deltaTime to ensure smooth and consistent motion.
+        // Move the first cube along the negative X-axis (non-physical movement)
         cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 
     // This was added
+    // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent from cube2, which handles physics-based interactions.
+        // Retrieve the RigidbodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<RigidbodyComponent>();
 
         // Check if cube2 is stationary by verifying if its linear velocity is effectively zero.
@@ -561,7 +631,7 @@ void Update(Scene scene, GameTime time)
             // Apply an impulse to cube2 along the X-axis, initiating movement.
             rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
 
-            // Reverse the direction of the impulse for the next application,
+            // Reverse the direction of the impulse for the next impulse,
             // allowing cube2 to move back and forth along the X-axis.
             force *= -1;
         }
@@ -570,7 +640,22 @@ void Update(Scene scene, GameTime time)
 
 ```
 
-## Step 12: Add Keyboard Interaction - Move the Cube! ⌨️
+Key Concepts:
+
+- `RigidbodyComponent`: This component handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
+- `ApplyImpulse()`: This method applies a force to the entity, causing it to move in the direction of the applied force. In this case, we’re applying an impulse to the cube, making it move along the X-axis.
+- `LinearVelocity`: This property represents the velocity of the cube. We check if the velocity is near zero (indicating the cube is stationary) before applying the impulse.
+
+Run the application. 🏃‍♂️ You should now see two cubes in the scene:
+
+- **Cube 1** moves along the X-axis using non-physical movement, just like in the previous step.
+- **Cube 2** interacts with the environment using physics, responding to forces and collisions.
+
+This step introduces a new level of realism by making the cube react to physical forces, adding depth and complexity to your game. 🎮
+
+The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
+
+## Step 13: Add Keyboard Interaction - Move the Cube! ⌨️
 
 We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this, also make sure that `Stride.Input;` namespace was added:
 
@@ -662,22 +747,22 @@ void Update(Scene scene, GameTime time)
 
 Run the application. You should see the box moving in the X direction only, left and right when you press the Z and X keys, respectively. Note that the capsule is not colliding with the box because we disabled the collider for the box.
 
-## Step 13: Add Mouse Interaction - Catch the Capsule! 🖱️
+## Step 14: Add Mouse Interaction - Catch the Capsule! 🖱️
 
 ```csharp
 ```
 
-## Step 14: Add Output - Console or Screen! 📺
+## Step 15: Add Output - Console or Screen! 📺
 
 ```csharp
 ```
 
-## Step 15: Break 2 - Let's Reflect 😅
+## Step 16: Break 2 - Let's Reflect 😅
 
 ```csharp
 ```
 
-## Step 16: Add More Primitives - Let's go crazy! 🤪
+## Step 17: Add More Primitives - Let's go crazy! 🤪
 
 ```csharp
 ```
