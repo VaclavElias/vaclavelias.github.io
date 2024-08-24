@@ -123,6 +123,32 @@ pre:hover .copy-button {
     display: inline-block;
 }
 
+.back-comment-buttons {
+    position: fixed;
+    top: 35%;
+    right: 0;
+    z-index: 2;
+    height: 120px;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-end;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.back-to-top {
+    width: 2.5rem;
+    height: 2.5rem;
+    /*background: #0060ac;*/
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 
 @media screen and (max-width: 768px) {
     .postcontent {
