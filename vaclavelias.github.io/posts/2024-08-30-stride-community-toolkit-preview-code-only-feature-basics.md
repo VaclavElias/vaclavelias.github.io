@@ -425,18 +425,47 @@ void Start(Scene rootScene)
 
 Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
-## Step 11: Add Motion without Physics - Move the Cube without Colliders! 📦 
+## Step 11: Add Motion - I like to Move It, Move It! 🕺
 
-Let's add a box (or cube) to the scene! 🎉 But before we start coding, let's consider the different ways we can move the box:
+Before we dive into coding, let's take a moment to explore the different ways we can move entities in our scene. In Stride, we can move objects using two main approaches: **non-physical movement** and **physics-based movement**. Each method has its strengths and use cases, depending on the type of game or simulation you're creating.
 
-1. **Moving Entities by Changing Their Position Directly (Without Colliders)**
-   - Simple movement without interaction with other entities.
-   - Non-physical movement that doesn't involve realistic physics or collisions.
-2. **Moving Entities Using Physics (With Colliders)**
-   - Realistic movement that interacts with the environment.
-   - Interaction with other entities, including collisions.
-   - Movement influenced by gravity and other forces.
-   - Physics-driven game mechanics like bouncing, sliding, or responding to obstacles.
+### Moving Entities by Changing Their Position Directly (Without Colliders)
+
+This method involves directly modifying an entity's position in the scene by changing its `Transform.Position`. It's a straightforward approach that allows you to move objects freely without considering the physics of the environment. Here are some key points to keep in mind:
+
+- **Simple Movement:** This method is ideal for scenarios where you want to move objects in a controlled manner without requiring interaction with other entities.
+- **Non-Physical:** The entity doesn't respond to gravity, collisions, or any external forces. This makes it perfect for UI elements, floating objects, or objects that need to follow a predefined path.
+- **No Interaction:** By default, the entity won't collide with or interact with other objects in the scene. This can simplify certain game mechanics but also limits realism.
+
+Use cases for non-physical movement include:
+
+- **Camera Movement:** Moving a camera smoothly around the scene without it being affected by the environment.
+- **UI Elements:** Moving user interface elements, like menus or health bars, without considering collisions.
+- **Cutscenes or Animations:** Predefined animations where objects follow scripted paths.
+
+{% capture title %}
+You can still add custom code or use Stride's [`CollisionHelper`](https://doc.stride3d.net/latest/en/api/Stride.Core.Mathematics.CollisionHelper.html) for basic interactions. For example, you can check for conditions like `BoxIntersectsBox` or calculate distances between objects with `DistanceBoxBox`.
+{% endcapture %}
+{% include _alert.html type:'info' title:title %}
+
+### Moving Entities Using Physics (With Colliders)
+
+This approach leverages Stride's physics engine to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
+
+- **Realistic Movement:** Entities move according to the laws of physics, making this method suitable for objects that need to interact with the environment.
+- **Collisions:** The entity will collide with other objects, allowing for dynamic interactions, such as objects bouncing off surfaces or pushing each other.
+- **Forces:** Movement can be influenced by various forces, including gravity, wind, or explosions. This allows for more complex and dynamic gameplay mechanics.
+- **Physics-Driven Gameplay:** This method is ideal for games that rely on physics-based mechanics, such as puzzle games, platformers, or simulations.
+
+Use cases for physics-based movement include:
+
+- **Dynamic Objects:** Moving objects that need to interact with other entities, like bouncing balls or rolling barrels.
+- **Character Movement:** Characters or vehicles that need to respond to the environment realistically.
+- **Environmental Interaction:** Objects that react to player actions, such as crates that can be pushed or destroyed.
+
+## Step 12: Add Motion without Physics - Move the Cube without Colliders! 📦 
+
+Let's add a a cube to the scene! 🎉
      
 We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this:
 
@@ -528,7 +557,7 @@ void Update(Scene scene, GameTime time)
 
 Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
 
-## Step 12: Add Motion with Physics - Move the Cube with Colliders! 🧊
+## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
 Now that we've moved the cube without colliders, let's dive into the more realistic option: moving the cube using physics. With this approach, the cube will interact with the environment, responding to forces like gravity and colliding with other entities.
 
@@ -655,7 +684,7 @@ This step introduces a new level of realism by making the cube react to physical
 
 The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
 
-## Step 13: Add Keyboard Interaction - Move the Cube! ⌨️
+## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
 We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this, also make sure that `Stride.Input;` namespace was added:
 
@@ -747,22 +776,22 @@ void Update(Scene scene, GameTime time)
 
 Run the application. You should see the box moving in the X direction only, left and right when you press the Z and X keys, respectively. Note that the capsule is not colliding with the box because we disabled the collider for the box.
 
-## Step 14: Add Mouse Interaction - Catch the Capsule! 🖱️
+## Step 15: Add Mouse Interaction - Catch the Capsule! 🖱️
 
 ```csharp
 ```
 
-## Step 15: Add Output - Console or Screen! 📺
+## Step 16: Add Output - Console or Screen! 📺
 
 ```csharp
 ```
 
-## Step 16: Break 2 - Let's Reflect 😅
+## Step 17: Break 2 - Let's Reflect 😅
 
 ```csharp
 ```
 
-## Step 17: Add More Primitives - Let's go crazy! 🤪
+## Step 18: Add More Primitives - Let's go crazy! 🤪
 
 ```csharp
 ```
