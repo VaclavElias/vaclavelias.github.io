@@ -631,7 +631,7 @@ void Start(Scene rootScene)
     {
         Material = game.CreateMaterial(Color.Orange)
     });
-    cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the groun
+    cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the ground
     cube2.Scene = rootScene;
 }
 
@@ -686,8 +686,73 @@ The main difference between the two cubes is that **Cube 1** moves without inter
 
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
-We will use the `Update` method to move the box around using the keyboard. Update the `Update` method to look like this, also make sure that `Stride.Input;` namespace was added:
+Now it's time to add some interactivity! 🎮 We will update the `Update` method to allow the player to move the cubes around using the keyboard. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2** (physics-based movement) respond to key presses.
 
+Ensure that the `using Stride.Input;` namespace is included to handle input.
+
+
+```csharp
+// Define the Update method, called every frame to update the game state
+void Update(Scene scene, GameTime time)
+{
+    // Calculate the time elapsed since the last frame for consistent movement
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
+
+    // This was updated
+    // Handle non-physical movement for cube1
+    if (cube1 != null)
+    {
+        // Move the first cube along the negative X-axis when the Z key is held down
+        if (game.Input.IsKeyDown(Keys.Z))
+        {
+            cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+        // Move the first cube along the positive X-axis when the X key is held down
+        else if (game.Input.IsKeyDown(Keys.X))
+        {
+            // Move the first cube along the positive X-axis (non-physical movement)
+            cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+    }
+
+    // This was updated
+    // Handle physics-based movement for cube2
+    if (cube2 != null)
+    {
+        // Retrieve the RigidbodyComponent, which handles physics interactions
+        var rigidBody = cube2.Get<RigidbodyComponent>();
+
+        // We use KeyPressed instead of KeyDown to apply impulses only once per key press
+        // Apply an impulse to the left when the C key is pressed
+        if (game.Input.IsKeyPressed(Keys.C))
+        {
+            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
+        }
+        // Apply an impulse to the right when the V key is pressed
+        else if (game.Input.IsKeyPressed(Keys.V))
+        {
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+        }
+    }
+}
+```
+
+- `game.Input.IsKeyDown()` checks if a key is currently held down. This is useful for continuous movement while a key is pressed.
+- `game.Input.IsKeyPressed()` checks if a key was pressed once. This is ideal for actions that should only trigger once per key press, like applying an impulse to a physics object.
+
+**Additional Points:**
+
+- The non-physical movement for **Cube 1** allows smooth, continuous movement along the X-axis when holding the Z or X keys.
+- The physics-based movement for **Cube 2** applies an impulse to the cube when the C or V keys are pressed, allowing it to interact with the environment.
+- The capsule does not collide with **Cube 1** because we disabled the collider for that cube but interacts with **Cube 2**, which has a collider and responds to physics.
+ 
+Run the application. You should now be able to control **Cube 1**'s position with the Z and X keys, moving it left and right, and apply impulses to **Cube 2** with the C and V keys, pushing it back and forth and colliding with the capsule. 🎮
+
+This step introduces basic keyboard controls, adding interactivity to your scene and allowing the player to manipulate objects in real-time. Ready to add even more interaction? Let's move on to mouse controls next! 🖱️
+
+## Step 15: Add Mouse Interaction - Do something! 🖱️
+
+Let's add mouse interaction to the scene! 🐭 We'll update the `Update` method to allow the player to interact with the cubes using the mouse. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2**  and capsule (physics-based movement) respond to mouse input.
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -699,86 +764,142 @@ using Stride.Games;
 using Stride.Input;
 using Stride.Physics;
 
-float movementSpeed = 5f;
-Entity? box1 = null;
-Entity? box2 = null;
-RigidbodyComponent? rigidBody = null;
+float movementSpeed = 1f;
+float force = 3f;
+Entity? cube1 = null;
+Entity? cube2 = null;
 
+CameraComponent? camera = null; // This was added
+Simulation? simulation = null; // This was added
+
+// Create an instance of the game
 using var game = new Game();
 
-game.Run(start: Start, update: Update);
+// Start the game loop and provide the Start and Update methods as callbacks
+game.Run(start: Start, update: Update); // This was updated
 
+// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
+    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
+
+    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
+
+    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
+
+    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
+
+    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler();
+
+    // Add a skybox to enhance the scene's visuals
     game.AddSkybox();
 
+    // Add a ground gizmo to visualize axis directions
     game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
 
+    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+
+    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
+
+    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 
-    // Note that we are disabling the collider for the box and
-    // adding a material to it so that we can change the color of the box
-    // The box is hanging in the air, so it won't collide with the ground
-    box1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    // Create a cube without a collider and add it to the scene (non-physical movement)
+    cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
-        IncludeCollider = false
+        IncludeCollider = false // No collider for simple movement
     });
-    box1.Transform.Position = new Vector3(0, 0, 0);
-    box1.Scene = rootScene;
+    cube1.Scene = rootScene;
 
-    // This was added
-    box2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    // Create a second cube with a collider for physics-based interaction
+    cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
-        Material = game.CreateMaterial(Color.DarkKhaki),
-        IncludeCollider = false
+        Material = game.CreateMaterial(Color.Orange)
     });
-    box2.Transform.Position = new Vector3(0, 1, 0);
-    box2.Scene = rootScene;
+    cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the ground
+    cube2.Scene = rootScene;
 
-    rigidBody = box1.Get<RigidbodyComponent>();
+    // These were added
+    camera = rootScene.GetCamera();
+    simulation = game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
 }
 
+// Define the Update method, called every frame to update the game state
 void Update(Scene scene, GameTime time)
 {
-    if (box1 != null)
-    {
-        var deltaTime = (float)time.Elapsed.TotalSeconds;
+    // Calculate the time elapsed since the last frame for consistent movement
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
 
-        box1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+    // Handle non-physical movement for cube1
+    if (cube1 != null)
+    {
+        // Move the first cube along the negative X-axis when the Z key is held down
+        if (game.Input.IsKeyDown(Keys.Z))
+        {
+            cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+        // Move the first cube along the positive X-axis when the X key is held down
+        else if (game.Input.IsKeyDown(Keys.X))
+        {
+            // Move the first cube along the positive X-axis (non-physical movement)
+            cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+    }
+
+    // Handle physics-based movement for cube2
+    if (cube2 != null)
+    {
+        // Retrieve the RigidbodyComponent, which handles physics interactions
+        var rigidBody = cube2.Get<RigidbodyComponent>();
+
+        // We use KeyPressed instead of KeyDown to apply impulses only once per key press
+        // Apply an impulse to the left when the C key is pressed
+        if (game.Input.IsKeyPressed(Keys.C))
+        {
+            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
+        }
+        // Apply an impulse to the right when the V key is pressed
+        else if (game.Input.IsKeyPressed(Keys.V))
+        {
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+        }
     }
 
     // This was added
-    if (box2 != null)
-    {
-        var deltaMovement = movementSpeed * (float)time.Elapsed.TotalSeconds;
+    if (camera == null || simulation == null) return;
 
-        if (game.Input.IsKeyDown(Keys.Z))
+    // This was added
+    // Handle mouse input to detect collisions with the camera raycast
+    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    {
+        var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
+
+        if (hitResult.Succeeded)
         {
-            box2.Transform.Position += new Vector3(-deltaMovement, 0, 0);
+            Console.WriteLine($"Hit: {hitResult.Collider.Entity.Name}");
+
+            var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+
+            if (rigidBody == null) return;
+
+            var direction = new Vector3(0, 3, 0);
+
+            rigidBody.ApplyImpulse(direction);
         }
-        else if (game.Input.IsKeyDown(Keys.X))
+        else
         {
-            box2.Transform.Position += new Vector3(deltaMovement, 0, 0);
+            Console.WriteLine("No hit detected.");
         }
     }
 }
-```
-
-- `game.Input.IsKeyDown()` checks if a key is pressed. It takes a `Keys` enum value as a parameter.
-
-Run the application. You should see the box moving in the X direction only, left and right when you press the Z and X keys, respectively. Note that the capsule is not colliding with the box because we disabled the collider for the box.
-
-## Step 15: Add Mouse Interaction - Catch the Capsule! 🖱️
-
-```csharp
 ```
 
 ## Step 16: Add Output - Console or Screen! 📺
