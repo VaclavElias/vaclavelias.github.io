@@ -450,7 +450,7 @@ You can still add custom code or use Stride's [`CollisionHelper`](https://doc.st
 
 ### Moving Entities Using Physics (With Colliders)
 
-This approach leverages Stride's physics engine to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
+This approach leverages [Stride's physics engine](https://doc.stride3d.net/latest/en/manual/physics/index.html) to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
 
 - **Realistic Movement:** Entities move according to the laws of physics, making this method suitable for objects that need to interact with the environment.
 - **Collisions:** The entity will collide with other objects, allowing for dynamic interactions, such as objects bouncing off surfaces or pushing each other.
@@ -582,7 +582,7 @@ Entity? cube2 = null; // This was added
 using var game = new Game();
 
 // Start the game loop and provide the Start and Update methods as callbacks
-game.Run(start: Start, update: Update); // This was updated
+game.Run(start: Start, update: Update);
 
 // Define the Start method to set up the scene
 void Start(Scene rootScene)
@@ -752,7 +752,9 @@ This step introduces basic keyboard controls, adding interactivity to your scene
 
 ## Step 15: Add Mouse Interaction - Do something! 🖱️
 
-Let's add mouse interaction to the scene! 🐭 We'll update the `Update` method to allow the player to interact with the cubes using the mouse. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2**  and capsule (physics-based movement) respond to mouse input.
+Let's add mouse interaction to the scene! 🐭 In this step, we'll update the `Update` method to allow players to interact with the cubes and the capsule using the mouse 🖱️. We'll make sure both **Cube 1** (non-physical movement), **Cube 2**, and the capsule (physics-based movement) respond to mouse input.
+
+The previous comments have been streamlined to keep the code clean and focused. 🧹
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -769,49 +771,28 @@ float force = 3f;
 Entity? cube1 = null;
 Entity? cube2 = null;
 
-CameraComponent? camera = null; // This was added
-Simulation? simulation = null; // This was added
+CameraComponent? camera = null; // This was added: Store the camera component
+Simulation? simulation = null; // This was added: Store the physics simulation
+ModelComponent? cube1Component = null; // This was added: Store the model component of Cube 1
 
-// Create an instance of the game
 using var game = new Game();
 
-// Start the game loop and provide the Start and Update methods as callbacks
-game.Run(start: Start, update: Update); // This was updated
+game.Run(start: Start, update: Update);
 
-// Define the Start method to set up the scene
 void Start(Scene rootScene)
 {
-    // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
-
-    // Add a 3D camera and a controller for basic camera movement
     game.Add3DCamera().Add3DCameraController();
-
-    // Add a directional light to illuminate the scene
     game.AddDirectionalLight();
-
-    // Add a 3D ground plane to catch the capsule
     game.Add3DGround();
-
-    // Add a performance profiler to monitor FPS and other metrics
     game.AddProfiler();
-
-    // Add a skybox to enhance the scene's visuals
     game.AddSkybox();
-
-    // Add a ground gizmo to visualize axis directions
     game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
 
-    // Create a 3D primitive capsule and store it in an entity
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
-
-    // Reposition the capsule 8 units above the origin in the scene
     entity.Transform.Position = new Vector3(0, 8, 0);
-
-    // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 
-    // Create a cube without a collider and add it to the scene (non-physical movement)
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
@@ -819,37 +800,33 @@ void Start(Scene rootScene)
     });
     cube1.Scene = rootScene;
 
-    // Create a second cube with a collider for physics-based interaction
     cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Orange)
     });
-    cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the ground
+    cube2.Transform.Position = new Vector3(-3, 5, 0);
     cube2.Scene = rootScene;
 
     // These were added
+    // Initialize camera, simulation, and model component for interactions
     camera = rootScene.GetCamera();
     simulation = game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
+    cube1Component = cube1.Get<ModelComponent>();
 }
 
-// Define the Update method, called every frame to update the game state
 void Update(Scene scene, GameTime time)
 {
-    // Calculate the time elapsed since the last frame for consistent movement
     var deltaTime = (float)time.Elapsed.TotalSeconds;
 
     // Handle non-physical movement for cube1
     if (cube1 != null)
     {
-        // Move the first cube along the negative X-axis when the Z key is held down
         if (game.Input.IsKeyDown(Keys.Z))
         {
             cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
         }
-        // Move the first cube along the positive X-axis when the X key is held down
         else if (game.Input.IsKeyDown(Keys.X))
         {
-            // Move the first cube along the positive X-axis (non-physical movement)
             cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
         }
     }
@@ -857,16 +834,12 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<RigidbodyComponent>();
 
-        // We use KeyPressed instead of KeyDown to apply impulses only once per key press
-        // Apply an impulse to the left when the C key is pressed
         if (game.Input.IsKeyPressed(Keys.C))
         {
             rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
         }
-        // Apply an impulse to the right when the V key is pressed
         else if (game.Input.IsKeyPressed(Keys.V))
         {
             rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
@@ -874,12 +847,14 @@ void Update(Scene scene, GameTime time)
     }
 
     // This was added
+    // Ensure camera and simulation are initialized before handling mouse input
     if (camera == null || simulation == null) return;
 
     // This was added
-    // Handle mouse input to detect collisions with the camera raycast
+    // Handle mouse input for interactions
     if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
     {
+        // Check for collisions with physics-based entities using raycasting
         var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
 
         if (hitResult.Succeeded)
@@ -888,31 +863,79 @@ void Update(Scene scene, GameTime time)
 
             var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
 
-            if (rigidBody == null) return;
+            if (rigidBody != null)
+            {
+                var direction = new Vector3(0, 3, 0); // Apply impulse upward
 
-            var direction = new Vector3(0, 3, 0);
-
-            rigidBody.ApplyImpulse(direction);
+                rigidBody.ApplyImpulse(direction);
+            }
         }
         else
         {
             Console.WriteLine("No hit detected.");
         }
+
+        // Check for intersections with non-physical entities using ray picking
+        var ray = camera.GetPickRay(game.Input.MousePosition);
+
+        if (cube1Component?.BoundingBox.Intersects(ref ray) ?? false)
+        {
+            Console.WriteLine("Cube 1 hit!");
+        }
     }
 }
 ```
+- **Mouse Interaction**: We've added functionality to detect mouse clicks and interact with both physics-based and non-physical entities.
+- **Camera** and **Simulation**: The `camera` component and `simulation` are initialized for handling raycasting and physics interactions.
+- **Raycasting** and **Ray Picking**: We use `camera.RaycastMouse()` to detect collisions with physics-based entities and `camera.GetPickRay()` to check for intersections with non-physical entities like **Cube 1**.
+
+Now, when you click the left mouse button, the application will respond with the following actions depending on where you click:
+
+- **Clicking Outside the Ground:** If you click anywhere in the scene that doesn't interact with an object or the ground, it will print "No hit detected." This indicates that the mouse ray didn't intersect with any entities.
+- **Clicking on Cube 1:** Since **Cube 1** doesn't have a collider, two things will happen:
+    - The raycast will pass through **Cube 1** and hit the ground beneath it, printing "Hit: Ground."
+    - Additionally, the ray-picking method will detect that **Cube 1** was hit, and it will print "Cube 1 hit!"
+- **Clicking on Cube 2:** **Cube 2** has a collider, so the raycast will detect the collision and print "Hit: Entity" An impulse will be applied to **Cube 2**, making it move upward in response to the click.
+- **Clicking on the Capsule:** Similar to **Cube 2**, clicking on the capsule will print "Hit: Entity", and an upward impulse will be applied to the capsule, causing it to move.
+- **Clicking on the Ground:** If you click directly on the ground, the raycast will detect it and print "Hit: Ground." However, the ground won't move because it has a `StaticColliderComponent`, which means it's a fixed object in the scene.
+
+Nice job! You’ve now implemented mouse interaction, which adds a whole new level of interactivity to the game. 🚀 You can now click on objects in the scene to trigger different actions, like moving cubes or capsules with physics or detecting hits on non-physical entities. This opens up endless possibilities for gameplay mechanics! 🎮 We rock! 🤘
 
 ## Step 16: Add Output - Console or Screen! 📺
+
+In this part we will do just basic output to the console and the screen. We will add a simple text output to the screen to display the name of the entity that was hit by the mouse raycast. This will help us visualize the interactions and provide feedback to the player.
 
 ```csharp
 ```
 
 ## Step 17: Break 2 - Let's Reflect 😅
 
-```csharp
-```
+Congratulations, explorer! 🎉 You've made it through another set of challenges and learned how to add mouse interaction to your scene. By implementing raycasting and ray picking, you've enabled players to interact with objects in the scene, triggering various actions based on their clicks. 🖱️
+
+Let's take a moment to reflect on what we've accomplished so far:
+
+- **Non-Physical Movement:** You learned how to move objects without physics by directly changing their positions. This method is ideal for simple, controlled movement and UI elements that don't require interactions with the environment.
+- **Physics-Based Movement:** You explored how to move objects using physics, allowing them to respond to forces, gravity, and collisions. This method is perfect for creating realistic interactions and dynamic gameplay mechanics.
+- **Keyboard Interaction:** You added keyboard controls to move cubes left and right and apply impulses to physics-based objects. This introduced basic interactivity to the scene, allowing players to control objects using key presses.
+- **Mouse Interaction:** You implemented mouse input to interact with objects in the scene. By using raycasting and ray picking, you enabled players to click on entities, trigger actions, and receive feedback based on their interactions.
+- **Output to Console and Screen:** You added text output to the screen to display the name of the entity hit by the mouse raycast. This visual feedback helps players understand the interactions and provides context for their actions.
+- **Game Loop:** You learned how the game loop works, updating the game state every frame and handling player input to create dynamic and responsive gameplay.
+- **Performance Monitoring:** You explored the importance of monitoring performance metrics, such as frames per second (FPS), to optimize your game and ensure a smooth player experience.
+- **Scene Setup:** You set up the scene with essential components like cameras, lights, and ground planes, creating a foundation for building interactive and visually appealing environments.
 
 ## Step 18: Add More Primitives - Let's go crazy! 🤪
+
+## What's Next? 🚀
+
+In the next part of our journey, we'll dive deeper into game development concepts and explore more advanced features to enhance your game. Here's a sneak peek at what's coming up:
+
+- **Advanced Physics Interactions:** We'll delve into more complex physics interactions, such as constraints, joints, and ragdoll physics, to create dynamic and realistic gameplay mechanics.
+- **User Interface (UI) Design:** You'll learn how to create interactive menus, health bars, and HUD elements to enhance the player experience and provide essential information during gameplay.
+- **Particle Effects:** We'll explore the world of particle systems to add visual effects like explosions, fire, smoke, and magic spells, bringing your game to life with stunning visuals.
+- **Audio and Sound Effects:** You'll discover how to integrate audio and sound effects into your game, creating immersive environments and enhancing player engagement through sound.
+- **Gameplay Mechanics:** We'll cover advanced gameplay mechanics, including character movement, combat systems, AI behavior, and level design, to create engaging and challenging gameplay experiences.
+- **Optimization Techniques:** You'll learn how to optimize your game for performance, including techniques for reducing lag, improving frame rates, and enhancing overall player experience.
+- **Publishing and Distribution:** We'll explore the process of publishing and distributing your game, including packaging, testing, debugging, and releasing your game to players around the world.
 
 ```csharp
 ```
