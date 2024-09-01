@@ -325,6 +325,11 @@ Once these basics are set up, you can start adding entities to the scene. In our
 
 The toolkit automatically added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
 
+{%- capture title -%}
+You can check the implementation of each [Stride toolkit extension](https://github.com/stride3d/stride-community-toolkit/tree/main/src/Stride.CommunityToolkit), which wraps some boilerplate code, and create your own custom implementation.
+{%- endcapture -%}
+{% include _alert.html type:'info' title:title %}
+
 Whew! 😅 Take a deep breath, and get ready for the next part of our journey. Up next: performance optimizations and more interactive elements. 🚀
 
 ## Step 9: Add Profiler - Performance! 📈
@@ -444,7 +449,7 @@ Use cases for non-physical movement include:
 - **Cutscenes or Animations:** Predefined animations where objects follow scripted paths.
 
 {% capture title %}
-You can still add custom code or use Stride's [`CollisionHelper`](https://doc.stride3d.net/latest/en/api/Stride.Core.Mathematics.CollisionHelper.html) for basic interactions. For example, you can check for conditions like `BoxIntersectsBox` or calculate distances between objects with `DistanceBoxBox`.
+You can still add custom code or use Stride's <a href="https://doc.stride3d.net/latest/en/api/Stride.Core.Mathematics.CollisionHelper.html"><code>CollisionHelper</code></a> for basic interactions. For example, you can check for conditions like <code>BoxIntersectsBox</code> or calculate distances between objects with <code>DistanceBoxBox</code>.
 {% endcapture %}
 {% include _alert.html type:'info' title:title %}
 
