@@ -55,6 +55,44 @@ The code-only approach is currently available only on Windows. The toolkit provi
 
 This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
 
+## What You'll Learn 🎯
+
+By the end of this post, you will have a solid foundation in using the Stride Community Toolkit's code-only feature to create a simple game. You’ll learn how to:
+
+- Set up the game window and initialize the core components
+- Add and manipulate entities within the scene
+- Implement basic interactivity using the keyboard and mouse
+
+## Basic Terminology 📚
+
+- [Stride 3D](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
+- [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride 3D engine.
+- [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
+- [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): A collection of entities that make up the game world.
+- [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): A game object that represents an entity in the scene and aggregates multiple EntityComponents.
+- [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
+- [RigidbodyComponent](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html): A component that enables physics interactions for an entity.
+- **Graphics Compositor**: A component that organizes how scenes are rendered in the Stride engine.
+- **3D Camera**: A camera that allows viewing the scene from different angles.
+- **3D Camera Controller**: A script that enables basic camera movement using keyboard and mouse inputs.
+- **3D Primitive**: A basic 3D model, such as a capsule, cube, or sphere.
+- **Collider**: A component that defines the shape of an entity for physics interactions.
+- **Physics Engine**: A system that simulates physical interactions between entities in the scene.
+- **Profiler**: A tool that monitors performance metrics like frames per second (FPS) and memory usage.
+- **Skybox**: A textured 3D model that provides a background for the scene.
+- **Game Loop**: The main loop that drives the game, updating the state and rendering the scene.
+- **Update Method**: A callback method that is called every frame to update the game state.
+- **Physics-Based Movement**: Moving entities using the physics engine to simulate realistic interactions.
+- **Non-Physical Movement**: Moving entities by directly changing their position without physics interactions.
+- **Transform**: A component that defines the position, rotation, and scale of an entity.
+- **Force**: A vector that represents a physical force applied to an entity.
+- **Delta Time**: The time elapsed between frames, used for frame-independent movement.
+- **Material**: A visual property that defines how an entity is rendered, including color, texture, and shading.
+- **Ground Gizmo**: A visual representation of the ground plane and axis directions in the scene.
+- **GameTime**: A structure that provides time-related information for the game loop.
+- **Vector3**: A 3D vector that represents a point or direction in 3D space.
+- **Frame Rate**: The number of frames rendered per second, measured in frames per second (FPS).
+
 ## Prerequisites 🏠 
 
 These prerequisites were tested on a clean Windows 11 installation.
@@ -102,6 +140,8 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 {% include _alert-svg.html %}
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
+{% include _alert.html type:'success' title: "You learnt how to setup Stride game window using the Stride Community Toolkit and even though it's just a black screen the game window is running." %}
+
 ## Step 2: Let There Be Light - Or at Least Blue 🌌
 
 Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. 🖥️ As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods. 🔧✨
@@ -135,6 +175,8 @@ The code above does the following:
 - `Add3DCamera()` adds a 3D camera to the scene, allowing you to view it from various angles.
 
 Run the application again. Now, instead of a black screen, you should see a blue screen. 🌌 While not overly exciting, it’s a step in the right direction. We’re looking through the camera, but there’s nothing to see—yet. 👀
+
+{% include _alert.html type:'success' title: "You learnt that Graphics Compositor is used to handle rendering and 3D Camera is used to view the scene from different angles. Still nothing to see because we haven't added anything to the scene yet. 🤷‍♂️" %}
 
 ## Step 3: Add Some Shapes - Capsule Time! 🎨
 
@@ -189,11 +231,17 @@ void Start(Scene rootScene)
 
 Now, run the application again. You should see a capsule in the middle of the screen if you're lucky because it's falling down. Fast! 🚀
 
+{% include _alert.html type:'success' title: "You learnt how to add a 3D capsule to the scene and how to add it to the root scene so it becomes part of the scene graph. The capsule is falling down because it has no collider to interact with the ground." %}
+
 ## Step 4: Control the Camera - Look Around! 🖱️
 
 Maybe we should at least look around the scene and view the capsule from different angles as it falls into the void 😠?
 
-Let's add a 3D camera controller using the `Add3DCameraController()` method. 🎮 This extension adds basic camera functionality, allowing you to interact with the camera through keyboard and mouse inputs. Specifically, it attaches a regular `SyncScript` to the camera with custom logic to handle camera movement. Time to refresh those mouse agility skills!
+Let's add a 3D camera controller using the `Add3DCameraController()` method. 🎮 This extension adds basic camera functionality, allowing you to interact with the camera through keyboard and mouse inputs. Specifically, it attaches a regular `SyncScript` to the camera with custom logic to handle camera movement.
+
+Your game would have your implementation how camera works which requires your specific game.
+
+Time to refresh those mouse agility skills!
 
 ```csharp
 // This was updated: Add a camera controller for basic camera movement
@@ -201,6 +249,8 @@ game.Add3DCamera().Add3DCameraController();
 ```
 
 Run the application again and use right-click and hold to rotate the camera towards the capsule, or follow the instructions displayed on the screen. 🎥 Feeling a bit more satisfied now? Let's make the experience even more interesting! 🎨✨
+
+{% include _alert.html type:'success' title: "You learnt how to add a 3D camera controller to the scene to allow basic camera movement. You can now rotate the camera using the mouse and keyboard." %}
 
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
@@ -909,6 +959,14 @@ Nice job! You’ve now implemented mouse interaction, which adds a whole new lev
 ## Step 16: Add Output - Console or Screen! 📺
 
 In this part we will do just basic output to the console and the screen. We will add a simple text output to the screen to display the name of the entity that was hit by the mouse raycast. This will help us visualize the interactions and provide feedback to the player.
+
+We have a few options where the output can be displayed:
+
+- **Console Output:** We can print messages to the console window, which is useful for debugging and logging information. This option is great for developers to see real-time feedback and debug the game.
+  - We can use traditional `Console.WriteLine()`.
+  - We can use Stride's `GlobalLogger.GetLogger()` respectively `Log` property if used in from the script.
+- **Debug Text Output:** We can display text directly in the game window.
+- **UI Elements:** We can create UI elements like text labels, buttons, or images to display information to the player.
 
 ```csharp
 ```
