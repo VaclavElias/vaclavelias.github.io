@@ -292,6 +292,8 @@ void Start(Scene rootScene)
 
 Run the application again. You should see a capsule falling down from the top of the screen. I know, the capsule is black, but don't worry, we'll fix that later. 😉
 
+{% include _alert.html type:'success' title: "You learnt how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now 8 units above the origin, giving you a better view as it falls." %}
+
 ## Step 6: Add a Ground - Catch the Capsule! 🛑
 
 Now let's catch the capsule by adding some ground to the scene. Update the `Start` method to look like this:
@@ -323,6 +325,8 @@ void Start(Scene rootScene)
 - `Add3DGround()` is a toolkit helper method that creates a 3D ground plane in the scene, providing a surface for the capsule to land on.
 
 Run the application again. You should see the capsule falling down and landing on the ground. 🎉 Unfortunately, it's still a black capsule on a black ground 🤦‍♂️. But don't worry, we’ll fix that later! In the meantime, you can move the camera around using the mouse and keyboard (Q or E) to lower or raise the camera and watch the capsule roll around on the ground. 🖱️⌨️
+
+{% include _alert.html type:'success' title: "You learnt how to add a 3D ground plane to the scene, providing a surface for the capsule to land on. The capsule now falls and lands on the ground, creating a more dynamic scene." %}
 
 ## Step 7: Illuminate the Scene - Add Light! 💡
 
@@ -358,6 +362,8 @@ void Start(Scene rootScene)
 Run the application again. 🌟 You should now see the capsule falling down and landing on the ground, with everything clearly illuminated by the directional light. The capsule and ground are much easier to see, thanks to the added light shining on the scene. 🎉
 
 Finally, no more black-on-black mysteries! 💡
+
+{% include _alert.html type:'success' title: "You learnt how to add a directional light to the scene, illuminating the capsule and ground. The scene is now well-lit, making it easier to see and interact with the objects." %}
 
 ## Step 8: Break 1 - Let's Reflect 😅
 
@@ -420,6 +426,8 @@ void Start(Scene rootScene)
 
 Run the application again. You should see [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen, showing the frames per second (FPS) and other performance metrics. 🚀 Press F1 to cycle through different profiler outputs and monitor various aspects of your game's performance. 📊
 
+{% include _alert.html type:'success' title: "You learnt how to add a performance profiler to the scene, allowing you to monitor FPS and other metrics. The profiler provides valuable insights into the game's performance and helps identify areas for optimization." %}
+
 ## Step 10: Illuminate the Scene - Add Skybox! 🌇
 
 As exciting as things are looking, we can make our scene even better by adding a [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html). A skybox will enhance the overall atmosphere and give our scene a more polished, realistic look. 🌇
@@ -480,6 +488,8 @@ void Start(Scene rootScene)
 
 Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
+{% include _alert.html type:'success' title: "You learnt how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic background for the scene, adding depth and atmosphere." %}
+
 ## Step 11: Add Motion - I like to Move It, Move It! 🕺
 
 Before we dive into coding, let's take a moment to explore the different ways we can move entities in our scene. In Stride, we can move objects using two main approaches: **non-physical movement** and **physics-based movement**. Each method has its strengths and use cases, depending on the type of game or simulation you're creating.
@@ -517,6 +527,8 @@ Use cases for physics-based movement include:
 - **Dynamic Objects:** Moving objects that need to interact with other entities, like bouncing balls or rolling barrels.
 - **Character Movement:** Characters or vehicles that need to respond to the environment realistically.
 - **Environmental Interaction:** Objects that react to player actions, such as crates that can be pushed or destroyed.
+
+{% include _alert.html type:'success' title: "You learnt about the two main approaches to moving entities in Stride: non-physical movement and physics-based movement. Each method has its strengths and use cases, depending on the type of game or simulation you're creating." %}
 
 ## Step 12: Add Motion without Physics - Move the Cube without Colliders! 📦 
 
@@ -611,6 +623,8 @@ void Update(Scene scene, GameTime time)
 - `Update()` is a callback method that is called every frame to update the game state.
 
 Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
+
+{% include _alert.html type:'success' title: "You learnt how to move a cube without colliders using non-physical movement. The cube moves smoothly along the X-axis, demonstrating basic animation and object manipulation." %}
 
 ## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
@@ -739,12 +753,15 @@ This step introduces a new level of realism by making the cube react to physical
 
 The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
 
+{% include _alert.html type:'success' title: "You learnt how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene." %}
+
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
 Now it's time to add some interactivity! 🎮 We will update the `Update` method to allow the player to move the cubes around using the keyboard. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2** (physics-based movement) respond to key presses.
 
 Ensure that the `using Stride.Input;` namespace is included to handle input.
 
+You can replace the existing `Update` method with the following code:
 
 ```csharp
 // Define the Update method, called every frame to update the game state
@@ -805,11 +822,15 @@ Run the application. You should now be able to control **Cube 1**'s position wit
 
 This step introduces basic keyboard controls, adding interactivity to your scene and allowing the player to manipulate objects in real-time. Ready to add even more interaction? Let's move on to mouse controls next! 🖱️
 
+{% include _alert.html type:'success' title: "You learnt how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. The cubes respond to key presses, enabling dynamic movement and interaction within the scene." %}
+
 ## Step 15: Add Mouse Interaction - Do something! 🖱️
 
 Let's add mouse interaction to the scene! 🐭 In this step, we'll update the `Update` method to allow players to interact with the cubes and the capsule using the mouse 🖱️. We'll make sure both **Cube 1** (non-physical movement), **Cube 2**, and the capsule (physics-based movement) respond to mouse input.
 
 The previous comments have been streamlined to keep the code clean and focused. 🧹
+
+You can replace the whole code with the following:
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -914,7 +935,8 @@ void Update(Scene scene, GameTime time)
 
         if (hitResult.Succeeded)
         {
-            Console.WriteLine($"Hit: {hitResult.Collider.Entity.Name}");
+            var message = $"Hit: {hitResult.Collider.Entity.Name}";
+            Console.WriteLine(message);
 
             var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
 
@@ -956,9 +978,11 @@ Now, when you click the left mouse button, the application will respond with the
 
 Nice job! You’ve now implemented mouse interaction, which adds a whole new level of interactivity to the game. 🚀 You can now click on objects in the scene to trigger different actions, like moving cubes or capsules with physics or detecting hits on non-physical entities. This opens up endless possibilities for gameplay mechanics! 🎮 We rock! 🤘
 
+{% include _alert.html type:'success' title: "You learnt how to add mouse interaction to the scene, allowing players to interact with objects using raycasting and ray picking. The application responds to mouse clicks by applying impulses to physics-based entities and detecting hits on non-physical entities." %}
+
 ## Step 16: Add Output - Console or Screen! 📺
 
-In this part we will do just basic output to the console and the screen. We will add a simple text output to the screen to display the name of the entity that was hit by the mouse raycast. This will help us visualize the interactions and provide feedback to the player.
+In this part we will do just basic output to the console and the screen. You have already added a simple text output `Console.WriteLine()` to the screen to display the interaction of the entity that was hit by the mouse raycast. This will help us visualize the interactions and provide feedback to the player.
 
 We have a few options where the output can be displayed:
 
@@ -968,8 +992,109 @@ We have a few options where the output can be displayed:
 - **Debug Text Output:** We can display text directly in the game window.
 - **UI Elements:** We can create UI elements like text labels, buttons, or images to display information to the player.
 
+Let's update the `if (hitResult.Succeeded) {}` block of code like this:
+
 ```csharp
+if (hitResult.Succeeded)
+{
+    var message = $"Hit: {hitResult.Collider.Entity.Name}";
+    Console.WriteLine(message);
+    GlobalLogger.GetLogger("Program.cs").Info(message); // This was added
+    game.DebugTextSystem.Print("Some text", new Int2(50, 50)); // This was added
+
+    var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+
+    if (rigidBody != null)
+    {
+        var direction = new Vector3(0, 3, 0); // Apply impulse upward
+
+        rigidBody.ApplyImpulse(direction);
+    }
+}
+else
+{
+    Console.WriteLine("No hit detected.");
+}
+
 ```
+Run the application. You should see now in the console window an additional output in the green text of the entity interaction when you click on the entities, however not on the screen. Or you might see just a quick flash of the text on the screen because it is rewritten every frame.
+
+Let's move the output to the screen `game.DebugTextSystem.Print()` at the beginning of the `Update()` method. The `Update()` method should look like this:
+
+```csharp
+void Update(Scene scene, GameTime time)
+{
+    game.DebugTextSystem.Print("Some text", new Int2(50, 50)); // This was moved
+
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
+
+    // Handle non-physical movement for cube1
+    if (cube1 != null)
+    {
+        if (game.Input.IsKeyDown(Keys.Z))
+        {
+            cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+        else if (game.Input.IsKeyDown(Keys.X))
+        {
+            cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+    }
+
+    // Handle physics-based movement for cube2
+    if (cube2 != null)
+    {
+        var rigidBody = cube2.Get<RigidbodyComponent>();
+
+        if (game.Input.IsKeyPressed(Keys.C))
+        {
+            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
+        }
+        else if (game.Input.IsKeyPressed(Keys.V))
+        {
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+        }
+    }
+
+    if (camera == null || simulation == null) return;
+
+    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    {
+        // Check for collisions with physics-based entities using raycasting
+        var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
+
+        if (hitResult.Succeeded)
+        {
+            var message = $"Hit: {hitResult.Collider.Entity.Name}";
+            Console.WriteLine(message);
+            GlobalLogger.GetLogger("Program.cs").Info(message);
+
+            var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+
+            if (rigidBody != null)
+            {
+                var direction = new Vector3(0, 3, 0); // Apply impulse upward
+
+                rigidBody.ApplyImpulse(direction);
+            }
+        }
+        else
+        {
+            Console.WriteLine("No hit detected.");
+        }
+
+        // Check for intersections with non-physical entities using ray picking
+        var ray = camera.GetPickRay(game.Input.MousePosition);
+
+        if (cube1Component?.BoundingBox.Intersects(ref ray) ?? false)
+        {
+            Console.WriteLine("Cube 1 hit!");
+        }
+    }
+}
+```
+
+Save and run the application. You should now see the text **"Some text"** displayed on the screen at the position (50, 50). Nice, we have some output on the screen! 📺
 
 ## Step 17: Break 2 - Let's Reflect 😅
 
@@ -1003,4 +1128,25 @@ In the next part of our journey, we'll dive deeper into game development concept
 ```csharp
 ```
 
+## Conclusion 🎯
 
+Congratulations, explorer! 🎉 You've completed another part of our journey through the world of game development. 🌍 In this part, you learned how to add mouse interaction to your scene, enabling players to interact with objects using raycasting and ray picking. By implementing keyboard and mouse controls, you've added interactivity to your game, allowing players to move objects, trigger actions, and receive feedback based on their interactions. 🖱️
+
+## Follow up articles
+
+In not so distant future, we will cover the following topics:
+
+**Stride Community Toolkit Preview - Code-Only Feature - Advanced**
+
+Let's get creative and explore more advanced features to take your game to the next level. 🚀
+
+- Interaction with the UI and from the UI
+- Transforming entities
+- Advanced physics interactions
+- Audio
+
+**Stride Community Toolkit Preview - Code-Only Feature - Refactoring**
+
+Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
+
+Or with another words - let's clean up the mess we made! 😅
