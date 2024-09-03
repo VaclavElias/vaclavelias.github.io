@@ -72,10 +72,10 @@ By the end of this post, you will have a solid foundation in using the Stride Co
 - [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): A game object that represents an entity in the scene and aggregates multiple EntityComponents.
 - [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
 - [RigidbodyComponent](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html): A component that enables physics interactions for an entity.
-- **Graphics Compositor**: A component that organizes how scenes are rendered in the Stride engine.
-- **3D Camera**: A camera that allows viewing the scene from different angles.
-- **3D Camera Controller**: A script that enables basic camera movement using keyboard and mouse inputs.
-- **3D Primitive**: A basic 3D model, such as a capsule, cube, or sphere.
+- [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html): A component that organizes how scenes are rendered in the Stride engine.
+- [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html): A camera that allows viewing the scene from different angles.
+- [Camera Controller](https://doc.stride3d.net/latest/en/tutorials/csharpintermediate/third-person-camera.html): A script that enables basic camera movement using keyboard and mouse inputs.
+- [3D Primitive](https://doc.stride3d.net/latest/en/api/Stride.Graphics.GeometricPrimitives.GeometricPrimitive.Cube.html): A basic 3D model, such as a capsule, cube, or sphere.
 - **Collider**: A component that defines the shape of an entity for physics interactions.
 - **Physics Engine**: A system that simulates physical interactions between entities in the scene.
 - **Profiler**: A tool that monitors performance metrics like frames per second (FPS) and memory usage.
@@ -1113,26 +1113,11 @@ Let's take a moment to reflect on what we've accomplished so far:
 
 ## Step 18: Add More Primitives - Let's go crazy! 🤪
 
-## What's Next? 🚀
-
-In the next part of our journey, we'll dive deeper into game development concepts and explore more advanced features to enhance your game. Here's a sneak peek at what's coming up:
-
-- **Advanced Physics Interactions:** We'll delve into more complex physics interactions, such as constraints, joints, and ragdoll physics, to create dynamic and realistic gameplay mechanics.
-- **User Interface (UI) Design:** You'll learn how to create interactive menus, health bars, and HUD elements to enhance the player experience and provide essential information during gameplay.
-- **Particle Effects:** We'll explore the world of particle systems to add visual effects like explosions, fire, smoke, and magic spells, bringing your game to life with stunning visuals.
-- **Audio and Sound Effects:** You'll discover how to integrate audio and sound effects into your game, creating immersive environments and enhancing player engagement through sound.
-- **Gameplay Mechanics:** We'll cover advanced gameplay mechanics, including character movement, combat systems, AI behavior, and level design, to create engaging and challenging gameplay experiences.
-- **Optimization Techniques:** You'll learn how to optimize your game for performance, including techniques for reducing lag, improving frame rates, and enhancing overall player experience.
-- **Publishing and Distribution:** We'll explore the process of publishing and distributing your game, including packaging, testing, debugging, and releasing your game to players around the world.
-
-```csharp
-```
-
 ## Conclusion 🎯
 
 Congratulations, explorer! 🎉 You've completed another part of our journey through the world of game development. 🌍 In this part, you learned how to add mouse interaction to your scene, enabling players to interact with objects using raycasting and ray picking. By implementing keyboard and mouse controls, you've added interactivity to your game, allowing players to move objects, trigger actions, and receive feedback based on their interactions. 🖱️
 
-## Follow up articles
+## Follow up articles 🚶
 
 In not so distant future, we will cover the following topics:
 
@@ -1143,8 +1128,9 @@ Let's get creative and explore more advanced features to take your game to the n
 - Interaction with the UI and from the UI
 - Transforming entities
 - Advanced physics interactions
-- Audio
-
+- Audio and sound effects
+- Partilce effects
+  
 **Stride Community Toolkit Preview - Code-Only Feature - Refactoring**
 
 Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
