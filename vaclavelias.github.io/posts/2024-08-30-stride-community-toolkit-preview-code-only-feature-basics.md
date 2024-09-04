@@ -47,14 +47,6 @@ Here’s the process I found to be the easiest way to begin with the code-only a
 3. Add interaction with the keyboard and mouse
 4. Add output to the console or screen
 
-### Code-Only on Windows 🪟
-
-The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game without the need for the Game Studio.
-
-### Code-Only on Other Platforms 🐧 
-
-This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
-
 ## What You'll Learn 🎯
 
 By the end of this post, you will have a solid foundation in using the Stride Community Toolkit's code-only feature to create a simple game. You’ll learn how to:
@@ -62,36 +54,49 @@ By the end of this post, you will have a solid foundation in using the Stride Co
 - Set up the game window and initialize the core components
 - Add and manipulate entities within the scene
 - Implement basic interactivity using the keyboard and mouse
+- Basic output to the console or screen
+
+## What You'll Learn 🎯
+
+By the end of this post, you will have a solid foundation in using the Stride Community Toolkit's code-only feature to create a simple game. You’ll learn how to:
+
+- Set up the game window and initialize the core components.
+- Add and manipulate entities within the scene.
+- Implement basic interactivity using the keyboard and mouse.
+
+Whether you’re a seasoned developer or new to game development, this post will guide you through the essential steps to get your first game up and running with Stride. Ready to dive in? Let’s get started! 🚀
 
 ## Basic Terminology 📚
+
+Before diving into the steps, it's helpful to understand some key terms that will be used throughout this guide:
 
 - [Stride 3D](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
 - [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride 3D engine.
 - [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
-- [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): A collection of entities that make up the game world.
-- [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): A game object that represents an entity in the scene and aggregates multiple EntityComponents.
+- [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
+- [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): An object in the scene that can represent anything from a 3D model to a camera or light and aggregates multiple EntityComponents.
 - [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
-- [RigidbodyComponent](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html): A component that enables physics interactions for an entity.
+- [RigidbodyComponent](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html): A physics component that allows an entity to respond to forces like gravity and collisions.
 - [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html): A component that organizes how scenes are rendered in the Stride engine.
 - [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html): A camera that allows viewing the scene from different angles.
 - [Camera Controller](https://doc.stride3d.net/latest/en/tutorials/csharpintermediate/third-person-camera.html): A script that enables basic camera movement using keyboard and mouse inputs.
 - [3D Primitive](https://doc.stride3d.net/latest/en/api/Stride.Graphics.GeometricPrimitives.GeometricPrimitive.Cube.html): A basic 3D model, such as a capsule, cube, or sphere.
-- **Collider**: A component that defines the shape of an entity for physics interactions.
-- **Physics Engine**: A system that simulates physical interactions between entities in the scene.
-- **Profiler**: A tool that monitors performance metrics like frames per second (FPS) and memory usage.
-- **Skybox**: A textured 3D model that provides a background for the scene.
-- **Game Loop**: The main loop that drives the game, updating the state and rendering the scene.
-- **Update Method**: A callback method that is called every frame to update the game state.
+- [Collider](https://doc.stride3d.net/latest/en/manual/physics/colliders.html): A component that defines the shape of an entity for physical interactions.
+- [Physics Engine](https://doc.stride3d.net/latest/en/manual/physics/index.html): A system that simulates physical interactions between entities in the scene.
+- [Profiler](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html): A tool that monitors performance metrics like frames per second (FPS) and memory usage.
+- [Skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html): A textured 3D model that provides a background for the scene.
+- [Game Loop](https://en.wikipedia.org/wiki/Video_game_programming#Game_structure): The main loop that drives the game, updating the state and rendering the scene.
+- [Update Method](https://doc.stride3d.net/latest/en/manual/scripts/types-of-script.html#synchronous-scripts): A callback method that is called every frame to update the game state.
 - **Physics-Based Movement**: Moving entities using the physics engine to simulate realistic interactions.
 - **Non-Physical Movement**: Moving entities by directly changing their position without physics interactions.
-- **Transform**: A component that defines the position, rotation, and scale of an entity.
-- **Force**: A vector that represents a physical force applied to an entity.
-- **Delta Time**: The time elapsed between frames, used for frame-independent movement.
-- **Material**: A visual property that defines how an entity is rendered, including color, texture, and shading.
-- **Ground Gizmo**: A visual representation of the ground plane and axis directions in the scene.
-- **GameTime**: A structure that provides time-related information for the game loop.
-- **Vector3**: A 3D vector that represents a point or direction in 3D space.
-- **Frame Rate**: The number of frames rendered per second, measured in frames per second (FPS).
+- [Transform](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/transform-position.html): Defines an entity's position, rotation, and scale in the scene.
+- [Force](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html?q=Force#Stride_Physics_RigidbodyComponent_ApplyForce_Stride_Core_Mathematics_Vector3_): A vector that represents a physical force applied to an [entity](https://doc.stride3d.net/latest/en/manual/physics/rigid-bodies.html).
+- [Delta Time](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/delta-time.html): The time elapsed between frames, used for frame-independent movement.
+- [Material](https://doc.stride3d.net/latest/en/manual/graphics/materials/index.html): A visual property that defines how an entity is rendered, including color, texture, and shading.
+- [Ground Gizmo](https://stride3d.github.io/stride-community-toolkit/api/Stride.CommunityToolkit.Engine.GameExtensions.html#Stride_CommunityToolkit_Engine_GameExtensions_AddGroundGizmo_Stride_Engine_Game_System_Nullable_Stride_Core_Mathematics_Vector3__System_Boolean_System_Boolean_): A visual representation of the ground plane and axis directions in the scene.
+- [GameTime](https://doc.stride3d.net/latest/en/api/Stride.Games.GameTime.html): A structure that provides time-related information for the game loop.
+- [Vector3](https://doc.stride3d.net/latest/en/api/Stride.Core.Mathematics.Vector3.html): A 3D vector that represents a point or direction in 3D space.
+- [Frame Rate](https://en.wikipedia.org/wiki/Frame_rate): The number of frames rendered per second, measured in frames per second (FPS).
 
 ## Prerequisites 🏠 
 
@@ -100,6 +105,22 @@ These prerequisites were tested on a clean Windows 11 installation.
 1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart your system if prompted.
 2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB).
 3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can also use [Visual Studio Code](https://code.visualstudio.com/), Rider, or any other IDE that supports .NET development.
+
+## How to use the code snippets 📝
+
+You can copy and paste the code into your `Program.cs` file and run the application to see the results.
+
+You will be guided to replace some parts of the code with the new code snippets as you progress through the steps or replacing the entire `Program.cs` file.
+
+Also, the code snippets contain comments which part of the code is new or updated.
+
+## Code-Only on Windows 🪟
+
+The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game without the need for the Game Studio.
+
+## Code-Only on Other Platforms 🐧 
+
+This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
 
 ## The Story of the Brave Explorers 📘
 
@@ -367,19 +388,19 @@ Finally, no more black-on-black mysteries! 💡
 
 ## Step 8: Break 1 - Let's Reflect 😅
 
-Tedious work but great job, explorer! 🎉 You’ve just learned the very basics of game setup behind the scenes—work that’s usually done for you automatically in the Game Studio. Let’s take a moment to reflect on what we've built so far:
+Tedious work, but you just learned the very basics of game setup behind the scenes, which is usually done in the Game Studio for you automatically.
 
-- You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene.
-- You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene from different angles.
-- You need a Camera Controller, a [C# script](https://doc.stride3d.net/latest/en/manual/scripts/index.html), to move the camera around and navigate the scene.
-- You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene and bring everything into focus
+- You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene
+- You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene
+- You need a Camera Controller to move the camera around. This is a [C# script](https://doc.stride3d.net/latest/en/manual/scripts/index.html) that controls the camera's position and orientation
+- You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene
 
-Once these basics are set up, you can start adding entities to the scene. In our example, we’ve added:
+Once the basics are set up, you need to add entities to the scene. In our example, we added:
 
 - A 3D Ground, a simple primitive model that provides a surface.
 - A Capsule, another primitive model, which we’ve repositioned and dropped into the scene.
 
-The toolkit automatically added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
+The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
 
 {%- capture title -%}
 You can check the implementation of each [Stride toolkit extension](https://github.com/stride3d/stride-community-toolkit/tree/main/src/Stride.CommunityToolkit), which wraps some boilerplate code, and create your own custom implementation.
@@ -982,17 +1003,21 @@ Nice job! You’ve now implemented mouse interaction, which adds a whole new lev
 
 ## Step 16: Add Output - Console or Screen! 📺
 
-In this part we will do just basic output to the console and the screen. You have already added a simple text output `Console.WriteLine()` to the screen to display the interaction of the entity that was hit by the mouse raycast. This will help us visualize the interactions and provide feedback to the player.
+In this part, we’ll explore basic output options, both to the console and directly on the screen. You’ve already added simple text output using `Console.WriteLine()` to display interactions when an entity is hit by the mouse raycast. Now, let's expand on this to better visualize interactions and provide feedback to the player.
 
-We have a few options where the output can be displayed:
+### Output Options
 
-- **Console Output:** We can print messages to the console window, which is useful for debugging and logging information. This option is great for developers to see real-time feedback and debug the game.
-  - We can use traditional `Console.WriteLine()`.
-  - We can use Stride's `GlobalLogger.GetLogger()` respectively `Log` property if used in from the script.
-- **Debug Text Output:** We can display text directly in the game window.
-- **UI Elements:** We can create UI elements like text labels, buttons, or images to display information to the player.
+We have several options for displaying output:
 
-Let's update the `if (hitResult.Succeeded) {}` block of code like this:
+- **Console Output:** Useful for debugging and logging information. This is great for developers to see real-time feedback and troubleshoot the game
+  - We can use traditional `Console.WriteLine()`
+  - We can also use Stride's `GlobalLogger.GetLogger()`, or the `Log` property when used from within a game script
+- **Debug Text Output:** Display text directly in the game window, which is useful for quick, in-game debugging
+- **UI Elements:** Create UI elements like text labels or buttons to display information to the player within the game world.
+
+### Updating the Console Output
+
+Let’s update the `if (hitResult.Succeeded)` block to include additional output options:
 
 ```csharp
 if (hitResult.Succeeded)
@@ -1017,9 +1042,12 @@ else
 }
 
 ```
-Run the application. You should see now in the console window an additional output in the green text of the entity interaction when you click on the entities, however not on the screen. Or you might see just a quick flash of the text on the screen because it is rewritten every frame.
 
-Let's move the output to the screen `game.DebugTextSystem.Print()` at the beginning of the `Update()` method. The `Update()` method should look like this:
+Run the application. You should see additional output in the console window, highlighted in green by `GlobalLogger`. However, the text in the game window may only flash briefly because it’s being overwritten every frame.
+
+### Moving Output to the Screen
+
+To keep the text on the screen, move the `game.DebugTextSystem.Print()` call to the beginning of the `Update()` method:
 
 ```csharp
 void Update(Scene scene, GameTime time)
@@ -1094,32 +1122,220 @@ void Update(Scene scene, GameTime time)
 }
 ```
 
-Save and run the application. You should now see the text **"Some text"** displayed on the screen at the position (50, 50). Nice, we have some output on the screen! 📺
+Now, when you run the application, the text **"Some text"** should remain visible on the screen at position *(50, 50)*. This gives us some basic screen output! 📺 But since this output is more suited for debugging, let’s explore adding more polished UI elements.
+
+### Adding UI Elements
+
+Let’s create a simple text block on the canvas to display information to the player. Replace your current code with this:
+
+```csharp
+using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Rendering.Compositing;
+using Stride.CommunityToolkit.Rendering.ProceduralModels;
+using Stride.CommunityToolkit.Skyboxes;
+using Stride.Core.Diagnostics;
+using Stride.Core.Mathematics;
+using Stride.Engine;
+using Stride.Games;
+using Stride.Graphics;
+using Stride.Input;
+using Stride.Physics;
+using Stride.Rendering;
+using Stride.UI; // This was added
+using Stride.UI.Controls; // This was added
+using Stride.UI.Panels; // This was added
+
+float movementSpeed = 1f;
+float force = 3f;
+Entity? cube1 = null;
+Entity? cube2 = null;
+
+CameraComponent? camera = null;
+Simulation? simulation = null;
+ModelComponent? cube1Component = null;
+
+SpriteFont? font = null; // This was added
+
+using var game = new Game();
+
+game.Run(start: Start, update: Update);
+
+void Start(Scene rootScene)
+{
+    game.AddGraphicsCompositor().AddCleanUIStage();
+    game.Add3DCamera().Add3DCameraController();
+    game.AddDirectionalLight();
+    game.Add3DGround();
+    game.AddProfiler();
+    game.AddSkybox();
+    game.AddGroundGizmo(position: new Vector3(-5, 0.1f, -5), showAxisName: true);
+
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
+    entity.Transform.Position = new Vector3(0, 8, 0);
+    entity.Scene = rootScene;
+
+    cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Gold),
+        IncludeCollider = false // No collider for simple movement
+    });
+    cube1.Scene = rootScene;
+
+    cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Orange)
+    });
+    cube2.Transform.Position = new Vector3(-3, 5, 0);
+    cube2.Scene = rootScene;
+
+    camera = rootScene.GetCamera();
+    simulation = game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
+    cube1Component = cube1.Get<ModelComponent>();
+
+    // This below was added: Create and display a UI text block
+    font = game.Content.Load<SpriteFont>("StrideDefaultFont");
+    var canvas = new Canvas
+    {
+        Width = 300,
+        Height = 100,
+        BackgroundColor = new Color(248, 177, 149, 100),
+        HorizontalAlignment = HorizontalAlignment.Left,
+        VerticalAlignment = VerticalAlignment.Bottom,
+    };
+
+    canvas.Children.Add(new TextBlock
+    {
+        Text = "Hello, Stride!",
+        TextColor = Color.White,
+        Font = font,
+        TextSize = 24,
+        Margin = new Thickness(3, 3, 3, 0),
+    });
+
+    var uiEntity = new Entity
+    {
+        new UIComponent
+        {
+            Page = new UIPage { RootElement = canvas },
+            RenderGroup = RenderGroup.Group31
+        }
+    };
+
+    uiEntity.Scene = rootScene;
+}
+
+void Update(Scene scene, GameTime time)
+{
+    game.DebugTextSystem.Print("Some text", new Int2(50, 50));
+
+    var deltaTime = (float)time.Elapsed.TotalSeconds;
+
+    // Handle non-physical movement for cube1
+    if (cube1 != null)
+    {
+        if (game.Input.IsKeyDown(Keys.Z))
+        {
+            cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+        else if (game.Input.IsKeyDown(Keys.X))
+        {
+            cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
+        }
+    }
+
+    // Handle physics-based movement for cube2
+    if (cube2 != null)
+    {
+        var rigidBody = cube2.Get<RigidbodyComponent>();
+
+        if (game.Input.IsKeyPressed(Keys.C))
+        {
+            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
+        }
+        else if (game.Input.IsKeyPressed(Keys.V))
+        {
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+        }
+    }
+
+    if (camera == null || simulation == null) return;
+
+    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    {
+        // Check for collisions with physics-based entities using raycasting
+        var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
+
+        if (hitResult.Succeeded)
+        {
+            var message = $"Hit: {hitResult.Collider.Entity.Name}";
+            Console.WriteLine(message);
+            GlobalLogger.GetLogger("Program.cs").Info(message);
+
+            var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+
+            if (rigidBody != null)
+            {
+                var direction = new Vector3(0, 3, 0); // Apply impulse upward
+
+                rigidBody.ApplyImpulse(direction);
+            }
+        }
+        else
+        {
+            Console.WriteLine("No hit detected.");
+        }
+
+        // Check for intersections with non-physical entities using ray picking
+        var ray = camera.GetPickRay(game.Input.MousePosition);
+
+        if (cube1Component?.BoundingBox.Intersects(ref ray) ?? false)
+        {
+            Console.WriteLine("Cube 1 hit!");
+        }
+    }
+}
+
+```
+
+Save and run the application. You should now see the text **"Hello, Stride!"** displayed at the bottom left corner of the screen. 📺
+
+Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
+
+{% include _alert.html type:'success' title: "You’ve learned how to add output to the screen, using text elements to provide feedback and enhance the player experience." %}
 
 ## Step 17: Break 2 - Let's Reflect 😅
 
-Congratulations, explorer! 🎉 You've made it through another set of challenges and learned how to add mouse interaction to your scene. By implementing raycasting and ray picking, you've enabled players to interact with objects in the scene, triggering various actions based on their clicks. 🖱️
+Let's take a moment to reflect on what we've accomplished in the past few steps. From enhancing performance monitoring to adding interactive elements, we've covered significant ground in making our simple game more functional and engaging. Here's a quick recap:
 
-Let's take a moment to reflect on what we've accomplished so far:
+- We integrated a performance profiler into our game, allowing us to monitor essential metrics like FPS (frames per second). This is crucial for optimizing our game's performance and ensuring a smooth player experience. You also learned how to cycle through different profiler outputs to monitor various aspects of the game. 🚀
+- We enhanced the visual appeal of our scene by adding a skybox. This addition provided a more immersive environment, transforming our basic game into something that looks and feels more polished and professional. The skybox added depth to the scene, making it visually engaging. 🎨
+- We explored the theory behind motion in game development, distinguishing between non-physical movement and physics-based movement. Understanding these concepts is key to deciding how entities interact with the environment and other objects in your game. This foundational knowledge set the stage for implementing different types of motion in the following steps. 🧠
+- We implemented non-physical movement by directly modifying an entity's position using its `Transform.Position`. This method allowed us to move entities smoothly without them interacting with other objects. It's a straightforward approach ideal for scenarios where interaction isn't necessary, such as UI elements or certain animations. 🚶‍♂️
+- We took motion to the next level by incorporating physics-based movement. By applying forces to entities via their `RigidbodyComponent`, we enabled realistic interactions with the environment. This method is perfect for creating dynamic, interactive gameplay where objects respond to gravity, collisions, and other physical forces. ⚙️
+- We added keyboard controls to our game, allowing players to interact with and move entities using keys. This introduced a basic level of interactivity, making the game feel more responsive and engaging. You learned how to handle both non-physical and physics-based movements using simple keyboard inputs. 🎮
+- We extended the interactivity further by adding mouse controls. Players can now click on entities to trigger actions, such as moving or applying forces to objects. This step demonstrated how to integrate more complex interactions, combining raycasting and entity detection to create a more dynamic gameplay experience. 🖱️
+- Finally, we explored different ways to display output, whether through the console, on-screen debug text, or more polished UI elements. This step highlighted how to provide feedback to the player, enhancing the overall user experience. Visual feedback is crucial for communicating game state and player actions effectively. 📊
 
-- **Non-Physical Movement:** You learned how to move objects without physics by directly changing their positions. This method is ideal for simple, controlled movement and UI elements that don't require interactions with the environment.
-- **Physics-Based Movement:** You explored how to move objects using physics, allowing them to respond to forces, gravity, and collisions. This method is perfect for creating realistic interactions and dynamic gameplay mechanics.
-- **Keyboard Interaction:** You added keyboard controls to move cubes left and right and apply impulses to physics-based objects. This introduced basic interactivity to the scene, allowing players to control objects using key presses.
-- **Mouse Interaction:** You implemented mouse input to interact with objects in the scene. By using raycasting and ray picking, you enabled players to click on entities, trigger actions, and receive feedback based on their interactions.
-- **Output to Console and Screen:** You added text output to the screen to display the name of the entity hit by the mouse raycast. This visual feedback helps players understand the interactions and provides context for their actions.
-- **Game Loop:** You learned how the game loop works, updating the game state every frame and handling player input to create dynamic and responsive gameplay.
-- **Performance Monitoring:** You explored the importance of monitoring performance metrics, such as frames per second (FPS), to optimize your game and ensure a smooth player experience.
-- **Scene Setup:** You set up the scene with essential components like cameras, lights, and ground planes, creating a foundation for building interactive and visually appealing environments.
 
 ## Step 18: Add More Primitives - Let's go crazy! 🤪
 
-## Conclusion 🎯
+ToDo: Add more primitives
 
-Congratulations, explorer! 🎉 You've completed another part of our journey through the world of game development. 🌍 In this part, you learned how to add mouse interaction to your scene, enabling players to interact with objects using raycasting and ray picking. By implementing keyboard and mouse controls, you've added interactivity to your game, allowing players to move objects, trigger actions, and receive feedback based on their interactions. 🖱️
+## Wrapping Up: Your Journey Continues 🎯
 
-## Follow up articles 🚶
+Congratulations, explorer! 🎉 You've navigated through another significant chapter in your game development journey. 🌍 In this part, you delved deeper into interactivity, mastering how to implement mouse and keyboard controls to make your game more dynamic and engaging.
 
-In not so distant future, we will cover the following topics:
+### What You've Achieved
+
+By adding mouse interactions, you’ve empowered players to directly interact with objects in your scene using techniques like raycasting and ray picking. Combined with the keyboard controls you implemented earlier, your game now responds to player inputs, allowing for real-time movement, actions, and feedback. 🖱️⌨️
+
+### The Power of Interactivity
+
+Interactivity is at the heart of game design. By giving players the ability to influence the game world, you create a more immersive and engaging experience. The skills you've developed—handling inputs, moving objects, managing physics, and providing feedback—are foundational to building more complex and polished games. 🌟
+
+## Follow-Up Articles 🚶
+
+In the not-so-distant future, we will cover the following topics:
 
 **Stride Community Toolkit Preview - Code-Only Feature - Advanced**
 
@@ -1129,10 +1345,13 @@ Let's get creative and explore more advanced features to take your game to the n
 - Transforming entities
 - Advanced physics interactions
 - Audio and sound effects
-- Partilce effects
+- Particle effects
   
 **Stride Community Toolkit Preview - Code-Only Feature - Refactoring**
 
 Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
 
-Or with another words - let's clean up the mess we made! 😅
+Or in other words, let’s clean up the mess we made! 😅
+
+{% include _alert.html type:'light' title: "Content reviewed and enhanced with the assistance of ChatGPT." %}
+
