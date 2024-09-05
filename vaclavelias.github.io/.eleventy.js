@@ -118,7 +118,7 @@ module.exports = function (eleventyConfig) {
     });
 
     eleventyConfig.addShortcode("video", function (url) {
-        return `<div class="ratio ratio-16x9 mb-2"><video autoplay controls loop preload="none" poster="${url.replace(".mp4", ".jpg") }"><source src="${url}" type="video/mp4"></video></div>`;
+        return `<div class="ratio ratio-16x9 mb-2"><video autoplay controls loop preload="none" poster="${url.replace(".mp4", ".jpg")}"><source src="${url}" type="video/mp4"></video></div>`;
     });
 
     eleventyConfig.addShortcode("video-fluid", function (url) {
