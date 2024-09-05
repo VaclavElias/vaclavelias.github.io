@@ -18,7 +18,7 @@ Discover the Stride Community Toolkit, a powerful collection of extensions and h
 
 This blog post is part 1 of a 3-part series:
 
-- Stride Community Toolkit Preview - Code-Only Feature - Basics
+- [Stride Community Toolkit Preview - Code-Only Feature - Basics](/stride3d/stride-community-toolkit-preview-code-only-feature-basics/)
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
 - Stride Community Toolkit Preview - Code-Only Feature - Refactoring
 
@@ -34,11 +34,11 @@ Although the toolkit is still in its early stages, it already offers several val
 
 This article assumes that you have some experience with .NET and C# programming.
 
-The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the Stride 3D engine and game development, bypassing the need to work directly in the Game Studio.
+The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the [Stride 3D engine](https://github.com/stride3d/stride) and game development, bypassing the need to work directly in the Game Studio.
 
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
-We will be using a standard .NET 8 **Console App** to create a simple game by adding some NuGet packages to get started.
+We will be using a standard [.NET 8 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
 
 Here’s the process I found to be the easiest way to begin with the code-only approach:
 
@@ -46,6 +46,7 @@ Here’s the process I found to be the easiest way to begin with the code-only a
 2. Add entities/primitives to the scene
 3. Add interaction with the keyboard and mouse
 4. Add output to the console or screen
+5. Play around, be creative and have fun
 
 ## What You'll Learn 🎯
 
@@ -54,15 +55,7 @@ By the end of this post, you will have a solid foundation in using the Stride Co
 - Set up the game window and initialize the core components
 - Add and manipulate entities within the scene
 - Implement basic interactivity using the keyboard and mouse
-- Basic output to the console or screen
-
-## What You'll Learn 🎯
-
-By the end of this post, you will have a solid foundation in using the Stride Community Toolkit's code-only feature to create a simple game. You’ll learn how to:
-
-- Set up the game window and initialize the core components.
-- Add and manipulate entities within the scene.
-- Implement basic interactivity using the keyboard and mouse.
+- Display text output to the console or directly on the screen for debugging or player feedback
 
 Whether you’re a seasoned developer or new to game development, this post will guide you through the essential steps to get your first game up and running with Stride. Ready to dive in? Let’s get started! 🚀
 
@@ -73,6 +66,7 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - [Stride 3D](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
 - [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride 3D engine.
 - [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
+- **Game:** In the context of this post, a game refers to any interactive or visual project created using a game engine. This can range from traditional playable games to simulations, visualizations, or any real-time interactive experiences where users can interact with or observe elements within a scene.
 - [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
 - [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): An object in the scene that can represent anything from a 3D model to a camera or light and aggregates multiple EntityComponents.
 - [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
@@ -87,8 +81,8 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - [Skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html): A textured 3D model that provides a background for the scene.
 - [Game Loop](https://en.wikipedia.org/wiki/Video_game_programming#Game_structure): The main loop that drives the game, updating the state and rendering the scene.
 - [Update Method](https://doc.stride3d.net/latest/en/manual/scripts/types-of-script.html#synchronous-scripts): A callback method that is called every frame to update the game state.
-- **Physics-Based Movement**: Moving entities using the physics engine to simulate realistic interactions.
-- **Non-Physical Movement**: Moving entities by directly changing their position without physics interactions.
+- **Physics-Based Movement:** Moving entities using the physics engine to simulate realistic interactions.
+- **Non-Physical Movement:** Moving entities by directly changing their position without physics interactions.
 - [Transform](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/transform-position.html): Defines an entity's position, rotation, and scale in the scene.
 - [Force](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html?q=Force#Stride_Physics_RigidbodyComponent_ApplyForce_Stride_Core_Mathematics_Vector3_): A vector that represents a physical force applied to an [entity](https://doc.stride3d.net/latest/en/manual/physics/rigid-bodies.html).
 - [Delta Time](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/delta-time.html): The time elapsed between frames, used for frame-independent movement.
@@ -132,6 +126,10 @@ As we venture further, we'll bring light into our world, transforming the empty 
 
 Beware, fellow adventurers! Our capsule is a wild creature, prone to falling into the void. But fear not, for we'll harness the power of a 3D camera 🎥 controller to keep a watchful eye 👁️ on our creation.
 
+As we continue, we'll introduce motion, allowing our entities to interact with their surroundings and respond to player input. From keyboard controls to mouse interactions, our world will come to life with movement and action. 🕹️
+
+Finally, we’ll display messages and feedback with both console output and on-screen text, letting our creation communicate with us through the game window. 📝
+
 So, refresh your mouse agility skills 🖱️, and join us on this exhilarating expedition. Let's dive into the code! 💻
 
 ## Step 1: Create a New C# .NET 8 Console App - Nothingness ⚫
@@ -149,6 +147,8 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
     using var game = new Game();
 
     // Start the game loop
+    // This method initializes the game, begins running the game loop,
+    // and starts processing events.
     game.Run();
     ```
 1. The first build on your computer requires running the command below. Afterward, you can just use your IDE to build:
@@ -161,21 +161,24 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 {% include _alert-svg.html %}
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
-{% include _alert.html type:'success' title: "You learnt how to setup Stride game window using the Stride Community Toolkit and even though it's just a black screen the game window is running." %}
+{% include _alert.html type:'success' title: "You’ve learned how to set up a Stride game window using the Stride Community Toolkit. Even though it's just a black screen, the game window is running, marking the first step in your journey." %}
 
 ## Step 2: Let There Be Light - Or at Least Blue 🌌
 
 Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. 🖥️ As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods. 🔧✨
 
+Update the `Program.cs` file to look like this:
 
 ```csharp
-using Stride.CommunityToolkit.Engine;  // This was added: Import the toolkit's helper methods
+using Stride.CommunityToolkit.Engine;
 using Stride.Engine;
 
 // Create an instance of the game
 using var game = new Game();
 
 // Start the game loop and provide the Start method as a callback
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start);  // This was updated
 
 // This was added
@@ -195,9 +198,9 @@ The code above does the following:
 - `AddGraphicsCompositor()` organizes [how scenes are rendered](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) in the Stride engine, enabling extensive customization of the rendering pipeline.
 - `Add3DCamera()` adds a 3D camera to the scene, allowing you to view it from various angles.
 
-Run the application again. Now, instead of a black screen, you should see a blue screen. 🌌 While not overly exciting, it’s a step in the right direction. We’re looking through the camera, but there’s nothing to see—yet. 👀
+Run the application again. Now, instead of a black screen, you should see a blue screen. 🌌 While not overly exciting, it’s a step in the right direction. We’re looking through the camera, but there’s nothing to see yet. 👀
 
-{% include _alert.html type:'success' title: "You learnt that Graphics Compositor is used to handle rendering and 3D Camera is used to view the scene from different angles. Still nothing to see because we haven't added anything to the scene yet. 🤷‍♂️" %}
+{% include _alert.html type:'success' title: "You’ve learned that Graphics Compositor is used to handle rendering and 3D Camera is used to view the scene from different angles. There's still nothing to see yet because we haven’t added any objects to the scene. 🤷‍♂️" %}
 
 ## Step 3: Add Some Shapes - Capsule Time! 🎨
 
