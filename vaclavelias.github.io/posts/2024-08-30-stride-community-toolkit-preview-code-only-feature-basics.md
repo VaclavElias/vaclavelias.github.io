@@ -364,7 +364,7 @@ void Start(Scene rootScene)
 
 Run the application again. You should see the capsule falling down and landing on the ground. 🎉 Unfortunately, it's still a black capsule on a black ground 🤦‍♂️. But don't worry, we’ll fix that later! In the meantime, you can move the camera around using the mouse and keyboard (Q or E) to lower or raise the camera and watch the capsule roll around on the ground. 🖱️⌨️
 
-{% include _alert.html type:'info' title: "If you're wondering why the ground is invisible from below, it's due to back face culling. This technique prevents the engine from drawing polygons that face away from the camera, which helps improve performance by avoiding unnecessary rendering." %}
+{% include _alert.html type:'info' title: "If you're wondering why the ground is invisible from below, it's due to back face culling. This technique prevents the engine from drawing polygons that face away from the camera, improving performance by avoiding unnecessary rendering. The same applies to the cube and other primitives: if the camera is inside the object, the walls won't be visible." %}
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a 3D ground plane to the scene, giving the capsule a surface to land on. Now, the capsule falls and lands on the ground, making the scene feel more dynamic." %}
 
@@ -663,19 +663,19 @@ void Update(Scene scene, GameTime time)
 - `movementSpeed` determines how fast the cube moves.
 - `cube1` is an `Entity` object representing the cube in the scene.
 - `game.Run(start: Start, update: Update)` now includes the `Update` method as a callback for updating the game state every frame.
-- `AddGroundGizmo()` adds a visual representation of the ground plane and axis directions.
+- `AddGroundGizmo()` adds a visual representation of the ground plane and axis directions. Just a visual aid, it doesn't affect the physics of the scene.
 - `CreateMaterial()` allows you to color the cube (and even the capsule if you want 😉).
 - `Update()` is a callback method that is called every frame to update the game state.
 
 Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
 
-{% include _alert.html type:'success' title: "You learnt how to move a cube without colliders using non-physical movement. The cube moves smoothly along the X-axis, demonstrating basic animation and object manipulation." %}
+{% include _alert.html type:'success' title: "You’ve learned how to move a cube without using colliders, applying non-physical movement. The cube moves smoothly along the X-axis, showcasing basic object manipulation and animation." %}
 
 ## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
 Now that we've moved the cube without colliders, let's dive into the more realistic option: moving the cube using physics. With this approach, the cube will interact with the environment, responding to forces like gravity and colliding with other entities.
 
-Update the code to include physics-based movement:
+Update the code to include physics-based movement or replace the entire file:
 
 
 ```csharp
@@ -696,6 +696,8 @@ Entity? cube2 = null; // This was added
 using var game = new Game();
 
 // Start the game loop and provide the Start and Update methods as callbacks
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start, update: Update);
 
 // Define the Start method to set up the scene
@@ -783,11 +785,12 @@ void Update(Scene scene, GameTime time)
 
 ```
 
-Key Concepts:
-
-- `RigidbodyComponent`: This component handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
-- `ApplyImpulse()`: This method applies a force to the entity, causing it to move in the direction of the applied force. In this case, we’re applying an impulse to the cube, making it move along the X-axis.
-- `LinearVelocity`: This property represents the velocity of the cube. We check if the velocity is near zero (indicating the cube is stationary) before applying the impulse.
+- `Stride.Physics` provides access to physics-related classes and components, including the `RigidbodyComponent`.
+- `force` determines the strength of the impulse applied to the cube.
+- `cube2` is an `Entity` object representing the cube that will move using physics-based interactions.
+- `RigidbodyComponent` handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
+- `LinearVelocity` represents the velocity of the cube. We check if the velocity is near zero (indicating the cube is stationary) before applying the impulse.
+- `ApplyImpulse()` applies a force to the entity, causing it to move in the direction of the applied force. In this case, we’re applying an impulse to the cube, making it move along the X-axis.
 
 Run the application. 🏃‍♂️ You should now see two cubes in the scene:
 
@@ -798,7 +801,7 @@ This step introduces a new level of realism by making the cube react to physical
 
 The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
 
-{% include _alert.html type:'success' title: "You learnt how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene." %}
+{% include _alert.html type:'success' title: "You’ve learned how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene. You now understand the key differences between non-physical and physics-based movement, giving you greater control over how objects interact in your game world." %}
 
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
