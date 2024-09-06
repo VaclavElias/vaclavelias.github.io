@@ -466,7 +466,7 @@ void Start(Scene rootScene)
 
 Run the application again. You should see [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen, showing the frames per second (FPS) and other performance metrics. 🚀 Press F1 to cycle through different profiler outputs and monitor various aspects of your game's performance. 📊
 
-{% include _alert.html type:'success' title: "You learnt how to add a performance profiler to the scene, allowing you to monitor FPS and other metrics. The profiler provides valuable insights into the game's performance and helps identify areas for optimization." %}
+{% include _alert.html type:'success' title: "You’ve learned how to add a performance profiler to the scene, enabling you to monitor FPS and other important metrics. The profiler provides valuable insights into your game's performance, helping you identify areas for optimization." %}
 
 ## Step 10: Illuminate the Scene - Add Skybox! 🌇
 
@@ -492,6 +492,8 @@ using Stride.Engine;
 using var game = new Game();
 
 // Start the game loop and provide the Start method as a callback
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
@@ -528,7 +530,7 @@ void Start(Scene rootScene)
 
 Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
-{% include _alert.html type:'success' title: "You learnt how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic background for the scene, adding depth and atmosphere." %}
+{% include _alert.html type:'success' title: "You’ve learned how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic backdrop, adding depth and atmosphere to your scene." %}
 
 ## Step 11: Add Motion - I like to Move It, Move It! 🕺
 
@@ -568,14 +570,13 @@ Use cases for physics-based movement include:
 - **Character Movement:** Characters or vehicles that need to respond to the environment realistically.
 - **Environmental Interaction:** Objects that react to player actions, such as crates that can be pushed or destroyed.
 
-{% include _alert.html type:'success' title: "You learnt about the two main approaches to moving entities in Stride: non-physical movement and physics-based movement. Each method has its strengths and use cases, depending on the type of game or simulation you're creating." %}
+{% include _alert.html type:'success' title: "You’ve learned about the two main approaches to moving entities in Stride: non-physical movement and physics-based movement. Each method offers unique advantages, depending on whether you need simple control or realistic physics-driven interactions in your game or simulation." %}
 
-## Step 12: Add Motion without Physics - Move the Cube without Colliders! 📦 
+## Step 12: Add Motion without Physics - Move the Cube without Colliders 📦 
 
-Let's add a a cube to the scene! 🎉
+Let's add a a cube 📦 to the scene! 🎉
      
-We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this:
-
+We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this or replace the entire file:
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -592,6 +593,8 @@ Entity? cube1 = null; // This was added
 using var game = new Game();
 
 // Start the game loop and provide the Start and Update methods as callbacks
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start, update: Update); // This was updated
 
 // Define the Start method to set up the scene
@@ -630,6 +633,7 @@ void Start(Scene rootScene)
     // This was added
     // Create a cube with material, disable its collider, and add it to the scene
     // The cube is hanging in the default position Vector(0,0,0) in the air,
+    // well intersecting the ground plane as it is not aware of the ground
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
@@ -658,6 +662,7 @@ void Update(Scene scene, GameTime time)
 
 - `movementSpeed` determines how fast the cube moves.
 - `cube1` is an `Entity` object representing the cube in the scene.
+- `game.Run(start: Start, update: Update)` now includes the `Update` method as a callback for updating the game state every frame.
 - `AddGroundGizmo()` adds a visual representation of the ground plane and axis directions.
 - `CreateMaterial()` allows you to color the cube (and even the capsule if you want 😉).
 - `Update()` is a callback method that is called every frame to update the game state.
@@ -1360,6 +1365,7 @@ In the not-so-distant future, we will cover the following topics:
 
 Let's get creative and explore more advanced features to take your game to the next level. 🚀
 
+- Maximize the game window
 - Interaction with the UI and from the UI
 - Transforming entities
 - Advanced physics interactions
