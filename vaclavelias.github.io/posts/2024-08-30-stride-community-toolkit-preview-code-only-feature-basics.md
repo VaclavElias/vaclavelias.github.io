@@ -167,10 +167,10 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 
 Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. 🖥️ As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods. 🔧✨
 
-Update the `Program.cs` file to look like this:
+Update the `Program.cs` file to look like this, or simply replace the entire file:
 
 ```csharp
-using Stride.CommunityToolkit.Engine;
+using Stride.CommunityToolkit.Engine; // This was added: Import the toolkit's helper methods
 using Stride.Engine;
 
 // Create an instance of the game
@@ -206,6 +206,8 @@ Run the application again. Now, instead of a black screen, you should see a blue
 
 Let's add something to the scene. 🎨 This time, we will be utilizing the `Stride.CommunityToolkit.Rendering.ProceduralModels` namespace, which provides helper methods for generating procedural models like capsules, cubes, and spheres. We will add a capsule to the scene.
 
+Update the `Program.cs` file to look like this, or simply replace the entire file:
+
 ```csharp
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;  // This was added: Import procedural model helpers
@@ -215,6 +217,8 @@ using Stride.Engine;
 using var game = new Game();
 
 // Start the game loop and provide the Start method as a callback
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
@@ -231,9 +235,11 @@ void Start(Scene rootScene)
 }
 ```
 
-In this step, we added a new line that creates a 3D primitive capsule. 🧊 The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an [`Entity`](https://doc.stride3d.net/latest/en/manual/game-studio/add-entities.html) object. The `PrimitiveModelType` enum defines the types of primitive 3D models that can be generated, such as capsules, cubes, and spheres.
+In this step, we added a new line that creates a 3D primitive capsule. 🧊 The `Create3DPrimitive()` method takes a `PrimitiveModelType` enum as a parameter and returns an [`Entity`](https://doc.stride3d.net/latest/en/manual/game-studio/add-entities.html) object, with a collider included by default. The [`PrimitiveModelType`](https://stride3d.github.io/stride-community-toolkit/api/Stride.CommunityToolkit.Rendering.ProceduralModels.PrimitiveModelType.html) enum defines the types of primitive 3D models that can be generated, such as capsules, cubes, and spheres.
 
-Run the application again. Surprise, nothing happened! 😲 We created an entity, but we didn't add it to the scene. This is a typical beginner's mistake 🤦‍♂️. To fix it, update the `Start` method to look like this:
+Run the application again. Surprise, nothing happened! 😲🤬 We created an entity, but we didn't add it to the scene. This is a typical beginner's mistake 🤦‍♂️. To fix it, update the `Start()` method to look like this.
+
+You can replace the entire `Start()` method with the code below:
 
 ```csharp
 // Define the Start method to set up the scene
@@ -255,15 +261,15 @@ void Start(Scene rootScene)
 
 Now, run the application again. You should see a capsule in the middle of the screen if you're lucky because it's falling down. Fast! 🚀
 
-{% include _alert.html type:'success' title: "You learnt how to add a 3D capsule to the scene and how to add it to the root scene so it becomes part of the scene graph. The capsule is falling down because it has no collider to interact with the ground." %}
+{% include _alert.html type:'success' title: "You’ve learned how to create and add a 3D capsule to the scene using procedural models. By adding the entity to the root scene, it becomes part of the scene graph. The capsule is falling because it lacks a collider to interact with the ground, which we'll address later." %}
 
 ## Step 4: Control the Camera - Look Around! 🖱️
 
-Maybe we should at least look around the scene and view the capsule from different angles as it falls into the void 😠?
+Maybe we should at least look around the scene and view the capsule from different angles as it falls into the void 🤔?
 
 Let's add a 3D camera controller using the `Add3DCameraController()` method. 🎮 This extension adds basic camera functionality, allowing you to interact with the camera through keyboard and mouse inputs. Specifically, it attaches a regular `SyncScript` to the camera with custom logic to handle camera movement.
 
-Your game would have your implementation how camera works which requires your specific game.
+In most games, you would implement your own custom camera logic to fit the specific needs of your game. However, for this example, we'll use the default camera controller to get basic camera movement up and running quickly.
 
 Time to refresh those mouse agility skills!
 
@@ -272,13 +278,15 @@ Time to refresh those mouse agility skills!
 game.Add3DCamera().Add3DCameraController();
 ```
 
-Run the application again and use right-click and hold to rotate the camera towards the capsule, or follow the instructions displayed on the screen. 🎥 Feeling a bit more satisfied now? Let's make the experience even more interesting! 🎨✨
+Run the application again and use right-click and hold to rotate the camera towards the capsule, or follow the instructions displayed on the screen. 🎥 Feeling a bit more satisfied now? Let’s make the experience even more interesting! 🎨✨
 
-{% include _alert.html type:'success' title: "You learnt how to add a 3D camera controller to the scene to allow basic camera movement. You can now rotate the camera using the mouse and keyboard." %}
+{% include _alert.html type:'success' title: "You’ve learned how to add a 3D camera controller to the scene, enabling basic camera movement. Now, you can rotate the camera using the mouse and keyboard, giving you more control over how you view the scene." %}
 
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
-Let's reposition the capsule to add a bit more excitement and give us a few extra seconds to admire it before it falls. Update the `Start` method as shown below, and don't forget to add the `Stride.Core.Mathematics` namespace for handling the 3D positioning.
+Let's reposition the capsule to add a bit more excitement and give us a few extra seconds to admire it before it falls. Update the `Start()` method as shown below, and don't forget to add the `Stride.Core.Mathematics` namespace for handling the 3D positioning.
+
+Update the `Program.cs` file to look like this, or simply replace the entire file:
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -290,6 +298,8 @@ using Stride.Engine;
 using var game = new Game();
 
 // Start the game loop and provide the Start method as a callback
+// This method initializes the game, begins running the game loop,
+// and starts processing events.
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
@@ -316,11 +326,13 @@ void Start(Scene rootScene)
 
 Run the application again. You should see a capsule falling down from the top of the screen. I know, the capsule is black, but don't worry, we'll fix that later. 😉
 
-{% include _alert.html type:'success' title: "You learnt how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now 8 units above the origin, giving you a better view as it falls." %}
+{% include _alert.html type:'success' title: "You’ve learned how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now positioned 8 units above the origin, giving you more time to admire it as it falls into the void." %}
 
 ## Step 6: Add a Ground - Catch the Capsule! 🛑
 
-Now let's catch the capsule by adding some ground to the scene. Update the `Start` method to look like this:
+Now let's catch the capsule by adding some ground to the scene. Update the `Start()` method to look like this so we can feel more grounded.
+
+You can replace the entire `Start()` method with the code below:
 
 ```csharp
 // Define the Start method to set up the scene
@@ -350,11 +362,13 @@ void Start(Scene rootScene)
 
 Run the application again. You should see the capsule falling down and landing on the ground. 🎉 Unfortunately, it's still a black capsule on a black ground 🤦‍♂️. But don't worry, we’ll fix that later! In the meantime, you can move the camera around using the mouse and keyboard (Q or E) to lower or raise the camera and watch the capsule roll around on the ground. 🖱️⌨️
 
-{% include _alert.html type:'success' title: "You learnt how to add a 3D ground plane to the scene, providing a surface for the capsule to land on. The capsule now falls and lands on the ground, creating a more dynamic scene." %}
+{% include _alert.html type:'info' title: "If you're wondering why the ground is invisible from below, it's due to back face culling. This technique prevents the engine from drawing polygons that face away from the camera, which helps improve performance by avoiding unnecessary rendering." %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a 3D ground plane to the scene, giving the capsule a surface to land on. Now, the capsule falls and lands on the ground, making the scene feel more dynamic." %}
 
 ## Step 7: Illuminate the Scene - Add Light! 💡
 
-It's time to brighten things up! Adding some light to the scene will help us see our objects more clearly. Thankfully, there's a helper method called `game.AddDirectionalLight()` that adds a directional light to the scene. Update the `Start` method to look like this:
+It's time to brighten things up! Adding some light to the scene will help us see our objects more clearly. Thankfully, there's a helper method called `AddDirectionalLight()` that adds a directional light to the scene. Update the `Start()` method to look like this:
 
 ```csharp
 // Define the Start method to set up the scene
@@ -387,7 +401,7 @@ Run the application again. 🌟 You should now see the capsule falling down and 
 
 Finally, no more black-on-black mysteries! 💡
 
-{% include _alert.html type:'success' title: "You learnt how to add a directional light to the scene, illuminating the capsule and ground. The scene is now well-lit, making it easier to see and interact with the objects." %}
+{% include _alert.html type:'success' title: "You’ve learned how to add a directional light to the scene, illuminating both the capsule and the ground. The scene is now well-lit, making it much easier to see and interact with the objects." %}
 
 ## Step 8: Break 1 - Let's Reflect 😅
 
@@ -395,7 +409,7 @@ Tedious work, but you just learned the very basics of game setup behind the scen
 
 - You need a [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html) to render the scene
 - You need a [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html) to view the scene
-- You need a Camera Controller to move the camera around. This is a [C# script](https://doc.stride3d.net/latest/en/manual/scripts/index.html) that controls the camera's position and orientation
+- You need a [Camera Controller](https://doc.stride3d.net/latest/en/tutorials/csharpintermediate/third-person-camera.html) to move the camera around. This is a [C# script](https://doc.stride3d.net/latest/en/manual/scripts/index.html) that controls the camera's position and orientation
 - You need a [Light](https://doc.stride3d.net/latest/en/manual/graphics/lights-and-shadows/index.html) to illuminate the scene
 
 Once the basics are set up, you need to add entities to the scene. In our example, we added:
@@ -406,7 +420,7 @@ Once the basics are set up, you need to add entities to the scene. In our exampl
 The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
 
 {%- capture title -%}
-You can check the implementation of each [Stride toolkit extension](https://github.com/stride3d/stride-community-toolkit/tree/main/src/Stride.CommunityToolkit), which wraps some boilerplate code, and create your own custom implementation.
+You can review the implementation of each [Stride toolkit extension](https://github.com/stride3d/stride-community-toolkit/tree/main/src/Stride.CommunityToolkit), which wraps some boilerplate code, and create your own custom implementation.
 {%- endcapture -%}
 {% include _alert.html type:'info' title:title %}
 
@@ -414,9 +428,9 @@ Whew! 😅 Take a deep breath, and get ready for the next part of our journey. U
 
 ## Step 9: Add Profiler - Performance! 📈
 
-As game developers, we love seeing those sweet FPS numbers! 🎮 The toolkit provides a `game.AddProfiler()` method that adds a performance profiler to the game, allowing us to monitor important metrics like frames per second (FPS).
+As game developers, we love seeing those sweet FPS numbers! 🎮 The toolkit provides a `AddProfiler()` method that adds a performance profiler to the game, allowing us to monitor important metrics like frames per second (FPS).
 
-Update the `Start` method to look like this:
+Update the `Start()` method to look like this:
 
 ```csharp
 // Define the Start method to set up the scene
@@ -1355,6 +1369,14 @@ Let's get creative and explore more advanced features to take your game to the n
 Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
 
 Or in other words, let’s clean up the mess we made! 😅
+
+## Support Stride Engine 🌟
+
+Stride is an open-source project that thrives on community contributions and support. By using Stride, sharing your experiences, and contributing to the community, you help make the engine better for everyone. 🚀
+
+- **Contribute:** Share your knowledge, contribute to the engine, or report issues on the [Stride GitHub repository](
+- **Join the Community:** Engage with other developers, ask questions, and share your projects on the [Stride Community Forums](https://forums.stride3d.net/).
+- **Sponsor**: Support the development of Stride by becoming a sponsor on [GitHub Sponsors](
 
 {% include _alert.html type:'light' title: "Content reviewed and enhanced with the assistance of ChatGPT." %}
 
