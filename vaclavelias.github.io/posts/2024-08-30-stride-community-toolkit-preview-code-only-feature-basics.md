@@ -805,7 +805,7 @@ The main difference between the two cubes is that **Cube 1** moves without inter
 
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
-Now it's time to add some interactivity! 🎮 We will update the `Update` method to allow the player to move the cubes around using the keyboard. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2** (physics-based movement) respond to key presses.
+Now it's time to add some interactivity! 🎮 We will update the `Update()` method to allow the player to move the cubes around using the keyboard. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2** (physics-based movement) respond to key presses.
 
 Ensure that the `using Stride.Input;` namespace is included to handle input.
 
@@ -830,7 +830,6 @@ void Update(Scene scene, GameTime time)
         // Move the first cube along the positive X-axis when the X key is held down
         else if (game.Input.IsKeyDown(Keys.X))
         {
-            // Move the first cube along the positive X-axis (non-physical movement)
             cube1.Transform.Position += new Vector3(movementSpeed * deltaTime, 0, 0);
         }
     }
@@ -842,13 +841,16 @@ void Update(Scene scene, GameTime time)
         // Retrieve the RigidbodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<RigidbodyComponent>();
 
-        // We use KeyPressed instead of KeyDown to apply impulses only once per key press
-        // Apply an impulse to the left when the C key is pressed
+        // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
+        // This means the player needs to press and release the key to apply an impulse,
+        // preventing multiple impulses from being applied while the key is held down.
+
+        // Apply an impulse to the left when the C key is pressed (and released)
         if (game.Input.IsKeyPressed(Keys.C))
         {
             rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
         }
-        // Apply an impulse to the right when the V key is pressed
+        // Apply an impulse to the right when the V key is pressed (and released)
         else if (game.Input.IsKeyPressed(Keys.V))
         {
             rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
@@ -857,8 +859,8 @@ void Update(Scene scene, GameTime time)
 }
 ```
 
-- `game.Input.IsKeyDown()` checks if a key is currently held down. This is useful for continuous movement while a key is pressed.
-- `game.Input.IsKeyPressed()` checks if a key was pressed once. This is ideal for actions that should only trigger once per key press, like applying an impulse to a physics object.
+- `game.Input.IsKeyDown()` checks if a key is currently held down. This is useful for continuous actions, like moving an object as long as the key is pressed.
+- `game.Input.IsKeyPressed()` checks if a key was pressed and released once. This is ideal for triggering actions that should only occur once per key press, such as applying an impulse to a physics object, to avoid multiple impulses being applied while the key is held down.
 
 **Additional Points:**
 
@@ -870,13 +872,13 @@ Run the application. You should now be able to control **Cube 1**'s position wit
 
 This step introduces basic keyboard controls, adding interactivity to your scene and allowing the player to manipulate objects in real-time. Ready to add even more interaction? Let's move on to mouse controls next! 🖱️
 
-{% include _alert.html type:'success' title: "You learnt how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. The cubes respond to key presses, enabling dynamic movement and interaction within the scene." %}
+{% include _alert.html type:'success' title: "You learned how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. <strong>Cube 1</strong> responds to continuous key presses for smooth, non-physical movement, while <strong>Cube 2</strong> reacts to single key presses, applying impulses for physics-based movement. These controls enable dynamic interaction and real-time object manipulation within the scene." %}
 
 ## Step 15: Add Mouse Interaction - Do something! 🖱️
 
-Let's add mouse interaction to the scene! 🐭 In this step, we'll update the `Update` method to allow players to interact with the cubes and the capsule using the mouse 🖱️. We'll make sure both **Cube 1** (non-physical movement), **Cube 2**, and the capsule (physics-based movement) respond to mouse input.
+Let's add mouse interaction to the scene! 🐭 In this step, we'll update the `Update()` method to allow players to interact with the cubes and the capsule using the mouse 🖱️. We'll make sure both **Cube 1** (non-physical movement), **Cube 2**, and the capsule (physics-based movement) respond to mouse input.
 
-The previous comments have been streamlined to keep the code clean and focused. 🧹
+The previous comments have been streamlined to keep the code clean and focused🧹. Also, make sure you can see your console output to see the results of the mouse interactions.
 
 You can replace the whole code with the following:
 
@@ -1010,23 +1012,26 @@ void Update(Scene scene, GameTime time)
     }
 }
 ```
-- **Mouse Interaction**: We've added functionality to detect mouse clicks and interact with both physics-based and non-physical entities.
-- **Camera** and **Simulation**: The `camera` component and `simulation` are initialized for handling raycasting and physics interactions.
-- **Raycasting** and **Ray Picking**: We use `camera.RaycastMouse()` to detect collisions with physics-based entities and `camera.GetPickRay()` to check for intersections with non-physical entities like **Cube 1**.
+
+- `camera` stores the camera component for raycasting and ray picking.
+- `simulation` stores the physics simulation for handling interactions.
+- `cube1Component` stores the model component of **Cube 1** for detecting intersections with the mouse ray.
+- `camera.RaycastMouse()` detects collisions with physics-based entities using raycasting.
+- `camera.GetPickRay()` checks for intersections with non-physical entities using ray picking.
 
 Now, when you click the left mouse button, the application will respond with the following actions depending on where you click:
 
-- **Clicking Outside the Ground:** If you click anywhere in the scene that doesn't interact with an object or the ground, it will print "No hit detected." This indicates that the mouse ray didn't intersect with any entities.
+- **Clicking Outside the Ground:** If you click anywhere in the scene that doesn't intersect with an object or the ground, it will print "No hit detected." This indicates that the mouse ray didn't collide with any entities.
 - **Clicking on Cube 1:** Since **Cube 1** doesn't have a collider, two things will happen:
     - The raycast will pass through **Cube 1** and hit the ground beneath it, printing "Hit: Ground."
     - Additionally, the ray-picking method will detect that **Cube 1** was hit, and it will print "Cube 1 hit!"
-- **Clicking on Cube 2:** **Cube 2** has a collider, so the raycast will detect the collision and print "Hit: Entity" An impulse will be applied to **Cube 2**, making it move upward in response to the click.
-- **Clicking on the Capsule:** Similar to **Cube 2**, clicking on the capsule will print "Hit: Entity", and an upward impulse will be applied to the capsule, causing it to move.
-- **Clicking on the Ground:** If you click directly on the ground, the raycast will detect it and print "Hit: Ground." However, the ground won't move because it has a `StaticColliderComponent`, which means it's a fixed object in the scene.
+- **Clicking on Cube 2:** **Cube 2** has a collider, so the raycast will detect the collision and print "Hit: Entity." An impulse will be applied to **Cube 2**, causing it to move upward in response to the click.
+- **Clicking on the Capsule:** Similar to **Cube 2**, clicking on the capsule will print "Hit: Entity," and an upward impulse will be applied, making the capsule move.
+- **Clicking on the Ground:** If you click directly on the ground, the raycast will detect it and print "Hit: Ground." However, the ground will remain stationary because it has a `StaticColliderComponent`, meaning it's a fixed object in the scene.
 
 Nice job! You’ve now implemented mouse interaction, which adds a whole new level of interactivity to the game. 🚀 You can now click on objects in the scene to trigger different actions, like moving cubes or capsules with physics or detecting hits on non-physical entities. This opens up endless possibilities for gameplay mechanics! 🎮 We rock! 🤘
 
-{% include _alert.html type:'success' title: "You learnt how to add mouse interaction to the scene, allowing players to interact with objects using raycasting and ray picking. The application responds to mouse clicks by applying impulses to physics-based entities and detecting hits on non-physical entities." %}
+{% include _alert.html type:'success' title: "You've learned how to add mouse interaction to the scene, allowing players to interact with objects using raycasting for physics-based entities and ray picking for non-physical ones. You can now click on objects to apply forces or detect hits, adding a new layer of interactivity to the game." %}
 
 ## Step 16: Add Output - Console or Screen! 📺
 
