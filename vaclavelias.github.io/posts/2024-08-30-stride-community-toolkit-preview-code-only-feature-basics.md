@@ -1,6 +1,6 @@
 ---
 title: Stride Community Toolkit Preview - Code-Only Feature - Basics
-description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride 3D game engine.
+description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
 date: 2024-08-30
@@ -12,7 +12,7 @@ tags:
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-Discover the Stride Community Toolkit, a powerful collection of extensions and helpers designed for the Stride 3D game engine. In this blog post, we dive into the toolkit's **code-only** feature, empowering C# and .NET developers to create immersive 2D/3D games and visualizations with ease. Explore how this community-driven, open-source project can simplify your game development journey.
+Discover the Stride Community Toolkit, a powerful collection of extensions and helpers designed for the Stride game engine. In this blog post, we dive into the toolkit's **code-only** feature, empowering C# and .NET developers to create immersive 2D/3D games and visualizations with ease. Explore how this community-driven, open-source project can simplify your game development journey.
 
 ---
 
@@ -28,13 +28,13 @@ Table of Contents:
 
 ## Introduction 🌱
 
-Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride 3D](https://www.stride3d.net/) C# game engine. This community-driven, [open-source project](https://github.com/stride3d/stride-community-toolkit) is designed to assist developers in creating 2D/3D games and visualizations using [Stride](https://doc.stride3d.net/latest/en/manual/index.html).
+Welcome to the preview of the [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html), a collection of extensions and helpers for the [Stride](https://www.stride3d.net/) C# game engine. This community-driven, [open-source project](https://github.com/stride3d/stride-community-toolkit) is designed to assist developers in creating 2D/3D games and visualizations using [Stride](https://doc.stride3d.net/latest/en/manual/index.html).
 
 Although the toolkit is still in its early stages, it already offers several valuable features. In this post, I will focus on the [code-only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) approach, which I found particularly useful for development.
 
 This article assumes that you have some experience with .NET and C# programming.
 
-The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the [Stride 3D engine](https://github.com/stride3d/stride) and game development, bypassing the need to work directly in the Game Studio.
+The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the [Stride engine](https://github.com/stride3d/stride) and game development, bypassing the need to work directly in the Game Studio.
 
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
@@ -65,8 +65,8 @@ Whether you’re a seasoned developer or new to game development, this post will
 
 Before diving into the steps, it's helpful to understand some key terms that will be used throughout this guide:
 
-- [Stride 3D](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
-- [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride 3D engine.
+- [Stride](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
+- [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride engine.
 - [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
 - **Game:** In the context of this post, a game refers to any interactive or visual project created using a game engine. This can range from traditional playable games to simulations, visualizations, or any real-time interactive experiences where users can interact with or observe elements within a scene.
 - [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
@@ -120,7 +120,7 @@ This option is not yet available but is planned for the future ([Use CompilerApp
 
 ## The Story of the Brave Explorers 📘
 
-🌍 Welcome, brave explorers of the digital wilderness! Today, we embark on an exciting journey into the heart of the Stride 3D game engine. Our guide? None other than the Stride Community Toolkit.
+🌍 Welcome, brave explorers of the digital wilderness! Today, we embark on an exciting journey into the heart of the Stride game engine. Our guide? None other than the Stride Community Toolkit.
 
 In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 8 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
 
@@ -167,7 +167,7 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 
 ## Step 2: Let There Be Light - Or at Least Blue 🌌
 
-Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride 3D game window. 🖥️ As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods. 🔧✨
+Once upon a time in a galaxy far, far away, you should see a window with a black background. This is the Stride game window. 🖥️ As a black screen is not very exciting, let's add some mystery code to make it more interesting. This time, we use the `Stride.CommunityToolkit.Engine` namespace so we can reference some of the toolkit helper methods. 🔧✨
 
 Update the `Program.cs` file to look like this, or simply replace the entire file:
 
@@ -1057,7 +1057,7 @@ if (hitResult.Succeeded)
     var message = $"Hit: {hitResult.Collider.Entity.Name}";
     Console.WriteLine(message);
     GlobalLogger.GetLogger("Program.cs").Info(message); // This was added
-    game.DebugTextSystem.Print("Some text", new Int2(50, 50)); // This was added
+    game.DebugTextSystem.Print($"Entities: {scene.Entities.Count}", new Int2(50, 50)); // This was added
 
     var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
 
@@ -1070,7 +1070,7 @@ if (hitResult.Succeeded)
 }
 ```
 
-Run the application. You should see additional output in the console window, highlighted in green by `GlobalLogger`. However, the text in the game window may only flash briefly because it’s being overwritten every frame.
+Run the application. You should see additional output in the console window when you click around, highlighted in green by `GlobalLogger`. However, the text in the **game window** may flash briefly, as it’s being overwritten every frame.
 
 ### Moving Output to the Screen
 
@@ -1079,7 +1079,8 @@ To keep the text on the screen, move the `game.DebugTextSystem.Print()` call to 
 ```csharp
 void Update(Scene scene, GameTime time)
 {
-    game.DebugTextSystem.Print("Some text", new Int2(50, 50)); // This was moved
+    // This was moved
+    game.DebugTextSystem.Print($"Entities: {scene.Entities.Count}", new Int2(50, 50));
 
     var deltaTime = (float)time.Elapsed.TotalSeconds;
 
@@ -1149,7 +1150,9 @@ void Update(Scene scene, GameTime time)
 }
 ```
 
-Now, when you run the application, the text **"Some text"** should remain visible on the screen at position *(50, 50)*. This gives us some basic screen output! 📺 But since this output is more suited for debugging, let’s explore adding more polished UI elements.
+Now, when you run the application, the text **"Entities:"** should remain visible on the screen at position *(50, 50)*. This gives us some basic screen output! 📺 But since this output is more suited for debugging, let’s explore adding more polished UI elements.
+
+{% include _alert.html type:'info' title: "Seeing a different number of entities than expected on the screen? Debug the <code>Update()</code>  and find out why is that 😯." %}
 
 ### Adding UI Elements
 
@@ -1253,7 +1256,7 @@ void Start(Scene rootScene)
 
 void Update(Scene scene, GameTime time)
 {
-    game.DebugTextSystem.Print("Some text", new Int2(50, 50));
+    game.DebugTextSystem.Print($"Entities: {scene.Entities.Count}", new Int2(50, 50));
 
     var deltaTime = (float)time.Elapsed.TotalSeconds;
 
@@ -1341,21 +1344,21 @@ Congratulations! 🎉 You've successfully added output to the screen, using both
 
 ## Step 17: Break 2 - Let's Reflect 😅
 
-Let's take a moment to reflect on what we've accomplished in the past few steps. From enhancing performance monitoring to adding interactive elements, we've covered significant ground in making our simple game more functional and engaging. Here's a quick recap:
+Time for a quick reflection on what we've achieved in the last few steps. We've significantly expanded our game's functionality and interactivity. Here's a recap:
 
-- We integrated a performance profiler into our game, allowing us to monitor essential metrics like FPS (frames per second). This is crucial for optimizing our game's performance and ensuring a smooth player experience. You also learned how to cycle through different profiler outputs to monitor various aspects of the game. 🚀
-- We enhanced the visual appeal of our scene by adding a skybox. This addition provided a more immersive environment, transforming our basic game into something that looks and feels more polished and professional. The skybox added depth to the scene, making it visually engaging. 🎨
-- We explored the theory behind motion in game development, distinguishing between non-physical movement and physics-based movement. Understanding these concepts is key to deciding how entities interact with the environment and other objects in your game. This foundational knowledge set the stage for implementing different types of motion in the following steps. 🧠
-- We implemented non-physical movement by directly modifying an entity's position using its `Transform.Position`. This method allowed us to move entities smoothly without them interacting with other objects. It's a straightforward approach ideal for scenarios where interaction isn't necessary, such as UI elements or certain animations. 🚶‍♂️
-- We took motion to the next level by incorporating physics-based movement. By applying forces to entities via their `RigidbodyComponent`, we enabled realistic interactions with the environment. This method is perfect for creating dynamic, interactive gameplay where objects respond to gravity, collisions, and other physical forces. ⚙️
-- We added keyboard controls to our game, allowing players to interact with and move entities using keys. This introduced a basic level of interactivity, making the game feel more responsive and engaging. You learned how to handle both non-physical and physics-based movements using simple keyboard inputs. 🎮
-- We extended the interactivity further by adding mouse controls. Players can now click on entities to trigger actions, such as moving or applying forces to objects. This step demonstrated how to integrate more complex interactions, combining raycasting and entity detection to create a more dynamic gameplay experience. 🖱️
-- Finally, we explored different ways to display output, whether through the console, on-screen debug text, or more polished UI elements. This step highlighted how to provide feedback to the player, enhancing the overall user experience. Visual feedback is crucial for communicating game state and player actions effectively. 📊
-
+- **Performance Monitoring:** We added a profiler to monitor key metrics like FPS, helping optimize performance for a smoother experience. You also learned how to toggle through profiler outputs to track different aspects of the game. 🚀
+- **Enhanced Visuals:** By adding a skybox, we made the scene more immersive, creating a polished and professional look. 🎨
+- **Understanding Motion:** We explored the difference between non-physical and physics-based movement, learning how to decide which method to use based on game mechanics. 🧠
+- **Non-Physical Movement:** You learned how to move entities using `Transform.Position` without interacting with other objects. This approach is great for UI elements or simple animations. 🚶‍♂️
+- **Physics-Based Movement:** By applying forces to entities via `RigidbodyComponent`, we introduced realistic interactions with gravity and collisions, adding depth to the gameplay. ⚙️
+- **Keyboard Controls:** We implemented basic keyboard inputs to move entities, adding interactivity and responsiveness to the game. 🎮
+- **Mouse Controls:** We extended player interaction by integrating mouse clicks, allowing players to trigger actions like applying forces to entities. 🖱️
+- **Displaying Output:** Finally, we explored output options, from console logs to UI elements, enhancing player feedback and communication. 📊
+- **Entities Count:** While debugging, you discovered that an entity can be added to the scene without necessarily having a visual representation. You also learned that the camera, light, game profiler, and skybox are all entities as well. 🤯
 
 ## Step 18: Add More Primitives - Let's go crazy! 🤪
 
-ToDo: Add more primitives
+Two boxes and a capsule isn't fun enough and I also didn't sign for this! Let's add more!
 
 ## Wrapping Up: Your Journey Continues 🎯
 
@@ -1375,6 +1378,8 @@ In the not-so-distant future, we will cover the following topics:
 
 - **Stride Community Toolkit Preview - Code-Only Feature - Advanced:** Let's get creative and explore more advanced features to take your game to the next level. 🚀
   - Maximize the game window
+  - Hot reload
+  - Entities vs Children vs Components
   - Interaction with the UI and from the UI
   - Transforming entities
   - Advanced physics interactions
