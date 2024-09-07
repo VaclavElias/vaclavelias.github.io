@@ -974,11 +974,11 @@ void Update(Scene scene, GameTime time)
 
     // This was added
     // Ensure camera and simulation are initialized before handling mouse input
-    if (camera == null || simulation == null) return;
+    if (camera == null || simulation == null || !game.Input.HasMouse) return;
 
     // This was added
     // Handle mouse input for interactions
-    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    if (game.Input.IsMouseButtonPressed(MouseButton.Left))
     {
         // Check for collisions with physics-based entities using raycasting
         var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
@@ -1112,9 +1112,9 @@ void Update(Scene scene, GameTime time)
         }
     }
 
-    if (camera == null || simulation == null) return;
+    if (camera == null || simulation == null || !game.Input.HasMouse) return;
 
-    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    if (game.Input.IsMouseButtonPressed(MouseButton.Left))
     {
         // Check for collisions with physics-based entities using raycasting
         var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
@@ -1288,9 +1288,9 @@ void Update(Scene scene, GameTime time)
         }
     }
 
-    if (camera == null || simulation == null) return;
+    if (camera == null || simulation == null || !game.Input.HasMouse) return;
 
-    if (game.Input.HasMouse && game.Input.IsMouseButtonPressed(MouseButton.Left))
+    if (game.Input.IsMouseButtonPressed(MouseButton.Left))
     {
         // Check for collisions with physics-based entities using raycasting
         var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
@@ -1358,7 +1358,53 @@ Time for a quick reflection on what we've achieved in the last few steps. We've 
 
 ## Step 18: Add More Primitives - Let's go crazy! 🤪
 
-Two boxes and a capsule isn't fun enough and I also didn't sign for this! Let's add more!
+Two boxes 📦🧊 and a capsule 💊? That's not enough fun! I didn't sign up for just that! Let's crank it up and add more shapes to the scene!
+
+To do this, add the following code inside the `Update()` method, below the `if (cube2 != null) {}` block:
+
+```csharp
+if (game.Input.IsKeyDown(Keys.Space))
+{
+    var entity = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
+    {
+        Material = game.CreateMaterial(Color.Green),
+        Size = new Vector3(0.5f, 0.5f, 0.5f),
+    });
+
+    entity.Transform.Position = new Vector3(0, 10, 0);
+    entity.Scene = scene;
+}
+
+```
+
+Now, run the application, zoom out the camera, and press the **Space** key. Watch as new cubes spawn and your FPS stretches to the limit! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that's getting a bit old, right? 🥱
+
+Let's spice things up with more mouse interaction, this time using the **middle mouse button**. Add the following code inside the `Update()` method, just below the line `if (camera == null || simulation == null || !game.Input.HasMouse) return;`:
+
+```csharp
+ if (game.Input.IsMouseButtonDown(MouseButton.Middle))
+ {
+     var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
+
+     if (hitResult.Succeeded)
+     {
+         var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+
+         if (rigidBody != null)
+         {
+             var direction = VectorHelper.RandomVector3([-20, 20], [0, 20], [-20, 20]);
+
+             rigidBody.ApplyImpulse(direction);
+         }
+     }
+ }
+```
+
+Run the application, and now, whenever you click the middle mouse button on an object, it will get a random impulse in a random direction. 🎲 How cool is that?
+
+{% include _alert.html type:'warning' title: "More cubes = more responsibility! Keep an eye on performance. Once cubes float too far away into the void, consider removing them from the scene to maintain performance. We will cover this in Part 2 of the series." %}
+
+{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button." %}
 
 ## Wrapping Up: Your Journey Continues 🎯
 
@@ -1379,6 +1425,7 @@ In the not-so-distant future, we will cover the following topics:
 - **Stride Community Toolkit Preview - Code-Only Feature - Advanced:** Let's get creative and explore more advanced features to take your game to the next level. 🚀
   - Maximize the game window
   - Hot reload
+  - Removing entities from the scene
   - Entities vs Children vs Components
   - Interaction with the UI and from the UI
   - Transforming entities
