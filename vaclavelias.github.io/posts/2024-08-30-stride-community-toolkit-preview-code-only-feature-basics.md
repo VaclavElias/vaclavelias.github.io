@@ -1049,7 +1049,7 @@ We have several options for displaying output:
 
 ### Updating the Console Output
 
-Let’s update the `if (hitResult.Succeeded)` block to include additional output options:
+Let’s update the `if (hitResult.Succeeded) {}` block by adding two lines to include additional output options:
 
 ```csharp
 if (hitResult.Succeeded)
@@ -1068,11 +1068,6 @@ if (hitResult.Succeeded)
         rigidBody.ApplyImpulse(direction);
     }
 }
-else
-{
-    Console.WriteLine("No hit detected.");
-}
-
 ```
 
 Run the application. You should see additional output in the console window, highlighted in green by `GlobalLogger`. However, the text in the game window may only flash briefly because it’s being overwritten every frame.
@@ -1169,10 +1164,10 @@ using Stride.Core.Diagnostics;
 using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Games;
-using Stride.Graphics;
+using Stride.Graphics; // This was added
 using Stride.Input;
 using Stride.Physics;
-using Stride.Rendering;
+using Stride.Rendering; // This was added
 using Stride.UI; // This was added
 using Stride.UI.Controls; // This was added
 using Stride.UI.Panels; // This was added
@@ -1194,7 +1189,7 @@ game.Run(start: Start, update: Update);
 
 void Start(Scene rootScene)
 {
-    game.AddGraphicsCompositor().AddCleanUIStage();
+    game.AddGraphicsCompositor().AddCleanUIStage(); // This was updated
     game.Add3DCamera().Add3DCameraController();
     game.AddDirectionalLight();
     game.Add3DGround();
@@ -1333,7 +1328,7 @@ Save and run the application. You should now see the text **"Hello, Stride!"** d
 
 Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
 
-{% include _alert.html type:'success' title: "You’ve learned how to add output to the screen, using text elements to provide feedback and enhance the player experience." %}
+{% include _alert.html type:'success' title: "You’ve learned how to add various types of output, from basic console logging to real-time in-game text feedback. Using debugging text and polished UI elements, you can enhance both the developer experience and the player experience, providing essential information and interactivity in your game." %}
 
 ## Step 17: Break 2 - Let's Reflect 😅
 
@@ -1369,30 +1364,22 @@ Interactivity is at the heart of game design. By giving players the ability to i
 
 In the not-so-distant future, we will cover the following topics:
 
-**Stride Community Toolkit Preview - Code-Only Feature - Advanced**
-
-Let's get creative and explore more advanced features to take your game to the next level. 🚀
-
-- Maximize the game window
-- Interaction with the UI and from the UI
-- Transforming entities
-- Advanced physics interactions
-- Audio and sound effects
-- Particle effects
-  
-**Stride Community Toolkit Preview - Code-Only Feature - Refactoring**
-
-Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
-
-Or in other words, let’s clean up the mess we made! 😅
+- **Stride Community Toolkit Preview - Code-Only Feature - Advanced:** Let's get creative and explore more advanced features to take your game to the next level. 🚀
+  - Maximize the game window
+  - Interaction with the UI and from the UI
+  - Transforming entities
+  - Advanced physics interactions
+  - Audio and sound effects
+  - Particle effects
+- **Stride Community Toolkit Preview - Code-Only Feature - Refactoring:** Let's refactor the code to make it more modular, reusable, and maintainable. 🛠️
+  - Or in other words, let’s clean up the mess we made! 😅
 
 ## Support Stride Engine 🌟
 
 Stride is an open-source project that thrives on community contributions and support. By using Stride, sharing your experiences, and contributing to the community, you help make the engine better for everyone. 🚀
 
-- **Contribute:** Share your knowledge, contribute to the engine, or report issues on the [Stride GitHub repository](
-- **Join the Community:** Engage with other developers, ask questions, and share your projects on the [Stride Community Forums](https://forums.stride3d.net/).
-- **Sponsor**: Support the development of Stride by becoming a sponsor on [GitHub Sponsors](
+- **Contribute:** Share your knowledge, [contribute to the engine](https://github.com/stride3d/stride), or [report issues](https://github.com/stride3d/stride/issues) to help improve Stride for all developers.
+- **Join the Community:** Engage with fellow developers, ask questions, and showcase your projects on our [Discord](https://discord.gg/f6aerfE) server or in [GitHub Discussions](https://github.com/stride3d/stride/discussions).
+- **Sponsor:** Support the continued development of Stride by becoming a sponsor on our [Open Collective](https://opencollective.com/stride3d) page.
 
-{% include _alert.html type:'light' title: "Content reviewed and enhanced with the assistance of ChatGPT." %}
-
+{% include _alert.html type:'light' title: "This content was reviewed and enhanced with the assistance of ChatGPT." %}
