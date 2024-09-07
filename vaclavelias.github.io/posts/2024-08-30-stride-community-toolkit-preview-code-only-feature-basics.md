@@ -1324,6 +1324,15 @@ void Update(Scene scene, GameTime time)
 
 ```
 
+- `font` stores the `SpriteFont` used for the UI text block.
+- `AddCleanUIStage()` adds a clean UI stage to the graphics compositor, allowing UI elements to be displayed on top of the 3D scene.
+- `game.Content.Load<SpriteFont>()` loads the default font for the UI text block.
+- `Canvas` is a UI panel that acts as a container for UI elements.
+- `TextBlock` is a UI element that displays text on the screen.
+- `UIComponent` is a component that manages UI elements in the scene.
+- `UIPage` is a UI page that contains the root element of the UI hierarchy.
+- `RenderGroup.Group31` specifies the rendering order of the UI element, ensuring it appears on top of other elements.
+
 Save and run the application. You should now see the text **"Hello, Stride!"** displayed at the bottom left corner of the screen. 📺
 
 Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
