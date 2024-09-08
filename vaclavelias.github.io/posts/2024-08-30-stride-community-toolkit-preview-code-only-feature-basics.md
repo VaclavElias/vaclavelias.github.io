@@ -267,6 +267,8 @@ Now, run the application again. You should see a capsule in the middle of the sc
 
 {% include _alert.html type:'success' title: "You’ve learned how to create and add a 3D capsule to the scene using procedural models. By adding the entity to the root scene, it becomes part of the scene graph. The capsule is falling because it lacks a collider to interact with the ground, which we'll address later." %}
 
+{% img 'Stride Game Engine - Code Only Basic - Capsule in blue game window' '/assets/img/2024/stride-basics-step-3.webp' %}
+
 ## Step 4: Control the Camera - Look Around! 🖱️
 
 Maybe we should at least look around the scene and view the capsule from different angles as it falls into the void 🤔?
@@ -285,6 +287,8 @@ game.Add3DCamera().Add3DCameraController();
 Run the application again and use right-click and hold to rotate the camera towards the capsule, or follow the instructions displayed on the screen. 🎥 Feeling a bit more satisfied now? Let’s make the experience even more interesting! 🎨✨
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a 3D camera controller to the scene, enabling basic camera movement. Now, you can rotate the camera using the mouse and keyboard, giving you more control over how you view the scene." %}
+
+{% img 'Stride Game Engine - Code Only Basic - Game controller instructions' '/assets/img/2024/stride-basics-step-3.webp' %}
 
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
