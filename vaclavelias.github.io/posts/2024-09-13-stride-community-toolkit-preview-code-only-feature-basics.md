@@ -3,7 +3,7 @@ title: Stride Community Toolkit Preview - Code-Only Feature - Basics
 description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
-date: 2024-08-30
+date: 2024-09-13
 tags:
   - C# 
   - Stride3D
@@ -758,7 +758,9 @@ void Start(Scene rootScene)
     // Add the entity to the root scene so it becomes part of the scene graph
     entity.Scene = rootScene;
 
-    // Create a cube without a collider and add it to the scene (non-physical movement)
+    // Create a cube with material, disable its collider, and add it to the scene
+    // The cube is hanging in the default position Vector(0,0,0) in the air,
+    // well intersecting the ground plane as it is not aware of the ground
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
@@ -909,7 +911,7 @@ Let's add mouse interaction to the scene! 🐭 In this step, we'll update the `U
 
 The previous comments have been streamlined to keep the code clean and focused🧹. Also, make sure you can see your console output to see the results of the mouse interactions.
 
-You can replace the whole code with the following:
+You can replace the entire code with the following, or refer to the comments labelled `// This was added` to see the specific changes.
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
@@ -1185,11 +1187,13 @@ Now, when you run the application, the text **"Entities:"** should remain visibl
 
 ### Adding UI Elements
 
-Let’s create a simple text block on the canvas to display information to the player. Replace your current code with this:
+Let’s create a simple text block on the canvas to display information to the player.
+
+Replace your current code with this or refer to the comments labelled `// This was added` to see the specific changes.
 
 ```csharp
 using Stride.CommunityToolkit.Engine;
-using Stride.CommunityToolkit.Rendering.Compositing;
+using Stride.CommunityToolkit.Rendering.Compositing; // This was added
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
 using Stride.Core.Diagnostics;
