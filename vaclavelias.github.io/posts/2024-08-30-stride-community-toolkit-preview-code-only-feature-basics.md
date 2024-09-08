@@ -288,7 +288,7 @@ Run the application again and use right-click and hold to rotate the camera towa
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a 3D camera controller to the scene, enabling basic camera movement. Now, you can rotate the camera using the mouse and keyboard, giving you more control over how you view the scene." %}
 
-{% img 'Stride Game Engine - Code Only Basic - Game controller instructions' '/assets/img/2024/stride-basics-step-3.webp' %}
+{% img 'Stride Game Engine - Code Only Basic - Game controller instructions' '/assets/img/2024/stride-basics-step-4.jpg' %}
 
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
@@ -336,6 +336,8 @@ Run the application again. You should see a capsule falling down from the top of
 
 {% include _alert.html type:'success' title: "You’ve learned how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now positioned 8 units above the origin, giving you more time to admire it as it falls into the void." %}
 
+{% img 'Stride Game Engine - Code Only Basic - Reposition Capsule' '/assets/img/2024/stride-basics-step-5.jpg' %}
+
 ## Step 6: Add a Ground - Catch the Capsule! 🛑
 
 Now let's catch the capsule by adding some ground to the scene. Update the `Start()` method to look like this so we can feel more grounded.
@@ -374,6 +376,15 @@ Run the application again. You should see the capsule falling down and landing o
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a 3D ground plane to the scene, giving the capsule a surface to land on. Now, the capsule falls and lands on the ground, making the scene feel more dynamic." %}
 
+<div class="row">
+    <div class="col-6">
+    {% img-click 'Stride Game Engine - Code Only Basic - Ground added' '/assets/img/2024/stride-basics-step-6a.jpg' %}
+    </div>
+    <div class="col-6">
+    {% img-click 'Stride Game Engine - Code Only Basic - Ground, different angle' '/assets/img/2024/stride-basics-step-6b.jpg' %}
+    </div>
+</div>
+
 ## Step 7: Illuminate the Scene - Add Light! 💡
 
 It's time to brighten things up! Adding some light to the scene will help us see our objects more clearly. Thankfully, there's a helper method called `AddDirectionalLight()` that adds a directional light to the scene. Update the `Start()` method to look like this:
@@ -410,6 +421,8 @@ Run the application again. 🌟 You should now see the capsule falling down and 
 Finally, no more black-on-black mysteries! 💡
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a directional light to the scene, illuminating both the capsule and the ground. The scene is now well-lit, making it much easier to see and interact with the objects." %}
+
+{% img 'Stride Game Engine - Code Only Basic - Light added' '/assets/img/2024/stride-basics-step-7.jpg' %}
 
 ## Step 8: Break 1 - Let's Reflect 😅
 
@@ -474,6 +487,8 @@ Run the application again. You should see [profiler text output](https://doc.str
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a performance profiler to the scene, enabling you to monitor FPS and other important metrics. The profiler provides valuable insights into your game's performance, helping you identify areas for optimization." %}
 
+{% img 'Stride Game Engine - Code Only Basic - Profiler added' '/assets/img/2024/stride-basics-step-9.jpg' %}
+
 ## Step 10: Illuminate the Scene - Add Skybox! 🌇
 
 As exciting as things are looking, we can make our scene even better by adding a [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html). A skybox will enhance the overall atmosphere and give our scene a more polished, realistic look. 🌇
@@ -537,6 +552,8 @@ void Start(Scene rootScene)
 Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
 {% include _alert.html type:'success' title: "You’ve learned how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic backdrop, adding depth and atmosphere to your scene." %}
+
+{% img 'Stride Game Engine - Code Only Basic - Skybox added' '/assets/img/2024/stride-basics-step-10.jpg' %}
 
 ## Step 11: Add Motion - I like to Move It, Move It! 🕺
 
@@ -676,6 +693,8 @@ void Update(Scene scene, GameTime time)
 Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
 
 {% include _alert.html type:'success' title: "You’ve learned how to move a cube without using colliders, applying non-physical movement. The cube moves smoothly along the X-axis, showcasing basic object manipulation and animation." %}
+
+{% video-fluid '/assets/img/2024/stride-basics-step-12.mp4' 'webp' %}
 
 ## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
