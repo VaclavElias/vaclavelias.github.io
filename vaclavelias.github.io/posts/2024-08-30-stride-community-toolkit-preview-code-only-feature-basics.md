@@ -694,7 +694,7 @@ Run the application. 🏃 You should see a box (cube) moving along the X-axis, w
 
 {% include _alert.html type:'success' title: "You’ve learned how to move a cube without using colliders, applying non-physical movement. The cube moves smoothly along the X-axis, showcasing basic object manipulation and animation." %}
 
-{% video-fluid '/assets/img/2024/stride-basics-step-12.mp4' 'webp' %}
+{% video-fluid '/assets/img/2024/stride-basics-step-12.mp4' 'webp' 'false' %}
 
 ## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
@@ -828,6 +828,8 @@ The main difference between the two cubes is that **Cube 1** moves without inter
 
 {% include _alert.html type:'success' title: "You’ve learned how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene. You now understand the key differences between non-physical and physics-based movement, giving you greater control over how objects interact in your game world." %}
 
+{% video-fluid '/assets/img/2024/stride-basics-step-13.mp4' 'webp' 'false' %}
+
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
 Now it's time to add some interactivity! 🎮 We will update the `Update()` method to allow the player to move the cubes around using the keyboard. We'll make sure both **Cube 1** (non-physical movement) and **Cube 2** (physics-based movement) respond to key presses.
@@ -898,6 +900,8 @@ Run the application. You should now be able to control **Cube 1**'s position wit
 This step introduces basic keyboard controls, adding interactivity to your scene and allowing the player to manipulate objects in real-time. Ready to add even more interaction? Let's move on to mouse controls next! 🖱️
 
 {% include _alert.html type:'success' title: "You learned how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. <strong>Cube 1</strong> responds to continuous key presses for smooth, non-physical movement, while <strong>Cube 2</strong> reacts to single key presses, applying impulses for physics-based movement. These controls enable dynamic interaction and real-time object manipulation within the scene." %}
+
+{% video-fluid '/assets/img/2024/stride-basics-step-14.mp4' 'webp' 'false' %}
 
 ## Step 15: Add Mouse Interaction - Do something! 🖱️
 
