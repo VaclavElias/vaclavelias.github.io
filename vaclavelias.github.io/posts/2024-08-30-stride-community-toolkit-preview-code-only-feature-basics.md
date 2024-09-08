@@ -36,6 +36,8 @@ This article assumes that you have some experience with .NET and C# programming.
 
 The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the [Stride engine](https://github.com/stride3d/stride) and game development, bypassing the need to work directly in the Game Studio.
 
+You can also access the [full source code for this post on GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs) to follow along or explore the final implementation directly.
+
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
 We will be using a standard [.NET 8 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
@@ -68,7 +70,7 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - [Stride](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
 - [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride engine.
 - [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
-- **Game:** In the context of this post, a game refers to any interactive or visual project created using a game engine. This can range from traditional playable games to simulations, visualizations, or any real-time interactive experiences where users can interact with or observe elements within a scene.
+- [Game](https://doc.stride3d.net/latest/en/api/Stride.Engine.Game.html): In the context of this post, a game refers to any interactive or visual project created using a game engine. This can range from traditional playable games to simulations, visualizations, or any real-time interactive experiences where users can interact with or observe elements within a scene.
 - [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
 - [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): An object in the scene that can represent anything from a 3D model to a camera or light and aggregates multiple EntityComponents.
 - [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
@@ -1368,7 +1370,7 @@ if (game.Input.IsKeyDown(Keys.Space))
     var entity = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Green),
-        Size = new Vector3(0.5f, 0.5f, 0.5f),
+        Size = new Vector3(0.5f),
     });
 
     entity.Transform.Position = new Vector3(0, 10, 0);
@@ -1377,7 +1379,7 @@ if (game.Input.IsKeyDown(Keys.Space))
 
 ```
 
-Now, run the application, zoom out the camera, and press the **Space** key. Watch as new cubes spawn and your FPS stretches to the limit! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that's getting a bit old, right? 🥱
+Now, run the application, zoom out the camera to view the entire ground, and press the **Space** key. Watch as new cubes spawn, pushing your FPS to its limits! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that’s getting a bit old, isn’t it? 🥱
 
 Let's spice things up with more mouse interaction, this time using the **middle mouse button**. Add the following code inside the `Update()` method, just below the line `if (camera == null || simulation == null || !game.Input.HasMouse) return;`:
 
@@ -1417,6 +1419,8 @@ By adding mouse interactions, you’ve empowered players to directly interact wi
 ### The Power of Interactivity
 
 Interactivity is at the heart of game design. By giving players the ability to influence the game world, you create a more immersive and engaging experience. The skills you've developed—handling inputs, moving objects, managing physics, and providing feedback—are foundational to building more complex and polished games. 🌟
+
+If you'd like to explore the final code for this project, you can access it on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs). Feel free to check it out and experiment! 💻
 
 ## Follow-Up Articles 🚶
 
