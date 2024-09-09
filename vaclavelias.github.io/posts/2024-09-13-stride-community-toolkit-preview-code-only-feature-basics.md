@@ -1062,6 +1062,8 @@ Now, when you click the left mouse button, the application will respond with the
 
 Nice job! You’ve now implemented mouse interaction, which adds a whole new level of interactivity to the game. 🚀 You can now click on objects in the scene to trigger different actions, like moving cubes or capsules with physics or detecting hits on non-physical entities. This opens up endless possibilities for gameplay mechanics! 🎮 We rock! 🤘
 
+{% video-fluid '/assets/img/2024/stride-basics-step-15.mp4' 'jpg' 'false' %}
+
 {% include _alert.html type:'success' title: "You've learned how to add mouse interaction to the scene, allowing players to interact with objects using raycasting for physics-based entities and ray picking for non-physical ones. You can now click on objects to apply forces or detect hits, adding a new layer of interactivity to the game." %}
 
 ## Step 16: Add Output - Console or Screen! 📺
@@ -1439,7 +1441,9 @@ Run the application, and now, whenever you click the middle mouse button on an o
 
 {% include _alert.html type:'warning' title: "More cubes = more responsibility! Keep an eye on performance. Once cubes float too far away into the void, consider removing them from the scene to maintain performance. We will cover this in Part 2 of the series." %}
 
-{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button." %}
+{% video-fluid '/assets/img/2024/stride-basics-step-18.mp4' 'webp' 'false' %}
+
+{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button - all in just around <strong>190</strong> lines of code." %}
 
 ## Wrapping Up: Your Journey Continues 🎯
 
