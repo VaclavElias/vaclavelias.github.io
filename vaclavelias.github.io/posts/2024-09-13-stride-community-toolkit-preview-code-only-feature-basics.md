@@ -265,9 +265,9 @@ void Start(Scene rootScene)
 
 Now, run the application again. You should see a capsule in the middle of the screen if you're lucky because it's falling down. Fast! 🚀
 
-{% include _alert.html type:'success' title: "You’ve learned how to create and add a 3D capsule to the scene using procedural models. By adding the entity to the root scene, it becomes part of the scene graph. The capsule is falling because it lacks a collider to interact with the ground, which we'll address later." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Capsule in blue game window' '/assets/img/2024/stride-basics-step-3.webp' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to create and add a 3D capsule to the scene using procedural models. By adding the entity to the root scene, it becomes part of the scene graph. The capsule is falling because it lacks a collider to interact with the ground, which we'll address later." %}
 
 ## Step 4: Control the Camera - Look Around! 🖱️
 
@@ -286,9 +286,9 @@ game.Add3DCamera().Add3DCameraController();
 
 Run the application again and use right-click and hold to rotate the camera towards the capsule, or follow the instructions displayed on the screen. 🎥 Feeling a bit more satisfied now? Let’s make the experience even more interesting! 🎨✨
 
-{% include _alert.html type:'success' title: "You’ve learned how to add a 3D camera controller to the scene, enabling basic camera movement. Now, you can rotate the camera using the mouse and keyboard, giving you more control over how you view the scene." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Game controller instructions' '/assets/img/2024/stride-basics-step-4.jpg' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a 3D camera controller to the scene, enabling basic camera movement. Now, you can rotate the camera using the mouse and keyboard, giving you more control over how you view the scene." %}
 
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
@@ -334,9 +334,9 @@ void Start(Scene rootScene)
 
 Run the application again. You should see a capsule falling down from the top of the screen. I know, the capsule is black, but don't worry, we'll fix that later. 😉
 
-{% include _alert.html type:'success' title: "You’ve learned how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now positioned 8 units above the origin, giving you more time to admire it as it falls into the void." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Reposition Capsule' '/assets/img/2024/stride-basics-step-5.jpg' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to reposition the capsule in the scene using the <code>Transform</code> component's <code>Position</code> property. The capsule is now positioned 8 units above the origin, giving you more time to admire it as it falls into the void." %}
 
 ## Step 6: Add a Ground - Catch the Capsule! 🛑
 
@@ -374,9 +374,7 @@ Run the application again. You should see the capsule falling down and landing o
 
 {% include _alert.html type:'info' title: "If you're wondering why the ground is invisible from below, it's due to back face culling. This technique prevents the engine from drawing polygons that face away from the camera, improving performance by avoiding unnecessary rendering. The same applies to the cube and other primitives: if the camera is inside the object, the walls won't be visible." %}
 
-{% include _alert.html type:'success' title: "You’ve learned how to add a 3D ground plane to the scene, giving the capsule a surface to land on. Now, the capsule falls and lands on the ground, making the scene feel more dynamic." %}
-
-<div class="row">
+<div class="row mb-2">
     <div class="col-6">
     {% img-click 'Stride Game Engine - Code Only Basic - Ground added' '/assets/img/2024/stride-basics-step-6a.jpg' %}
     </div>
@@ -384,6 +382,8 @@ Run the application again. You should see the capsule falling down and landing o
     {% img-click 'Stride Game Engine - Code Only Basic - Ground, different angle' '/assets/img/2024/stride-basics-step-6b.jpg' %}
     </div>
 </div>
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a 3D ground plane to the scene, giving the capsule a surface to land on. Now, the capsule falls and lands on the ground, making the scene feel more dynamic." %}
 
 ## Step 7: Illuminate the Scene - Add Light! 💡
 
@@ -420,9 +420,9 @@ Run the application again. 🌟 You should now see the capsule falling down and 
 
 Finally, no more black-on-black mysteries! 💡
 
-{% include _alert.html type:'success' title: "You’ve learned how to add a directional light to the scene, illuminating both the capsule and the ground. The scene is now well-lit, making it much easier to see and interact with the objects." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Light added' '/assets/img/2024/stride-basics-step-7.jpg' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a directional light to the scene, illuminating both the capsule and the ground. The scene is now well-lit, making it much easier to see and interact with the objects." %}
 
 ## Step 8: Break 1 - Let's Reflect 😅
 
@@ -485,9 +485,9 @@ void Start(Scene rootScene)
 
 Run the application again. You should see [profiler text output](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html) in the top-left corner of the screen, showing the frames per second (FPS) and other performance metrics. 🚀 Press F1 to cycle through different profiler outputs and monitor various aspects of your game's performance. 📊
 
-{% include _alert.html type:'success' title: "You’ve learned how to add a performance profiler to the scene, enabling you to monitor FPS and other important metrics. The profiler provides valuable insights into your game's performance, helping you identify areas for optimization." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Profiler added' '/assets/img/2024/stride-basics-step-9.jpg' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a performance profiler to the scene, enabling you to monitor FPS and other important metrics. The profiler provides valuable insights into your game's performance, helping you identify areas for optimization." %}
 
 ## Step 10: Illuminate the Scene - Add Skybox! 🌇
 
@@ -551,9 +551,9 @@ void Start(Scene rootScene)
 
 Run the application again. 🎮 You should now see a beautiful skybox surrounding the scene, making it look more immersive and realistic. 🌅 The [skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html) is essentially a large, textured 3D model that wraps around the entire scene, providing a visually appealing background. 🌇
 
-{% include _alert.html type:'success' title: "You’ve learned how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic backdrop, adding depth and atmosphere to your scene." %}
-
 {% img 'Stride Game Engine - Code Only Basic - Skybox added' '/assets/img/2024/stride-basics-step-10.jpg' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to add a skybox to the scene, enhancing the visuals and creating a more immersive environment. The skybox provides a realistic backdrop, adding depth and atmosphere to your scene." %}
 
 ## Step 11: Add Motion - I like to Move It, Move It! 🕺
 
@@ -692,9 +692,9 @@ void Update(Scene scene, GameTime time)
 
 Run the application. 🏃 You should see a box (cube) moving along the X-axis, without interacting with other entities.
 
-{% include _alert.html type:'success' title: "You’ve learned how to move a cube without using colliders, applying non-physical movement. The cube moves smoothly along the X-axis, showcasing basic object manipulation and animation." %}
-
 {% video-fluid '/assets/img/2024/stride-basics-step-12.mp4' 'webp' 'false' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to move a cube without using colliders, applying non-physical movement. The cube moves smoothly along the X-axis, showcasing basic object manipulation and animation." %}
 
 ## Step 13: Add Motion with Physics - Move the Cube with Colliders! 🧊
 
@@ -828,9 +828,9 @@ This step introduces a new level of realism by making the cube react to physical
 
 The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
 
-{% include _alert.html type:'success' title: "You’ve learned how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene. You now understand the key differences between non-physical and physics-based movement, giving you greater control over how objects interact in your game world." %}
-
 {% video-fluid '/assets/img/2024/stride-basics-step-13.mp4' 'webp' 'false' %}
+
+{% include _alert.html type:'success' title: "You’ve learned how to move a cube using physics-based movement, allowing it to interact with the environment. The cube responds to forces, gravity, and collisions, creating a more dynamic and realistic scene. You now understand the key differences between non-physical and physics-based movement, giving you greater control over how objects interact in your game world." %}
 
 ## Step 14: Add Keyboard Interaction - Move the Cube! ⌨️
 
@@ -901,9 +901,9 @@ Run the application. You should now be able to control **Cube 1**'s position wit
 
 This step introduces basic keyboard controls, adding interactivity to your scene and allowing the player to manipulate objects in real-time. Ready to add even more interaction? Let's move on to mouse controls next! 🖱️
 
-{% include _alert.html type:'success' title: "You learned how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. <strong>Cube 1</strong> responds to continuous key presses for smooth, non-physical movement, while <strong>Cube 2</strong> reacts to single key presses, applying impulses for physics-based movement. These controls enable dynamic interaction and real-time object manipulation within the scene." %}
-
 {% video-fluid '/assets/img/2024/stride-basics-step-14.mp4' 'webp' 'false' %}
+
+{% include _alert.html type:'success' title: "You learned how to add keyboard interaction to the scene, allowing players to move the cubes using the Z, X, C, and V keys. <strong>Cube 1</strong> responds to continuous key presses for smooth, non-physical movement, while <strong>Cube 2</strong> reacts to single key presses, applying impulses for physics-based movement. These controls enable dynamic interaction and real-time object manipulation within the scene." %}
 
 ## Step 15: Add Mouse Interaction - Do something! 🖱️
 
@@ -1372,6 +1372,8 @@ void Update(Scene scene, GameTime time)
 Save and run the application. You should now see the text **"Hello, Stride!"** displayed at the bottom left corner of the screen. 📺
 
 Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
+
+{% img 'Stride Game Engine - Code Only Basic - Output added' '/assets/img/2024/stride-basics-step-16.jpg' %}
 
 {% include _alert.html type:'success' title: "You’ve learned how to add various types of output, from basic console logging to real-time in-game text feedback. Using debugging text and polished UI elements, you can enhance both the developer experience and the player experience, providing essential information and interactivity in your game." %}
 
