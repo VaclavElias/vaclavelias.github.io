@@ -188,7 +188,7 @@ game.Run(start: Start);  // This was updated
 
 // This was added
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -227,7 +227,7 @@ using var game = new Game();
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -248,7 +248,7 @@ You can replace the entire `Start()` method with the code below:
 
 ```csharp
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -260,7 +260,7 @@ void Start(Scene rootScene)
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene; // This was added
+    entity.Scene = scene; // This was added
 }
 ```
 
@@ -312,7 +312,7 @@ using var game = new Game();
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -327,7 +327,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0); // This was added
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 }
 ```
 - `entity.Transform.Position` sets the position of the entity within the scene. The `Vector3` object represents a 3D vector, which in this case, places the capsule at coordinates `(0, 8, 0)`, which is 8 units above the scene's origin.
@@ -347,7 +347,7 @@ You can replace the entire `Start()` method with the code below:
 
 ```csharp
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -365,7 +365,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 }
 ```
 
@@ -392,7 +392,7 @@ It's time to brighten things up! Adding some light to the scene will help us see
 
 ```csharp
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -413,7 +413,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 }
 ```
 
@@ -456,7 +456,7 @@ Update the `Start()` method to look like this:
 
 ```csharp
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -480,7 +480,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 }
 ```
 
@@ -519,7 +519,7 @@ using var game = new Game();
 game.Run(start: Start);
 
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -546,7 +546,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 }
 ```
 
@@ -622,7 +622,7 @@ using var game = new Game();
 game.Run(start: Start, update: Update); // This was updated
 
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -652,7 +652,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 
     // This was added
     // Create a cube with material, disable its collider, and add it to the scene
@@ -663,7 +663,7 @@ void Start(Scene rootScene)
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false // No collider for non-physical movement
     });
-    cube1.Scene = rootScene;
+    cube1.Scene = scene;
 }
 
 // This was added
@@ -727,7 +727,7 @@ using var game = new Game();
 game.Run(start: Start, update: Update);
 
 // Define the Start method to set up the scene
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     // Add the default graphics compositor to handle rendering
     game.AddGraphicsCompositor();
@@ -757,7 +757,7 @@ void Start(Scene rootScene)
     entity.Transform.Position = new Vector3(0, 8, 0);
 
     // Add the entity to the root scene so it becomes part of the scene graph
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 
     // Create a cube with material, disable its collider, and add it to the scene
     // The cube is hanging in the default position Vector(0,0,0) in the air,
@@ -767,7 +767,7 @@ void Start(Scene rootScene)
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false // No collider for simple movement
     });
-    cube1.Scene = rootScene;
+    cube1.Scene = scene;
 
     // This was added
     // Create a second cube with a collider for physics-based interaction
@@ -776,7 +776,7 @@ void Start(Scene rootScene)
         Material = game.CreateMaterial(Color.Orange)
     });
     cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the ground
-    cube2.Scene = rootScene;
+    cube2.Scene = scene;
 }
 
 // Define the Update method, called every frame to update the game state
@@ -937,7 +937,7 @@ using var game = new Game();
 
 game.Run(start: Start, update: Update);
 
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     game.AddGraphicsCompositor();
     game.Add3DCamera().Add3DCameraController();
@@ -949,25 +949,25 @@ void Start(Scene rootScene)
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
     entity.Transform.Position = new Vector3(0, 8, 0);
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false // No collider for simple movement
     });
-    cube1.Scene = rootScene;
+    cube1.Scene = scene;
 
     cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Orange)
     });
     cube2.Transform.Position = new Vector3(-3, 5, 0);
-    cube2.Scene = rootScene;
+    cube2.Scene = scene;
 
     // These were added
     // Initialize camera, simulation, and model component for interactions
-    camera = rootScene.GetCamera();
+    camera = scene.GetCamera();
     simulation = game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
     cube1Component = cube1.Get<ModelComponent>();
 }
@@ -1226,7 +1226,7 @@ using var game = new Game();
 
 game.Run(start: Start, update: Update);
 
-void Start(Scene rootScene)
+void Start(Scene scene)
 {
     game.AddGraphicsCompositor().AddCleanUIStage(); // This was updated
     game.Add3DCamera().Add3DCameraController();
@@ -1238,23 +1238,23 @@ void Start(Scene rootScene)
 
     var entity = game.Create3DPrimitive(PrimitiveModelType.Capsule);
     entity.Transform.Position = new Vector3(0, 8, 0);
-    entity.Scene = rootScene;
+    entity.Scene = scene;
 
     cube1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false // No collider for simple movement
     });
-    cube1.Scene = rootScene;
+    cube1.Scene = scene;
 
     cube2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new()
     {
         Material = game.CreateMaterial(Color.Orange)
     });
     cube2.Transform.Position = new Vector3(-3, 5, 0);
-    cube2.Scene = rootScene;
+    cube2.Scene = scene;
 
-    camera = rootScene.GetCamera();
+    camera = scene.GetCamera();
     simulation = game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>()?.Simulation;
     cube1Component = cube1.Get<ModelComponent>();
 
@@ -1287,7 +1287,7 @@ void Start(Scene rootScene)
         }
     };
 
-    uiEntity.Scene = rootScene;
+    uiEntity.Scene = scene;
 }
 
 void Update(Scene scene, GameTime time)
