@@ -6,7 +6,7 @@ date: 2021-05-24
 tags:
   - C# 
   - Visual-Studio 
-  - Advance
+  - Advanced
 image: /assets/img/visual-studio.png
 ---
 

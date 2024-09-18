@@ -6,7 +6,7 @@ date: 2020-10-31
 tags:
   - TypeScript 
   - ASP.NET-Core 
-  - Advance
+  - Advanced
 image: /assets/img/dotnet-bot_scene_juggling-small.png
 ---
 

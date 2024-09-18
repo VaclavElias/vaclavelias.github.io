@@ -9,7 +9,7 @@ tags:
   - Stride3D
   - .NET
   - Game Development
-  - Advance
+  - Advanced
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
