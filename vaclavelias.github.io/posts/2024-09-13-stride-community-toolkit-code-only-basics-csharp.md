@@ -1,5 +1,5 @@
 ---
-title: Stride Community Toolkit Preview - Code-Only Feature - Basics
+title: Stride Community Toolkit Preview - Code-Only Feature Basics in C#
 description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
@@ -9,6 +9,7 @@ tags:
   - Stride3D
   - .NET
   - Game Development
+  - Advance
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
