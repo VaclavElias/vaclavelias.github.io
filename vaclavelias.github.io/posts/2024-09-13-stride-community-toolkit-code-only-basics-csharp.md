@@ -19,7 +19,8 @@ Discover the Stride Community Toolkit, a powerful collection of extensions and h
 
 This blog post is part 1 of a 3-part series:
 
-- [Stride Community Toolkit Preview - Code-Only Feature - Basics](/stride3d/stride-community-toolkit-preview-code-only-feature-basics/)
+- [Stride Community Toolkit Preview - Code-Only Feature - Basics (C#)](/stride3d/stride-community-toolkit-code-only-basics-csharp/)
+  - Also available: [Condensed F# version of this tutorial](/stride3d/stride-community-toolkit-code-only-basics-fsharp)
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
 - Stride Community Toolkit Preview - Code-Only Feature - Refactoring
 

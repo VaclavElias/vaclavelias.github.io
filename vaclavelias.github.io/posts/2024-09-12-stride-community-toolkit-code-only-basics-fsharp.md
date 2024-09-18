@@ -236,6 +236,8 @@ let main argv =
 
 In this article, you learned how to use the Stride Community Toolkit's **code-only** feature with F# for game development in the Stride engine. We explored the basics of integrating F# with Stride to create 3D scenes, handle input, and manage entities—all while leveraging functional programming techniques.
 
+If you'd like to see the full project, you can access it on [GitHub](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp). Feel free to check it out and experiment! 💻
+
 ## Support Stride Engine 🌟
 
 Stride is an open-source project that thrives on community contributions and support. By using Stride, sharing your experiences, and contributing to the community, you help improve the engine for everyone. 🚀
