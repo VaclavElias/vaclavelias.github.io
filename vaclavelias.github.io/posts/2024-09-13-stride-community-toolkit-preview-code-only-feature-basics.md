@@ -1465,6 +1465,7 @@ In the not-so-distant future, we will cover the following topics:
 
 - **Stride Community Toolkit Preview - Code-Only Feature - Advanced:** Let's get creative and explore more advanced features to take your game to the next level. 🚀
   - Maximize the game window
+  - Setting the Game Window Title
   - Hot reload
   - Removing entities from the scene
   - Entities vs Children vs Components
