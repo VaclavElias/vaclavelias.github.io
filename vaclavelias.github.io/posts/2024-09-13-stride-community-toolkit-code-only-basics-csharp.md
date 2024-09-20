@@ -21,6 +21,7 @@ This blog post is part 1 of a 3-part series:
 
 - [Stride Community Toolkit Preview - Code-Only Feature - Basics (C#)](/stride3d/stride-community-toolkit-code-only-basics-csharp/)
   - Also available: [Condensed F# version of this tutorial](/stride3d/stride-community-toolkit-code-only-basics-fsharp)
+  - The [Visual Basic version is also possible](https://stride3d.github.io/stride-community-toolkit/manual/code-only/examples/capsule-with-rigid-body-vb.html) but I am running out of space here 😅
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
 - Stride Community Toolkit Preview - Code-Only Feature - Refactoring
 

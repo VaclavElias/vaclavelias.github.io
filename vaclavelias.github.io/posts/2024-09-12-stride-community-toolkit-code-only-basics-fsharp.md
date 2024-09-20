@@ -232,6 +232,11 @@ let main argv =
     0
 ```
 
+{% include _alert-svg.html %}
+{% include _alert.html type:'info' title: "The video below was recorded for the C# version, but the result is the same for F#." %}
+
+{% video-fluid '/assets/img/2024/stride-basics-step-18.mp4' 'webp' 'false' %}
+
 ## Conclusion
 
 In this article, you learned how to use the Stride Community Toolkit's **code-only** feature with F# for game development in the Stride engine. We explored the basics of integrating F# with Stride to create 3D scenes, handle input, and manage entities—all while leveraging functional programming techniques.
