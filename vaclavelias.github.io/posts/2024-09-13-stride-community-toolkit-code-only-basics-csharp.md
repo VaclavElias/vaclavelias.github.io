@@ -1419,7 +1419,7 @@ if (game.Input.IsKeyDown(Keys.Space))
 
 Now, run the application, zoom out the camera to view the entire ground, and press the **Space** key. Watch as new cubes spawn, pushing your FPS to its limits! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that’s getting a bit old, isn’t it? 🥱
 
-Let's spice things up with more mouse interaction, this time using the **middle mouse button**. Add the following code inside the `Update()` method, just below the line `if (camera == null || simulation == null || !game.Input.HasMouse) return;`:
+Let's spice things up with more mouse interaction, this time using the **middle mouse button**. Firstly add this namespace `using Stride.CommunityToolkit.Helpers;` and then add the following code inside the `Update()` method, just below the line `if (camera == null || simulation == null || !game.Input.HasMouse) return;`:
 
 ```csharp
  if (game.Input.IsMouseButtonDown(MouseButton.Middle))
@@ -1440,13 +1440,15 @@ Let's spice things up with more mouse interaction, this time using the **middle 
  }
 ```
 
+The final code is available also on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs).
+
 Run the application, and now, whenever you click the middle mouse button on an object, it will get a random impulse in a random direction. 🎲 How cool is that?
 
 {% include _alert.html type:'warning' title: "More cubes = more responsibility! Keep an eye on performance. Once cubes float too far away into the void, consider removing them from the scene to maintain performance. We will cover this in Part 2 of the series." %}
 
 {% video-fluid '/assets/img/2024/stride-basics-step-18.mp4' 'webp' 'false' %}
 
-{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button - all in just around <strong>190</strong> lines of code." %}
+{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button - all in just around <strong>240</strong> lines of code." %}
 
 ## Wrapping Up: Your Journey Continues 🎯
 
