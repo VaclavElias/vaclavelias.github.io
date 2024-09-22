@@ -3,7 +3,7 @@ title: Stride Community Toolkit Preview - Code-Only Feature Basics in C#
 description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
-date: 2024-09-13
+date: 2024-09-22
 tags:
   - C# 
   - Stride3D
@@ -158,9 +158,9 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
     // and starts processing events.
     game.Run();
     ```
-1. The first build on your computer requires running the command below. Afterward, you can just use your IDE to build:
+1. Build the project from the command line or use your IDE to build it:
     ```bash
-    dotnet build --runtime win-x64
+    dotnet build
     ``` 
 1. Run the application.
 1. Behold the black void of nothingness 🙀.
@@ -1440,7 +1440,7 @@ Let's spice things up with more mouse interaction, this time using the **middle 
  }
 ```
 
-The final code is available also on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs).
+The final code is also available on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs).
 
 Run the application, and now, whenever you click the middle mouse button on an object, it will get a random impulse in a random direction. 🎲 How cool is that?
 

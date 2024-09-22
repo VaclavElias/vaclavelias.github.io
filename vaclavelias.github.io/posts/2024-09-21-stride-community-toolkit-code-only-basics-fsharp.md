@@ -3,7 +3,7 @@ title: Stride Community Toolkit Preview - Code-Only Feature Basics in F#
 description: Learn how to use the Stride Community Toolkit’s code-only feature with F# for game development in the Stride engine.
 
 categories: stride3d
-date: 2024-09-12
+date: 2024-09-21
 tags:
   - F# 
   - Stride3D
@@ -40,9 +40,10 @@ These steps were tested on a fresh installation of Windows 11.
 ## Getting Started 🚀
 
 1. Create a new F# Console App (.NET Core) project in your IDE.
-1. Add the Stride Community Toolkit NuGet package to your project.
+1. Add the Stride Community Toolkit NuGet packages to your project.
     ```bash
     dotnet add package Stride.CommunityToolkit.Windows --prerelease
+    dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
     ```
 1. Replace the contents of the `Program.fs` file with the code below.
 1. Run the project and enjoy the scene!
