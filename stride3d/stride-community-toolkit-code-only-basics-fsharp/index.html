@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark-v">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stride Community Toolkit Preview - Code-Only Feature Basics in F#</title>
+    <meta name="author" content="Vaclav Elias">
+    <meta name="description" content="Learn how to use the Stride Community Toolkit’s code-only feature with F# for game development in the Stride engine.">
+    <meta property="og:site_name" content="Code or not to code">
+    <meta property="og:title" content="Stride Community Toolkit Preview - Code-Only Feature Basics in F#">
+    <meta property="og:description" content="Discover how to use the Stride Community Toolkit's **code-only** feature with F#, showcasing a powerful set of extensions and helpers specifically tailored f...">
+    <meta property="og:url" content="https://www.vaclavelias.com/stride3d/stride-community-toolkit-code-only-basics-fsharp/">
+    <meta property="og:image" content="https://www.vaclavelias.com/assets/img/stride-logo-blue-toolkit.svg"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+    <meta name="twitter:title" content="Stride Community Toolkit Preview - Code-Only Feature Basics in F#">
+    <meta name="twitter:description" content="Discover how to use the Stride Community Toolkit's **code-only** feature with F#, showcasing a powerful set of extensions and helpers specifically tailored f...">
+    <meta name="twitter:image" content="https://www.vaclavelias.com/assets/img/stride-logo-blue-toolkit.svg"><link rel="stylesheet" href="/assets/css/styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0VDFZERRK"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-E0VDFZERRK');
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container">
+        <input type="checkbox" id="navbar-toggle-cbox">
+        <a class="navbar-brand" href="/">Václav Eliáš</a>
+        <label for="navbar-toggle-cbox" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </label>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/tags/">Tags</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/archive/">Archive</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about/">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/VasoElias">Twitter</a>
+                </li>
+            </ul>
+            <!--<form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>-->
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        <div class="row postcontent">
+    <div class="col-12">
+        <article>
+            <h1>Stride Community Toolkit Preview - Code-Only Feature Basics in F#</h1>
+            <div class="entry-meta entry-meta-layoutt text-center">
+                <p class="x-hidden-focus mt-4 pt-1 small text-muted date d-inline-block">
+                    September 21, 2024
+                </p>
+            </div>
+            <p>Discover how to use the Stride Community Toolkit's <strong>code-only</strong> feature with F#, showcasing a powerful set of extensions and helpers specifically tailored for game development in the Stride engine. Learn the basics of integrating F# with Stride's game engine to create 3D scenes, handle input, and manage entities—all using functional programming techniques.</p>
+<p>Table of Contents:</p>
+<div class="table-of-contents"><ul><li><a href="#introduction">Introduction </a></li><li><a href="#prerequisites-%F0%9F%8F%A0">Prerequisites 🏠 </a></li><li><a href="#getting-started-%F0%9F%9A%80">Getting Started 🚀 </a></li><li><a href="#how-to-play-%E2%8C%A8%EF%B8%8F">How to Play ⌨️ </a></li><li><a href="#conclusion">Conclusion </a></li><li><a href="#support-stride-engine-%F0%9F%8C%9F">Support Stride Engine 🌟 </a></li></ul></div>
+<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction">🔗</a></h2>
+<p>This article is a condensed version of the original tutorial aimed at C# developers. You can find the original article <a href="/stride3d/stride-community-toolkit-code-only-basics-csharp">here</a>.</p>
+<p>Though I’m not an F# developer, I wanted to demonstrate how easy it is to use the Stride Community Toolkit with F#. The code provided is a direct translation of the original C# implementation into F#.</p>
+<h2 id="prerequisites-%F0%9F%8F%A0" tabindex="-1">Prerequisites 🏠 <a class="direct-link" href="#prerequisites-%F0%9F%8F%A0">🔗</a></h2>
+<p>To follow this tutorial, you should have a solid understanding of F# and .NET.</p>
+<p>These steps were tested on a fresh installation of Windows 11.</p>
+<ol>
+<li>Install the <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Microsoft Visual C++ 2015-2022 Redistributable</a> (25MB) and restart your system if prompted.</li>
+<li>Install the <a href="https://dotnet.microsoft.com/en-us/download">.NET 8 SDK x64</a> (200MB).</li>
+<li>Install the IDE of your choice. I will be using <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2022</a>, but you can also use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, Rider, or any other IDE that supports .NET development.</li>
+</ol>
+<h2 id="getting-started-%F0%9F%9A%80" tabindex="-1">Getting Started 🚀 <a class="direct-link" href="#getting-started-%F0%9F%9A%80">🔗</a></h2>
+<ol>
+<li>Create a new F# Console App (.NET Core) project in your IDE.</li>
+<li>Add the Stride Community Toolkit NuGet packages to your project.<pre class="language-bash"><code class="language-bash">dotnet <span class="token function">add</span> package Stride.CommunityToolkit.Windows <span class="token parameter variable">--prerelease</span>
+dotnet <span class="token function">add</span> package Stride.CommunityToolkit.Skyboxes <span class="token parameter variable">--prerelease</span></code></pre>
+</li>
+<li>Replace the contents of the <code>Program.fs</code> file with the code below.</li>
+<li>Run the project and enjoy the scene!</li>
+</ol>
+<h2 id="how-to-play-%E2%8C%A8%EF%B8%8F" tabindex="-1">How to Play ⌨️ <a class="direct-link" href="#how-to-play-%E2%8C%A8%EF%B8%8F">🔗</a></h2>
+<ul>
+<li>Use the <code>Z</code> and <code>X</code> keys to move the first cube left and right.</li>
+<li>Use the <code>C</code> and <code>V</code> keys to apply an impulse to the second cube in the opposite directions.</li>
+<li>Press the <code>Space</code> key to create a new cube. You can create multiple cubes this way.</li>
+<li>Click the middle mouse button to apply a random impulse to the cube under the cursor.</li>
+<li>Click the left mouse button to apply an upward impulse to the cube under the cursor.</li>
+</ul>
+<pre class="language-fsharp"><code class="language-fsharp"><span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Engine
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Skyboxes
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Rendering<span class="token punctuation">.</span>ProceduralModels
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Core<span class="token punctuation">.</span>Mathematics
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Engine
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Rendering<span class="token punctuation">.</span>Compositing
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Physics
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Games
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Input
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Helpers
+<span class="token keyword">open</span> System
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Core<span class="token punctuation">.</span>Diagnostics
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Graphics
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>UI<span class="token punctuation">.</span>Panels
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>UI<span class="token punctuation">.</span>Controls
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>UI
+<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Rendering
+
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> movementSpeed <span class="token operator">=</span> <span class="token number">1.0f</span>
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> force <span class="token operator">=</span> <span class="token number">3.0f</span>
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> cube1<span class="token punctuation">:</span> <span class="token class-name">Entity</span> option <span class="token operator">=</span> None
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> cube2<span class="token punctuation">:</span> <span class="token class-name">Entity</span> option <span class="token operator">=</span> None
+
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> camera<span class="token punctuation">:</span> <span class="token class-name">CameraComponent</span> option <span class="token operator">=</span> None
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> simulation<span class="token punctuation">:</span> <span class="token class-name">Simulation</span> option <span class="token operator">=</span> None
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> cube1Component<span class="token punctuation">:</span> <span class="token class-name">ModelComponent</span> option <span class="token operator">=</span> None
+
+<span class="token keyword">let</span> <span class="token keyword">mutable</span> font<span class="token punctuation">:</span> <span class="token class-name">SpriteFont</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+
+<span class="token keyword">let</span> game <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Game</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> Start <span class="token punctuation">(</span>scene<span class="token punctuation">:</span> <span class="token class-name">Scene</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+    game<span class="token punctuation">.</span><span class="token function">AddGraphicsCompositor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AddCleanUIStage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">Add3DCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add3DCameraController</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">AddDirectionalLight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">Add3DGround</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">AddProfiler</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">AddSkybox</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> ignore
+    game<span class="token punctuation">.</span><span class="token function">AddGroundGizmo</span><span class="token punctuation">(</span><span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">5.0f</span><span class="token punctuation">,</span> <span class="token number">0.1f</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5.0f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> showAxisName <span class="token operator">=</span> <span class="token keyword">true</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">let</span> entity <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Capsule<span class="token punctuation">)</span>
+    entity<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">&lt;-</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">8f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span>
+    entity<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
+
+    <span class="token comment">// Create the first cube (no collider)</span>
+    <span class="token keyword">let</span> primitive1 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+        Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Gold<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        IncludeCollider <span class="token operator">=</span> <span class="token keyword">false</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    primitive1<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
+    cube1 <span class="token operator">&lt;-</span> Some primitive1
+
+    <span class="token comment">// Create the second cube (with collider)</span>
+    <span class="token keyword">let</span> primitive2 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+        Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Orange<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    primitive2<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">&lt;-</span> <span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">5.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span>
+    primitive2<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
+    cube2 <span class="token operator">&lt;-</span> Some primitive2
+
+    <span class="token comment">// Initialize camera, simulation, and model component for interactions</span>
+    camera <span class="token operator">&lt;-</span> Some <span class="token punctuation">(</span>scene<span class="token punctuation">.</span><span class="token function">GetCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    simulation <span class="token operator">&lt;-</span> game<span class="token punctuation">.</span>SceneSystem<span class="token punctuation">.</span>SceneInstance<span class="token punctuation">.</span>GetProcessor<span class="token operator">&lt;</span>PhysicsProcessor<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Simulation <span class="token operator">|></span> Option<span class="token punctuation">.</span>ofObj
+    cube1Component <span class="token operator">&lt;-</span> primitive1<span class="token punctuation">.</span>Get<span class="token operator">&lt;</span>ModelComponent<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|></span> Option<span class="token punctuation">.</span>ofObj
+
+    <span class="token comment">// Create and display a UI text block</span>
+    font <span class="token operator">&lt;-</span> game<span class="token punctuation">.</span>Content<span class="token punctuation">.</span>Load<span class="token operator">&lt;</span>SpriteFont<span class="token operator">></span><span class="token punctuation">(</span><span class="token string">"StrideDefaultFont"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">let</span> canvas <span class="token operator">=</span> <span class="token function">Canvas</span><span class="token punctuation">(</span>
+        Width <span class="token operator">=</span> <span class="token number">300.0f</span><span class="token punctuation">,</span>
+        Height <span class="token operator">=</span> <span class="token number">100.0f</span><span class="token punctuation">,</span>
+        BackgroundColor <span class="token operator">=</span> <span class="token function">Color</span><span class="token punctuation">(</span>byte <span class="token number">248</span><span class="token punctuation">,</span> byte <span class="token number">177</span><span class="token punctuation">,</span> byte <span class="token number">149</span><span class="token punctuation">,</span> byte <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        HorizontalAlignment <span class="token operator">=</span> HorizontalAlignment<span class="token punctuation">.</span>Left<span class="token punctuation">,</span>
+        VerticalAlignment <span class="token operator">=</span> VerticalAlignment<span class="token punctuation">.</span>Bottom<span class="token punctuation">)</span>
+
+    <span class="token comment">// Add a text block to the canvas</span>
+    <span class="token keyword">let</span> textBlock <span class="token operator">=</span> <span class="token function">TextBlock</span><span class="token punctuation">(</span>
+        Text <span class="token operator">=</span> <span class="token string">"Hello, Stride!"</span><span class="token punctuation">,</span>
+        TextColor <span class="token operator">=</span> Color<span class="token punctuation">.</span>White<span class="token punctuation">,</span>
+        Font <span class="token operator">=</span> font<span class="token punctuation">,</span>
+        TextSize <span class="token operator">=</span> <span class="token number">24.0f</span><span class="token punctuation">,</span>
+        Margin <span class="token operator">=</span> <span class="token function">Thickness</span><span class="token punctuation">(</span><span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    canvas<span class="token punctuation">.</span>Children<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>textBlock<span class="token punctuation">)</span>
+
+    <span class="token keyword">let</span> uiEntity <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Entity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    uiEntity<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token function">UIComponent</span><span class="token punctuation">(</span>
+        Page <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UIPage</span><span class="token punctuation">(</span>RootElement <span class="token operator">=</span> canvas<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        RenderGroup <span class="token operator">=</span> RenderGroup<span class="token punctuation">.</span>Group31<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    uiEntity<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
+
+<span class="token comment">// Define the Update method, called every frame to update the game state</span>
+<span class="token keyword">let</span> Update <span class="token punctuation">(</span>scene<span class="token punctuation">:</span> <span class="token class-name">Scene</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>time<span class="token punctuation">:</span> <span class="token class-name">GameTime</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+    game<span class="token punctuation">.</span>DebugTextSystem<span class="token punctuation">.</span><span class="token function">Print</span><span class="token punctuation">(</span>sprintf <span class="token string">"Entities: %d"</span> scene<span class="token punctuation">.</span>Entities<span class="token punctuation">.</span>Count<span class="token punctuation">,</span> <span class="token function">Int2</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Calculate the time elapsed since the last frame for consistent movement</span>
+    <span class="token comment">// This is crucial for frame-independent movement, ensuring consistent</span>
+    <span class="token comment">// behaviour regardless of frame rate.</span>
+    <span class="token keyword">let</span> deltaTime <span class="token operator">=</span> float32 time<span class="token punctuation">.</span>Elapsed<span class="token punctuation">.</span>TotalSeconds
+
+    <span class="token comment">// Handle non-physical movement for cube1</span>
+    <span class="token comment">// Move the first cube along the X-axis (non-physical movement)</span>
+    <span class="token keyword">match</span> cube1 <span class="token keyword">with</span>
+    <span class="token operator">|</span> Some cube <span class="token operator">-></span>
+        <span class="token keyword">let</span> position <span class="token operator">=</span> cube<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position
+        <span class="token keyword">let</span> newPosition <span class="token operator">=</span>
+            <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyDown</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>Z<span class="token punctuation">)</span> <span class="token keyword">then</span>
+                <span class="token function">Vector3</span><span class="token punctuation">(</span>position<span class="token punctuation">.</span>X <span class="token operator">-</span> movementSpeed <span class="token operator">*</span> deltaTime<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Y<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Z<span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyDown</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>X<span class="token punctuation">)</span> <span class="token keyword">then</span>
+                <span class="token function">Vector3</span><span class="token punctuation">(</span>position<span class="token punctuation">.</span>X <span class="token operator">+</span> movementSpeed <span class="token operator">*</span> deltaTime<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Y<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Z<span class="token punctuation">)</span>
+            <span class="token keyword">else</span>
+                position
+        cube<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">&lt;-</span> newPosition
+    <span class="token operator">|</span> None <span class="token operator">-></span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">// Handle physics-based movement for cube2</span>
+    <span class="token keyword">match</span> cube2 <span class="token keyword">with</span>
+    <span class="token operator">|</span> Some cube <span class="token operator">-></span>
+        <span class="token keyword">let</span> rigidBody <span class="token operator">=</span> cube<span class="token punctuation">.</span>Get<span class="token operator">&lt;</span>RigidbodyComponent<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyPressed</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>C<span class="token punctuation">)</span> <span class="token keyword">then</span>
+            rigidBody<span class="token punctuation">.</span><span class="token function">ApplyImpulse</span><span class="token punctuation">(</span><span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token operator">-</span>force<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyPressed</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token keyword">then</span>
+            rigidBody<span class="token punctuation">.</span><span class="token function">ApplyImpulse</span><span class="token punctuation">(</span><span class="token function">Vector3</span><span class="token punctuation">(</span>force<span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token operator">|</span> None <span class="token operator">-></span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyDown</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>Space<span class="token punctuation">)</span> <span class="token keyword">then</span>
+        <span class="token keyword">let</span> entity <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+            Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Green<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            Size <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0.5f</span><span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span>
+        entity<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">&lt;-</span> <span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token number">0f</span><span class="token punctuation">,</span> <span class="token number">10f</span><span class="token punctuation">,</span> <span class="token number">0f</span><span class="token punctuation">)</span>
+        entity<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
+
+    <span class="token comment">// Ensure camera and simulation are initialized before handling mouse input</span>
+    <span class="token keyword">if</span> camera<span class="token punctuation">.</span>IsNone <span class="token operator">||</span> simulation<span class="token punctuation">.</span>IsNone <span class="token operator">||</span> <span class="token keyword">not</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span>HasMouse <span class="token keyword">then</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsMouseButtonDown</span><span class="token punctuation">(</span>MouseButton<span class="token punctuation">.</span>Middle<span class="token punctuation">)</span> <span class="token keyword">then</span>
+            <span class="token keyword">let</span> hitResult <span class="token operator">=</span> camera<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token function">RaycastMouse</span><span class="token punctuation">(</span>simulation<span class="token punctuation">.</span>Value<span class="token punctuation">,</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span>MousePosition<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> hitResult<span class="token punctuation">.</span>Succeeded <span class="token keyword">then</span>
+                <span class="token keyword">let</span> rigidBody <span class="token operator">=</span> hitResult<span class="token punctuation">.</span>Collider<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>Get<span class="token operator">&lt;</span>RigidbodyComponent<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> rigidBody <span class="token operator">&lt;></span> <span class="token keyword">null</span> <span class="token keyword">then</span>
+                    <span class="token keyword">let</span> direction <span class="token operator">=</span> VectorHelper<span class="token punctuation">.</span><span class="token function">RandomVector3</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">|</span> <span class="token operator">-</span><span class="token number">20.0f</span><span class="token punctuation">;</span> <span class="token number">20.0f</span> <span class="token operator">|</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">|</span> <span class="token number">0.0f</span><span class="token punctuation">;</span> <span class="token number">20.0f</span> <span class="token operator">|</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">|</span> <span class="token operator">-</span><span class="token number">20.0f</span><span class="token punctuation">;</span> <span class="token number">20.0f</span> <span class="token operator">|</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    rigidBody<span class="token punctuation">.</span><span class="token function">ApplyImpulse</span><span class="token punctuation">(</span>direction<span class="token punctuation">)</span>
+            <span class="token comment">// Return after handling middle mouse input</span>
+
+        <span class="token comment">// Handle left mouse button input</span>
+        <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsMouseButtonPressed</span><span class="token punctuation">(</span>MouseButton<span class="token punctuation">.</span>Left<span class="token punctuation">)</span> <span class="token keyword">then</span>
+            <span class="token keyword">let</span> hitResult <span class="token operator">=</span> camera<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token function">RaycastMouse</span><span class="token punctuation">(</span>simulation<span class="token punctuation">.</span>Value<span class="token punctuation">,</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span>MousePosition<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> hitResult<span class="token punctuation">.</span>Succeeded <span class="token keyword">then</span>
+                <span class="token keyword">let</span> message <span class="token operator">=</span> sprintf <span class="token string">"Hit: %s"</span> hitResult<span class="token punctuation">.</span>Collider<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>Name
+                Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+                GlobalLogger<span class="token punctuation">.</span><span class="token function">GetLogger</span><span class="token punctuation">(</span><span class="token string">"Program.fs"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+
+                <span class="token keyword">let</span> rigidBody <span class="token operator">=</span> hitResult<span class="token punctuation">.</span>Collider<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>Get<span class="token operator">&lt;</span>RigidbodyComponent<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> rigidBody <span class="token operator">&lt;></span> <span class="token keyword">null</span> <span class="token keyword">then</span>
+                    <span class="token keyword">let</span> direction <span class="token operator">=</span> <span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token number">0.0f</span><span class="token punctuation">,</span> <span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span> <span class="token comment">// Apply upward impulse</span>
+                    rigidBody<span class="token punctuation">.</span><span class="token function">ApplyImpulse</span><span class="token punctuation">(</span>direction<span class="token punctuation">)</span>
+            <span class="token keyword">else</span>
+                Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"No hit detected."</span><span class="token punctuation">)</span>
+
+            <span class="token comment">// Check for intersections with non-physical entities using ray picking</span>
+            <span class="token keyword">let</span> ray <span class="token operator">=</span> camera<span class="token punctuation">.</span>Value<span class="token punctuation">.</span><span class="token function">GetPickRay</span><span class="token punctuation">(</span>game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span>MousePosition<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> cube1Component<span class="token punctuation">.</span>IsSome <span class="token operator">&amp;&amp;</span> cube1Component<span class="token punctuation">.</span>Value<span class="token punctuation">.</span>BoundingBox<span class="token punctuation">.</span><span class="token function">Intersects</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ray<span class="token punctuation">)</span> <span class="token keyword">then</span>
+                Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"Cube 1 hit!"</span><span class="token punctuation">)</span>
+
+<span class="token annotation"><span class="token punctuation">[&lt;</span><span class="token class-name">EntryPoint</span><span class="token punctuation">>]</span></span>
+<span class="token comment">// Start the game loop and provide the Start and Update methods as callbacks</span>
+<span class="token comment">// This method initializes the game, begins running the game loop,</span>
+<span class="token comment">// and starts processing events.</span>
+<span class="token keyword">let</span> main argv <span class="token operator">=</span>
+    game<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span>start <span class="token operator">=</span> System<span class="token punctuation">.</span>Action<span class="token operator">&lt;</span>Scene<span class="token operator">></span><span class="token punctuation">(</span>Start<span class="token punctuation">)</span><span class="token punctuation">,</span> update <span class="token operator">=</span> System<span class="token punctuation">.</span>Action<span class="token operator">&lt;</span>Scene<span class="token punctuation">,</span> GameTime<span class="token operator">></span><span class="token punctuation">(</span>Update<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token number">0</span></code></pre>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="success" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+    <symbol id="info" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="light" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="warning" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+    <symbol id="danger" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+</svg>
+<div class="alert alert-info d-flex">
+    <svg class="bi flex-shrink-0 me-2 mt-1" width="24" height="24" role="img"><use xlink:href="#info" /></svg>
+    <div>The video below was recorded for the C# version, but the result is the same for F#.</div>
+</div>
+<p><video class="mb-2 img-fluid"  controls loop preload="none" poster="/assets/img/2024/stride-basics-step-18.webp"><source src="/assets/img/2024/stride-basics-step-18.mp4" type="video/mp4"></video></p>
+<h2 id="conclusion" tabindex="-1">Conclusion <a class="direct-link" href="#conclusion">🔗</a></h2>
+<p>In this article, you learned how to use the Stride Community Toolkit's <strong>code-only</strong> feature with F# for game development in the Stride engine. We explored the basics of integrating F# with Stride to create 3D scenes, handle input, and manage entities—all while leveraging functional programming techniques.</p>
+<p>If you'd like to see the full project, you can access it on <a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp">GitHub</a>. Feel free to check it out and experiment! 💻</p>
+<h2 id="support-stride-engine-%F0%9F%8C%9F" tabindex="-1">Support Stride Engine 🌟 <a class="direct-link" href="#support-stride-engine-%F0%9F%8C%9F">🔗</a></h2>
+<p>Stride is an open-source project that thrives on community contributions and support. By using Stride, sharing your experiences, and contributing to the community, you help improve the engine for everyone. 🚀</p>
+<ul>
+<li><strong>Contribute:</strong> Share your knowledge, <a href="https://github.com/stride3d/stride">contribute to the engine</a>, or <a href="https://github.com/stride3d/stride/issues">report issues</a> to help enhance Stride for all developers.</li>
+<li><strong>Join the Community:</strong> Engage with fellow developers, ask questions, and showcase your projects on our <a href="https://discord.gg/f6aerfE">Discord</a> server or in <a href="https://github.com/stride3d/stride/discussions">GitHub Discussions</a>.</li>
+<li><strong>Sponsor:</strong> Support the ongoing development of Stride by becoming a sponsor on our <a href="https://opencollective.com/stride3d">Open Collective</a> page.</li>
+</ul>
+<div class="alert alert-light d-flex">
+    <svg class="bi flex-shrink-0 me-2 mt-1" width="24" height="24" role="img"><use xlink:href="#light" /></svg>
+    <div>This content was reviewed and enhanced with the assistance of ChatGPT.</div>
+</div>
+            <hr />
+            <p><span class="badge rounded-pill text-bg-success me-1">F#</span><span class="badge rounded-pill text-bg-success me-1">Stride3D</span><span class="badge rounded-pill text-bg-success me-1">.NET</span><span class="badge rounded-pill text-bg-success me-1">Game Development</span><span class="badge rounded-pill text-bg-success me-1">Advanced</span></p>
+            <p>
+                Any comments? You can start 🗨 at <a href="https://github.com/VaclavElias/vaclavelias.github.io/discussions" target="_blank" rel="noreferrer">GitHub Discussions</a>. <a href="https://github.com/VaclavElias/vaclavelias.github.io/blob/main/vaclavelias.github.io/./posts/2024-09-21-stride-community-toolkit-code-only-basics-fsharp.md" target="_blank" rel="noreferrer">Edit</a> this page on <svg style="margin-top: -6px;" width="16" height="16" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)" fill="#1B1F23" />
+                </svg>.
+            </p>
+        </article>
+    </div>
+</div>
+<div class="row mb-5">
+    
+    
+    <div class="col-md-6 mb-4">
+        
+        <div class="post-card">
+            <h5>Previous Post</h5>
+            <a class="prev stretched-link" href="/dotnet/remote-csharp-code-reference-example/">How to reference remote C# code in 11ty</a>
+        </div>
+        
+    </div>
+    <div class="col-md-6 text-md-end">
+        
+        <div class="post-card">
+            <h5>Next Post</h5>
+            <a class="next stretched-link" href="/stride3d/stride-community-toolkit-code-only-basics-csharp/">Stride Community Toolkit Preview - Code-Only Feature Basics in C#</a>
+        </div>
+        
+    </div>
+</div>
+    </div>
+    <div class="back-comment-buttons">
+    <span title="Back to top" aria-label="click back to top of page" class="back-to-top text-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="29" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </span>
+</div>
+    <script src="/assets/scripts/copy-code.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const backToTopButton = document.querySelector("div.back-comment-buttons");
+
+            if (!backToTopButton) return;
+
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > window.innerHeight) {
+                    backToTopButton.style.display = "flex";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            });
+
+            backToTopButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
