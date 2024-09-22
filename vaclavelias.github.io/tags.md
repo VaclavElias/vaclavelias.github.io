@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Blog Tags
+description: Explore the blog's tags. Discover posts grouped by topic.
 tags: search
 ---
 Welcome to the Tags page, where you can explore all the blog posts grouped by topic.
