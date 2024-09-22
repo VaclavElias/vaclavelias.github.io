@@ -13,7 +13,7 @@ tags:
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-Discover how to use the Stride Community Toolkit's **code-only** feature with F#, showcasing a powerful set of extensions and helpers specifically tailored for game development in the Stride engine. Learn the basics of integrating F# with Stride's game engine to create 3D scenes, handle input, and manage entities—all using functional programming techniques.
+Discover how to use the Stride Community Toolkit's **code-only** feature with F#, showcasing a powerful set of extensions and helpers specifically tailored for game development in the Stride engine. Learn the basics of integrating F# with Stride's game engine to create 3D scenes, handle input, and manage entities, all using functional programming techniques.
 
 ---
 
