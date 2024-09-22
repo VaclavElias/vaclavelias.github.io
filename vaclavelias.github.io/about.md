@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About Me - Vaclav Elias
+description: About Vaclav Elias
 ---
 <div class="text-center mb-4">
 <img class="img-fluid rounded-circle img-thumbnail w-25" alt="Vaclav Elias" src="/assets/img/vaso-profile-photo.jpg">

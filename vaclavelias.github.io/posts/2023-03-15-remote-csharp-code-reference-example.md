@@ -7,7 +7,7 @@ tags:
   - C# 
   - .NET
   - 11ty
-  - Advance
+  - Advanced
 image: /assets/img/11ty-logo-400x400.png
 ---
 

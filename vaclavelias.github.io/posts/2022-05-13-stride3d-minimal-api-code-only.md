@@ -7,7 +7,7 @@ tags:
   - C# 
   - Stride3D 
   - .NET 
-  - Game
+  - Game Development
 image: https://www.stride3d.net/images/svg/logo.svg
 ---
 

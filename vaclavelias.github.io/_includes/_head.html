@@ -1,0 +1,32 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>{% if description %}
+    <meta name="author" content="{{ site.author }}">
+    <meta name="description" content="{{ description }}">{% endif %}
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ description }}{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url | url }}">
+    {% if image %}
+    {%- if image contains "http://" or image contains "https://" -%}
+    <meta property="og:image" content="{{ image }}">
+    {%- else -%}
+    <meta property="og:image" content="{{ site.url }}{{ image }}">
+    {%- endif -%}
+    {%- endif -%}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{{ site.twitter-username }}">
+    <meta name="twitter:creator" content="@{{ site.twitter-username }}">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ description }}{% endif %}">
+    {% if image %}
+    {%- if image contains "http://" or image contains "https://" -%}
+    <meta name="twitter:image" content="{{ image }}">
+    {%- else -%}
+    <meta name="twitter:image" content="{{ site.url }}{{ image }}">
+    {%- endif -%}
+    {%- endif -%}
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    {% include _google-analytics.html %}
+</head>
