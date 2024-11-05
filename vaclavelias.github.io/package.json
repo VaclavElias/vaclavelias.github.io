@@ -1,27 +1,35 @@
 {
   "name": "vaclavelias.github.io",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Vaclav's website",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "main": "index.js",
   "scripts": {
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Vaclav Elias",
+    "url": "https://www.vaclavelias.com/"
+  },
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.1",
-    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-plugin-rss": "^2.0.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^4.0.1",
+    "@11ty/eleventy-upgrade-help": "^3.0.1",
     "bootstrap": "^5.3.3",
     "lunr": "^2.3.9",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-table-of-contents": "^0.8.0",
     "sass": "^1.77.6",
-    "terser": "^5.33.0"
+    "terser": "^5.36.0"
   }
 }
