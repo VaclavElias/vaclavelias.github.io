@@ -5,7 +5,7 @@ import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
 import markdownItToc from 'markdown-it-table-of-contents';
 import pluginRss from '@11ty/eleventy-plugin-rss';
-import EleventyFetch from '@11ty/eleventy-fetch';
+import eleventyFetch from '@11ty/eleventy-fetch';
 
 export default function (eleventyConfig) {
 
@@ -147,7 +147,7 @@ export default function (eleventyConfig) {
 
     eleventyConfig.addAsyncShortcode("remote_include", async function (url) {
 
-        const sample = await EleventyFetch(url, {
+        const sample = await eleventyFetch(url, {
             duration: "1d"
         });
 
@@ -162,7 +162,7 @@ export default function (eleventyConfig) {
     //        urlPath = urlPath.slice(1);
     //    }
     //    const url = new URL(urlPath, DOMAIN).href;
-    //    const sample = await EleventyFetch(url, {
+    //    const sample = await eleventyFetch(url, {
     //        duration: "1d",
     //        type: "cs",
     //    });
