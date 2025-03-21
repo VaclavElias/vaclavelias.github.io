@@ -25,6 +25,9 @@ This blog post is part 1 of a 3-part series:
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
 - Stride Community Toolkit Preview - Code-Only Feature - Refactoring
 
+{% include _alert-svg.html %}
+{% include _alert.html type:'info' title: "Note: This blog post currently uses Bullet Physics. A separate blog post will be published using Bepu Physics, which is now the preferred physics engine for Stride. In the meantime, feel free to continue with this tutorial to get familiar with the core concepts, which remain the same." %}
+
 Table of Contents:
 
 [[TOC]]
