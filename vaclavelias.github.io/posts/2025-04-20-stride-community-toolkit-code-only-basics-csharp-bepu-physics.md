@@ -459,7 +459,7 @@ Once the basics are set up, you need to add entities to the scene. In our exampl
 - A 3D Ground, a simple primitive model that provides a surface.
 - A Capsule, another primitive model, which we’ve repositioned and dropped into the scene.
 
-The toolkit added [colliders](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
+The toolkit added [collidables](https://doc.stride3d.net/latest/en/manual/physics/colliders.html) for the ground and capsule, ensuring that the capsule doesn't fall through the ground but instead interacts realistically with the scene.
 
 {%- capture title -%}
 You can review the implementation of each [Stride toolkit extension](https://github.com/stride3d/stride-community-toolkit/tree/main/src/Stride.CommunityToolkit), which wraps some boilerplate code, and create your own custom implementation.
@@ -524,6 +524,7 @@ Then, update the code to look like this:
 
 
 ```csharp
+using Stride.CommunityToolkit.Bepu;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;  // This was added: Import skybox helpers
@@ -601,7 +602,7 @@ You can still add custom code or use Stride's <a href="https://doc.stride3d.net/
 
 ### Moving Entities Using Physics (With Colliders)
 
-This approach leverages [Stride's physics engine](https://doc.stride3d.net/latest/en/manual/physics/index.html) to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
+This approach leverages [Stride's physics engine](https://doc.stride3d.net/latest/en/manual/physics/index.html) to handle movement. By applying forces and impulses to an entity's `BodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
 
 - **Realistic Movement:** Entities move according to the laws of physics, making this method suitable for objects that need to interact with the environment.
 - **Collisions:** The entity will collide with other objects, allowing for dynamic interactions, such as objects bouncing off surfaces or pushing each other.
@@ -623,6 +624,7 @@ Let's add a a cube 📦 to the scene! 🎉
 We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this or replace the entire file:
 
 ```csharp
+using Stride.CommunityToolkit.Bepu;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
