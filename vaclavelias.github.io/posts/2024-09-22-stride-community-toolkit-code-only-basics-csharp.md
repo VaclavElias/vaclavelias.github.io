@@ -43,7 +43,7 @@ This article assumes that you have some experience with .NET and C# programming.
 
 The toolkit allows you to create a game using a code-only approach, meaning you can develop a game without relying on the Stride [Game Studio](https://doc.stride3d.net/latest/en/manual/game-studio/index.html). As a C#/.NET developer in my day job, I found this approach very helpful for getting started with the [Stride engine](https://github.com/stride3d/stride) and game development, bypassing the need to work directly in the Game Studio.
 
-You can also access the [full source code for this post on GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs) to follow along or explore the final implementation directly.
+You can also access the [full source code for this post on GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysics/Program.cs) to follow along or explore the final implementation directly.
 
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
@@ -1445,7 +1445,7 @@ Let's spice things up with more mouse interaction, this time using the **middle 
  }
 ```
 
-The final code is also available on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs).
+The final code is also available on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysics/Program.cs).
 
 Run the application, and now, whenever you click the middle mouse button on an object, it will get a random impulse in a random direction. 🎲 How cool is that?
 
@@ -1467,7 +1467,7 @@ By adding mouse interactions, you’ve empowered players to directly interact wi
 
 Interactivity is at the heart of game design. By giving players the ability to influence the game world, you create a more immersive and engaging experience. The skills you've developed—handling inputs, moving objects, managing physics, and providing feedback—are foundational to building more complex and polished games. 🌟
 
-If you'd like to explore the final code for this project, you can access it on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs). Feel free to check it out and experiment! 💻
+If you'd like to explore the final code for this project, you can access it on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysics/Program.cs). Feel free to check it out and experiment! 💻
 
 ## Follow-Up Articles 🚶
 
