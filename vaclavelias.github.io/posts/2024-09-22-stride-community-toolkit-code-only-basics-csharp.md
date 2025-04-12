@@ -1,5 +1,5 @@
 ---
-title: Stride Community Toolkit Preview - Code-Only Feature Basics in C#
+title: Stride Community Toolkit Preview - Code-Only Feature Basics in C# - Bullet Physics
 description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
@@ -13,13 +13,14 @@ tags:
 image: /assets/img/stride-logo-blue-toolkit.svg
 ---
 
-Discover the Stride Community Toolkit, a powerful collection of extensions and helpers designed for the Stride game engine. In this blog post, we dive into the toolkit's **code-only** feature, empowering C# and .NET developers to create immersive 2D/3D games and visualizations with ease. Explore how this community-driven, open-source project can simplify your game development journey.
+Discover the Stride Community Toolkit, a powerful collection of extensions and helpers designed for the Stride game engine. In this blog post (Bullet Physics version), we dive into the toolkit's **code-only** feature, empowering C# and .NET developers to create immersive 2D/3D games and visualizations with ease. Explore how this community-driven, open-source project can simplify your game development journey.
 
 ---
 
 This blog post is part 1 of a 3-part series:
 
 - [Stride Community Toolkit Preview - Code-Only Feature - Basics (C#)](/stride3d/stride-community-toolkit-code-only-basics-csharp/)
+  - [Bepu Physics version](/stride3d/stride-community-toolkit-code-only-basics-csharp-bepu-physics)
   - Also available: [Condensed F# version of this tutorial](/stride3d/stride-community-toolkit-code-only-basics-fsharp)
   - The [Visual Basic version is also possible](https://stride3d.github.io/stride-community-toolkit/manual/code-only/examples/capsule-with-rigid-body-vb.html) but I am running out of space here 😅
 - Stride Community Toolkit Preview - Code-Only Feature - Advanced
@@ -75,6 +76,8 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 
 - [Stride](https://www.stride3d.net/): A C# game engine for creating 2D/3D games and visualizations.
 - [Stride Community Toolkit](https://stride3d.github.io/stride-community-toolkit/index.html): A collection of extensions and helpers for the Stride engine.
+- [Bepu Physics](https://doc.stride3d.net/latest/en/manual/physics/index.html): The preferred physics engine for Stride, providing advanced [Bepu physics](https://github.com/bepu/bepuphysics2) simulation capabilities.
+- [Bullet Physics](https://doc.stride3d.net/latest/en/manual/physics-bullet/index.html): An alternative physics engine for Stride, which is being phased out in favor of Bepu Physics.
 - [Code-Only](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html): A feature of the toolkit that allows you to create a game without using the Game Studio.
 - [Game](https://doc.stride3d.net/latest/en/api/Stride.Engine.Game.html): In the context of this post, a game refers to any interactive or visual project created using a game engine. This can range from traditional playable games to simulations, visualizations, or any real-time interactive experiences where users can interact with or observe elements within a scene.
 - [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
@@ -168,7 +171,6 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 1. Run the application.
 1. Behold the black void of nothingness 🙀.
 
-{% include _alert-svg.html %}
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
 {% include _alert.html type:'success' title: "You’ve learned how to set up a Stride game window using the Stride Community Toolkit. Even though it's just a black screen, the game window is running, marking the first step in your journey." %}
@@ -1469,7 +1471,7 @@ If you'd like to explore the final code for this project, you can access it on [
 
 ## Follow-Up Articles 🚶
 
-In the not-so-distant future, we will cover the following topics:
+In the not-so-distant future, we will cover the following topics in Bepu Physics:
 
 - **Stride Community Toolkit Preview - Code-Only Feature - Advanced:** Let's get creative and explore more advanced features to take your game to the next level. 🚀
   - Maximize the game window
