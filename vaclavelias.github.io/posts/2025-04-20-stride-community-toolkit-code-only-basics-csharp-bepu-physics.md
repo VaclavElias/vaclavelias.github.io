@@ -86,7 +86,7 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html): A camera that allows viewing the scene from different angles.
 - [Camera Controller](https://doc.stride3d.net/latest/en/tutorials/csharpintermediate/third-person-camera.html): A script that enables basic camera movement using keyboard and mouse inputs.
 - [3D Primitive](https://doc.stride3d.net/latest/en/api/Stride.Graphics.GeometricPrimitives.GeometricPrimitive.Cube.html): A basic 3D model, such as a capsule, cube, or sphere.
-- [Collider](https://doc.stride3d.net/latest/en/manual/physics/colliders.html): A component that defines the shape of an entity for physical interactions.
+- [Collidable](https://doc.stride3d.net/latest/en/manual/physics/colliders.html): A component that defines the shape of an entity for physical interactions.
 - [Physics Engine](https://doc.stride3d.net/latest/en/manual/physics/index.html): A system that simulates physical interactions between entities in the scene.
 - [Profiler](https://doc.stride3d.net/latest/en/manual/troubleshooting/profiling.html): A tool that monitors performance metrics like frames per second (FPS) and memory usage.
 - [Skybox](https://doc.stride3d.net/latest/en/manual/graphics/textures/skyboxes-and-backgrounds.html): A textured 3D model that provides a background for the scene.
@@ -126,9 +126,13 @@ Also, the code snippets contain comments which part of the code is new or update
 
 The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game without the need for the Game Studio.
 
-## Code-Only on Other Platforms 🐧 
+## Code-Only on Other Platforms 🐧
 
-This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
+Code-only development isn't fully supported on non-Windows platforms yet, but progress is being made. Thanks to [this PR](https://github.com/stride3d/stride/pull/2279), the build tool `Stride.Core.Assets.CompilerApp`, which is responsible for building assets, now works on Linux as a cross-platform binary.
+
+However, there are still some limitations. A known workaround for Linux (Ubuntu) is documented here: [Code-Only Development on Linux (Ubuntu) Requires Manual File Copying](https://github.com/stride3d/stride/issues/2596).
+
+While Stride is a cross-platform engine and you can build your game on Windows and run it elsewhere, full support for code-only workflows on platforms like Linux is still evolving.
 
 ## The Story of the Brave Explorers 📘
 
