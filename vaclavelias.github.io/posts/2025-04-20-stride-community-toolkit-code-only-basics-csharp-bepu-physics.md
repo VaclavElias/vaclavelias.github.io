@@ -81,7 +81,7 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - [Scene](https://doc.stride3d.net/latest/en/manual/game-studio/scenes.html): The container for entities, which defines the game world or environment.
 - [Entity](https://doc.stride3d.net/latest/en/api/Stride.Engine.Entity.html): An object in the scene that can represent anything from a 3D model to a camera or light and aggregates multiple EntityComponents.
 - [EntityComponent](https://doc.stride3d.net/latest/en/api/Stride.Engine.EntityComponent.html): A base component that defines the behavior or properties of an entity. Other components inherit from this class.
-- [RigidbodyComponent](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html): A physics component that allows an entity to respond to forces like gravity and collisions.
+- [BodyComponent](https://doc.stride3d.net/latest/en/api/Stride.BepuPhysics.BodyComponent.html): A physics component that allows an entity to respond to forces like gravity and collisions.
 - [Graphics Compositor](https://doc.stride3d.net/latest/en/manual/graphics/graphics-compositor/index.html): A component that organizes how scenes are rendered in the Stride engine.
 - [Camera](https://doc.stride3d.net/latest/en/manual/graphics/cameras/index.html): A camera that allows viewing the scene from different angles.
 - [Camera Controller](https://doc.stride3d.net/latest/en/tutorials/csharpintermediate/third-person-camera.html): A script that enables basic camera movement using keyboard and mouse inputs.
@@ -95,7 +95,7 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 - **Physics-Based Movement:** Moving entities using the physics engine to simulate realistic interactions.
 - **Non-Physical Movement:** Moving entities by directly changing their position without physics interactions.
 - [Transform](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/transform-position.html): Defines an entity's position, rotation, and scale in the scene.
-- [Force](https://doc.stride3d.net/latest/en/api/Stride.Physics.RigidbodyComponent.html?q=Force#Stride_Physics_RigidbodyComponent_ApplyForce_Stride_Core_Mathematics_Vector3_): A vector that represents a physical force applied to an [entity](https://doc.stride3d.net/latest/en/manual/physics/rigid-bodies.html).
+- [Impulse](https://doc.stride3d.net/latest/en/api/Stride.BepuPhysics.BodyComponent.html#Stride_BepuPhysics_BodyComponent_ApplyImpulse_Stride_Core_Mathematics_Vector3_Stride_Core_Mathematics_Vector3_): A vector that represents a physical impulse applied to an [entity](https://doc.stride3d.net/latest/en/manual/physics/rigid-bodies.html).
 - [Delta Time](https://doc.stride3d.net/latest/en/tutorials/csharpbeginner/delta-time.html): The time elapsed between frames, used for frame-independent movement.
 - [Material](https://doc.stride3d.net/latest/en/manual/graphics/materials/index.html): A visual property that defines how an entity is rendered, including color, texture, and shading.
 - [Ground Gizmo](https://stride3d.github.io/stride-community-toolkit/api/Stride.CommunityToolkit.Engine.GameExtensions.html#Stride_CommunityToolkit_Engine_GameExtensions_AddGroundGizmo_Stride_Engine_Game_System_Nullable_Stride_Core_Mathematics_Vector3__System_Boolean_System_Boolean_): A visual representation of the ground plane and axis directions in the scene.
@@ -891,7 +891,7 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
+        // Retrieve the BodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<BodyComponent>();
 
         // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
@@ -1055,7 +1055,7 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
+        // Retrieve the BodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<BodyComponent>();
 
         // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
@@ -1210,7 +1210,7 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
+        // Retrieve the BodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<BodyComponent>();
 
         // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
@@ -1285,7 +1285,7 @@ Replace your current code with this or refer to the comments labelled `// This w
 using Stride.BepuPhysics;
 using Stride.CommunityToolkit.Bepu;
 using Stride.CommunityToolkit.Engine;
-using Stride.CommunityToolkit.Rendering.Compositing;
+using Stride.CommunityToolkit.Rendering.Compositing; // This was added
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
 using Stride.Core.Diagnostics;
@@ -1369,7 +1369,6 @@ void Start(Scene scene)
     cube2.Transform.Position = new Vector3(-3, 5, 0);  // Reposition the cube above the ground
     cube2.Scene = scene;
 
-    // These were added
     // Initialize camera, simulation, and model component for interactions
     camera = scene.GetCamera();
     simulation = camera?.Entity.GetSimulation();
@@ -1405,7 +1404,7 @@ void Start(Scene scene)
         new UIComponent
         {
             Page = new UIPage { RootElement = canvas },
-            RenderGroup = RenderGroup.Group31
+            RenderGroup = RenderGroup.Group31 // Used to render AddCleanUIStage()
         }
     };
 
@@ -1438,7 +1437,7 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
+        // Retrieve the BodyComponent, which handles physics interactions
         var rigidBody = cube2.Get<BodyComponent>();
 
         // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
@@ -1459,11 +1458,9 @@ void Update(Scene scene, GameTime time)
         }
     }
 
-    // This was added
     // Ensure camera and simulation are initialized before handling mouse input
     if (camera == null || simulation == null || !game.Input.HasMouse) return;
 
-    // This was added
     // Handle mouse input for interactions
     if (game.Input.IsMouseButtonPressed(MouseButton.Left))
     {
@@ -1474,7 +1471,7 @@ void Update(Scene scene, GameTime time)
         {
             var message = $"Hit: {hitInfo.Collidable.Entity.Name}";
             Console.WriteLine(message);
-            GlobalLogger.GetLogger("Program.cs").Info(message); // This was added
+            GlobalLogger.GetLogger("Program.cs").Info(message);
 
             var rigidBody = hitInfo.Collidable.Entity.Get<BodyComponent>();
 
@@ -1512,6 +1509,8 @@ void Update(Scene scene, GameTime time)
 
 Save and run the application. You should now see the text **"Hello, Stride!"** displayed at the bottom left corner of the screen. 📺
 
+{% include _alert.html type:'info' title:'Make sure that you added <code>AddCleanUIStage()</code> .' %}
+
 Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
 
 {% img 'Stride Game Engine - Code Only Basic - Output added' '/assets/img/2024/stride-basics-step-16.jpg' %}
@@ -1526,7 +1525,7 @@ Time for a quick reflection on what we've achieved in the last few steps. We've 
 - **Enhanced Visuals:** By adding a skybox, we made the scene more immersive, creating a polished and professional look. 🎨
 - **Understanding Motion:** We explored the difference between non-physical and physics-based movement, learning how to decide which method to use based on game mechanics. 🧠
 - **Non-Physical Movement:** You learned how to move entities using `Transform.Position` without interacting with other objects. This approach is great for UI elements or simple animations. 🚶‍♂️
-- **Physics-Based Movement:** By applying forces to entities via `RigidbodyComponent`, we introduced realistic interactions with gravity and collisions, adding depth to the gameplay. ⚙️
+- **Physics-Based Movement:** By applying forces to entities via `BodyComponent`, we introduced realistic interactions with gravity and collisions, adding depth to the gameplay. ⚙️
 - **Keyboard Controls:** We implemented basic keyboard inputs to move entities, adding interactivity and responsiveness to the game. 🎮
 - **Mouse Controls:** We extended player interaction by integrating mouse clicks, allowing players to trigger actions like applying forces to entities. 🖱️
 - **Displaying Output:** Finally, we explored output options, from console logs to UI elements, enhancing player feedback and communication. 📊
@@ -1547,10 +1546,13 @@ if (game.Input.IsKeyDown(Keys.Space))
         Size = new Vector3(0.5f),
     });
 
-    entity.Transform.Position = new Vector3(0, 10, 0);
+    entity.Transform.Position = VectorHelper.RandomVector3(
+        xRange: [-3, 3],
+        yRange: [10, 20],
+        zRange: [-3, 3]
+    );
     entity.Scene = scene;
 }
-
 ```
 
 Now, run the application, zoom out the camera to view the entire ground, and press the **Space** key. Watch as new cubes spawn, pushing your FPS to its limits! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that’s getting a bit old, isn’t it? 🥱
@@ -1558,22 +1560,22 @@ Now, run the application, zoom out the camera to view the entire ground, and pre
 Let's spice things up with more mouse interaction, this time using the **middle mouse button**. Firstly add this namespace `using Stride.CommunityToolkit.Helpers;` and then add the following code inside the `Update()` method, just below the line `if (camera == null || simulation == null || !game.Input.HasMouse) return;`:
 
 ```csharp
- if (game.Input.IsMouseButtonDown(MouseButton.Middle))
- {
-     var hitResult = camera.RaycastMouse(simulation, game.Input.MousePosition);
+if (game.Input.IsMouseButtonDown(MouseButton.Middle))
+{
+    var hitResult = camera.Raycast(game.Input.MousePosition, 100f, out HitInfo hitInfo);
 
-     if (hitResult.Succeeded)
-     {
-         var rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>();
+    if (hitResult)
+    {
+        var rigidBody = hitInfo.Collidable.Entity.Get<BodyComponent>();
 
-         if (rigidBody != null)
-         {
-             var direction = VectorHelper.RandomVector3([-20, 20], [0, 20], [-20, 20]);
-
-             rigidBody.ApplyImpulse(direction);
-         }
-     }
- }
+        if (rigidBody != null)
+        {
+            var direction = VectorHelper.RandomVector3([-20, 20], [0, 20], [-20, 20]);
+            rigidBody.Awake = true;
+            rigidBody.ApplyImpulse(direction, new Vector3(0, 0, 0));
+        }
+    }
+}
 ```
 
 The final code is also available on [GitHub](https://github.com/VaclavElias/stride-examples/blob/main/src/CommunityToolkit/CodeOnlyBasics/Program.cs).
@@ -1584,7 +1586,7 @@ Run the application, and now, whenever you click the middle mouse button on an o
 
 {% video-fluid '/assets/img/2024/stride-basics-step-18.mp4' 'webp' 'false' %}
 
-{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button - all in just around <strong>240</strong> lines of code." %}
+{% include _alert.html type:'success' title: "You've now learned how to create more primitives using keyboard input and apply random forces to objects with the middle mouse button - all in just around <strong>250</strong> lines of code." %}
 
 ## Wrapping Up: Your Journey Continues 🎯
 
