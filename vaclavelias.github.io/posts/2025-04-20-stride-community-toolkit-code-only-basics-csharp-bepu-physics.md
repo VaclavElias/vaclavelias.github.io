@@ -54,6 +54,8 @@ Here’s the process I found to be the easiest way to begin with the code-only a
 4. Add output to the console or screen
 5. Play around, be creative and have fun
 
+This post was updated to use the latest version of the Stride Community Toolkit, which now includes the [Bepu physics engine](https://doc.stride3d.net/latest/en/manual/physics/index.html) as the default physics engine. The previous version used Bullet Physics, which is still available but not recommended for new projects. The Bepu physics engine is a powerful and efficient physics engine that provides advanced simulation capabilities for 3D games and visualizations. Thank you [Daryl](https://github.com/dboggs95) for your help with this update! 🙏
+
 ## What You'll Learn 🎯
 
 By the end of this post, you will have a solid foundation in using the Stride Community Toolkit's code-only feature to create a simple game. You’ll learn how to:
@@ -832,15 +834,14 @@ void Update(Scene scene, GameTime time)
         }
     }
 }
-
 ```
 
-- `Stride.Physics` provides access to physics-related classes and components, including the `BodyComponent`.
+- `Stride.BepuPhysics` provides access to physics-related classes and components, including the `BodyComponent`.
 - `force` determines the strength of the impulse applied to the cube.
 - `cube2` is an `Entity` object representing the cube that will move using physics-based interactions.
-- `RigidbodyComponent` handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
+- `BodyComponent` handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
 - `LinearVelocity` represents the velocity of the cube. We check if the velocity is near zero (indicating the cube is stationary) before applying the impulse.
-- `ApplyImpulse()` applies a force to the entity, causing it to move in the direction of the applied force. In this case, we’re applying an impulse to the cube, making it move along the X-axis.
+- `ApplyImpulse()` applies a force to the entity, causing it to move in the direction of the applied force. In this case, we're applying an impulse to the cube, making it move along the X-axis.
 
 Run the application. 🏃‍♂️ You should now see two cubes in the scene:
 
@@ -849,7 +850,7 @@ Run the application. 🏃‍♂️ You should now see two cubes in the scene:
 
 This step introduces a new level of realism by making the cube react to physical forces, adding depth and complexity to your game. 🎮
 
-The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `RigidbodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
+The main difference between the two cubes is that **Cube 1** moves without interacting with the environment. We directly modify the entity's `Transform.Position` to move it, resulting in simple, non-physical movement. In contrast, **Cube 2** responds to physics, collisions, and forces. Instead of manually changing its position, we control its movement through the `BodyComponent`, which handles all the physics-based interactions, including gravity, impulses, and collisions with other objects in the scene. This makes Cube 2's movement more realistic and reactive to its surroundings.
 
 {% video-fluid '/assets/img/2024/stride-basics-step-13.mp4' 'webp' 'false' %}
 
@@ -891,7 +892,7 @@ void Update(Scene scene, GameTime time)
     if (cube2 != null)
     {
         // Retrieve the RigidbodyComponent, which handles physics interactions
-        var rigidBody = cube2.Get<RigidbodyComponent>();
+        var rigidBody = cube2.Get<BodyComponent>();
 
         // We use KeyPressed instead of KeyDown to apply impulses only once per key press.
         // This means the player needs to press and release the key to apply an impulse,
@@ -900,12 +901,14 @@ void Update(Scene scene, GameTime time)
         // Apply an impulse to the left when the C key is pressed (and released)
         if (game.Input.IsKeyPressed(Keys.C))
         {
-            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0));
+            rigidBody.Awake = true; // Wake up the rigid body to ensure it can respond to impulses
+            rigidBody.ApplyImpulse(new Vector3(-force, 0, 0), Vector3.Zero);
         }
         // Apply an impulse to the right when the V key is pressed (and released)
         else if (game.Input.IsKeyPressed(Keys.V))
         {
-            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+            rigidBody.Awake = true; // Wake up the rigid body to ensure it can respond to impulses
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0), Vector3.Zero);
         }
     }
 }
@@ -913,6 +916,7 @@ void Update(Scene scene, GameTime time)
 
 - `game.Input.IsKeyDown()` checks if a key is currently held down. This is useful for continuous actions, like moving an object as long as the key is pressed.
 - `game.Input.IsKeyPressed()` checks if a key was pressed and released once. This is ideal for triggering actions that should only occur once per key press, such as applying an impulse to a physics object, to avoid multiple impulses being applied while the key is held down.
+- `rigidBody.Awake = true;` gets or sets whether the body is in the active set. Setting this to `true` will attempt to wake the body; setting it to `false` will force the body and any constraint-connected bodies asleep. Using an awake mechanism helps by reducing the computational overhead.
 
 **Additional Points:**
 
