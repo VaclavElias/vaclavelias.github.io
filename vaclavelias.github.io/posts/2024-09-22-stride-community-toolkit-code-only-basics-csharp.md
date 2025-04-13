@@ -109,9 +109,12 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 
 These prerequisites were tested on a clean Windows 11 installation.
 
-1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart your system if prompted.
-2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB).
-3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can also use [Visual Studio Code](https://code.visualstudio.com/), Rider, or any other IDE that supports .NET development.
+1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (approximately 25MB) and restart your system if prompted.
+2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 200MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
+   - [Visual Studio Code](https://code.visualstudio.com/) - Free
+   - [Rider](https://www.jetbrains.com/rider/download/#section=windows) - Free for non-commercial use
+   - Any other IDE that supports .NET development
 
 ## How to use the code snippets 📝
 
@@ -127,7 +130,11 @@ The code-only approach is currently available only on Windows. The toolkit provi
 
 ## Code-Only on Other Platforms 🐧 
 
-This option is not yet available but is planned for the future ([Use CompilerApp cross-platform binary instead of exe](https://github.com/stride3d/stride/pull/2279)). While Stride is a cross-platform engine, you can build the game on Windows and then run it on other platforms. However, one of the build tools, `Stride.Core.Assets.CompilerApp.exe`, which is responsible for building the assets, is currently only available on Windows.
+Code-only development isn't fully supported on non-Windows platforms yet, but progress is being made. Thanks to [this PR](https://github.com/stride3d/stride/pull/2279), the build tool `Stride.Core.Assets.CompilerApp`, which is responsible for building assets, now works on Linux as a cross-platform binary.
+
+However, there are still some limitations. A known workaround for Linux (Ubuntu) is documented here: [Code-Only Development on Linux (Ubuntu) Requires Manual File Copying](https://github.com/stride3d/stride/issues/2596).
+
+While Stride is a cross-platform engine and you can build your game on Windows and run it elsewhere, full support for code-only workflows on platforms like Linux is still evolving.
 
 ## The Story of the Brave Explorers 📘
 
@@ -147,7 +154,10 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 
 ## Step 1: Create a New C# .NET 8 Console App - Nothingness ⚫
 
-1. Create a new C# .NET 8 Console App in your IDE.
+1. Create a new C# .NET 8 Console App in your IDE or use the command line:
+    ```bash
+    dotnet new console --framework net8.0 --name YourProjectName
+    ```
 1. Add the following NuGet package: 📦
     ```bash
     dotnet add package Stride.CommunityToolkit.Windows --prerelease
@@ -216,11 +226,18 @@ Run the application again. Now, instead of a black screen, you should see a blue
 
 ## Step 3: Add Some Shapes - Capsule Time! 🎨
 
-Let's add something to the scene. 🎨 This time, we will be utilizing the `Stride.CommunityToolkit.Rendering.ProceduralModels` namespace, which provides helper methods for generating procedural models like capsules, cubes, and spheres. We will add a capsule to the scene.
+Firstly, we need to add another NuGet package, `Stride.CommunityToolkit.Bullet`, which includes the Bullet physics engine. This package is required for the physics engine to work properly. You can add it using the following command: 
+
+```bash
+dotnet add package Stride.CommunityToolkit.Bullet --prerelease
+```
+
+Now let's add something to the scene. 🎨 This time, we will be utilizing the `Stride.CommunityToolkit.Rendering.ProceduralModels` namespace, which provides helper methods for generating procedural models like capsules, cubes, and spheres. We will add a capsule to the scene.
 
 Update the `Program.cs` file to look like this, or simply replace the entire file:
 
 ```csharp
+using Stride.CommunityToolkit.Bullet; // This was added: Import the Bullet physics engine
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;  // This was added: Import procedural model helpers
 using Stride.Engine;
@@ -305,6 +322,7 @@ Let's reposition the capsule to add a bit more excitement and give us a few extr
 Update the `Program.cs` file to look like this, or simply replace the entire file:
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.Core.Mathematics;  // This was added: Import Vector3 and other math utilities
@@ -511,6 +529,7 @@ Then, update the code to look like this:
 
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;  // This was added: Import skybox helpers
@@ -610,6 +629,7 @@ Let's add a a cube 📦 to the scene! 🎉
 We'll start with the first option: moving the cube by directly changing its position. Update the code to look like this or replace the entire file:
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
@@ -712,6 +732,7 @@ Update the code to include physics-based movement or replace the entire file:
 
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
@@ -922,6 +943,7 @@ The previous comments have been streamlined to keep the code clean and focused�
 You can replace the entire code with the following, or refer to the comments labelled `// This was added` to see the specific changes.
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
@@ -1202,6 +1224,7 @@ Let’s create a simple text block on the canvas to display information to the p
 Replace your current code with this or refer to the comments labelled `// This was added` to see the specific changes.
 
 ```csharp
+using Stride.CommunityToolkit.Bullet;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.Compositing; // This was added
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
