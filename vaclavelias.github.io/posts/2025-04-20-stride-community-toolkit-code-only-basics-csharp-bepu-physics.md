@@ -703,7 +703,6 @@ void Update(Scene scene, GameTime time)
         cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 }
-
 ```
 
 - `movementSpeed` determines how fast the cube moves.
@@ -727,13 +726,14 @@ Update the code to include physics-based movement or replace the entire file:
 
 
 ```csharp
+using Stride.BepuPhysics; // This was added
+using Stride.CommunityToolkit.Bepu;
 using Stride.CommunityToolkit.Engine;
 using Stride.CommunityToolkit.Rendering.ProceduralModels;
 using Stride.CommunityToolkit.Skyboxes;
 using Stride.Core.Mathematics;
 using Stride.Engine;
 using Stride.Games;
-using Stride.Physics; // This was added
 
 float movementSpeed = 1f;
 float force = 3f; // This was added
@@ -817,14 +817,14 @@ void Update(Scene scene, GameTime time)
     // Handle physics-based movement for cube2
     if (cube2 != null)
     {
-        // Retrieve the RigidbodyComponent, which handles physics interactions
-        var rigidBody = cube2.Get<RigidbodyComponent>();
+        // Retrieve the BodyComponent, which handles physics interactions
+        var rigidBody = cube2.Get<BodyComponent>();
 
         // Check if cube2 is stationary by verifying if its linear velocity is effectively zero.
         if (Math.Round(rigidBody.LinearVelocity.Length()) == 0)
         {
-            // Apply an impulse to cube2 along the X-axis, initiating movement.
-            rigidBody.ApplyImpulse(new Vector3(force, 0, 0));
+            // Apply an impulse to cube2 along the X-axis, initiating movement. Impulse offset is set to zero.
+            rigidBody.ApplyImpulse(new Vector3(force, 0, 0), Vector3.Zero);
 
             // Reverse the direction of the impulse for the next impulse,
             // allowing cube2 to move back and forth along the X-axis.
@@ -835,7 +835,7 @@ void Update(Scene scene, GameTime time)
 
 ```
 
-- `Stride.Physics` provides access to physics-related classes and components, including the `RigidbodyComponent`.
+- `Stride.Physics` provides access to physics-related classes and components, including the `BodyComponent`.
 - `force` determines the strength of the impulse applied to the cube.
 - `cube2` is an `Entity` object representing the cube that will move using physics-based interactions.
 - `RigidbodyComponent` handles physics interactions, allowing the entity to respond to forces, gravity, and collisions.
