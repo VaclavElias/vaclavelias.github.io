@@ -3,7 +3,7 @@ title: Stride Community Toolkit Preview - Code-Only Feature Basics in C# - Bepu 
 description: Explore the Stride Community Toolkit's code-only feature, a powerful collection of extensions and helpers for the Stride game engine.
 
 categories: stride3d
-date: 2025-04-20
+date: 2025-04-13
 tags:
   - C# 
   - Stride3D
@@ -1552,7 +1552,7 @@ if (game.Input.IsKeyDown(Keys.Space))
 
     entity.Transform.Position = VectorHelper.RandomVector3(
         xRange: [-3, 3],
-        yRange: [10, 20],
+        yRange: [10, 13],
         zRange: [-3, 3]
     );
     entity.Scene = scene;
