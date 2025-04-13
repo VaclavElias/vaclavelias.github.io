@@ -23,7 +23,7 @@ Table of Contents:
 
 ## Introduction
 
-This article is a condensed version of the original tutorial aimed at C# developers. You can find the original article [here](/stride3d/stride-community-toolkit-code-only-basics-csharp).
+This article is a condensed version of the original tutorial aimed at C# developers. You can find the original article [here](/stride3d/stride-community-toolkit-code-only-basics-csharp-bepu-physics).
 
 Though I’m not an F# developer, I wanted to demonstrate how easy it is to use the Stride Community Toolkit with F#. The code provided is a direct translation of the original C# implementation into F#.
 
@@ -33,9 +33,12 @@ To follow this tutorial, you should have a solid understanding of F# and .NET.
 
 These steps were tested on a fresh installation of Windows 11.
 
-1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (25MB) and restart your system if prompted.
-2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (200MB).
-3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/), but you can also use [Visual Studio Code](https://code.visualstudio.com/), Rider, or any other IDE that supports .NET development.
+1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (approximately 25MB) and restart your system if prompted.
+2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 200MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
+   - [Visual Studio Code](https://code.visualstudio.com/) - Free
+   - [Rider](https://www.jetbrains.com/rider/download/#section=windows) - Free for non-commercial use
+   - Any other IDE that supports .NET development
 
 ## Getting Started 🚀
 
@@ -44,6 +47,7 @@ These steps were tested on a fresh installation of Windows 11.
     ```bash
     dotnet add package Stride.CommunityToolkit.Windows --prerelease
     dotnet add package Stride.CommunityToolkit.Skyboxes --prerelease
+    dotnet add package Stride.CommunityToolkit.Bepu --prerelease
     ```
 1. Replace the contents of the `Program.fs` file with the code below.
 1. Run the project and enjoy the scene!
@@ -57,6 +61,7 @@ These steps were tested on a fresh installation of Windows 11.
 - Click the left mouse button to apply an upward impulse to the cube under the cursor.
 
 ```fsharp
+open Stride.CommunityToolkit.Bepu
 open Stride.CommunityToolkit.Engine
 open Stride.CommunityToolkit.Skyboxes
 open Stride.CommunityToolkit.Rendering.ProceduralModels
@@ -74,6 +79,7 @@ open Stride.UI.Panels
 open Stride.UI.Controls
 open Stride.UI
 open Stride.Rendering
+open Stride.BepuPhysics
 
 let mutable movementSpeed = 1.0f
 let mutable force = 3.0f
@@ -81,7 +87,7 @@ let mutable cube1: Entity option = None
 let mutable cube2: Entity option = None
 
 let mutable camera: CameraComponent option = None
-let mutable simulation: Simulation option = None
+let mutable simulation: BepuSimulation option = None
 let mutable cube1Component: ModelComponent option = None
 
 let mutable font: SpriteFont = null
@@ -119,7 +125,7 @@ let Start (scene: Scene) =
 
     // Initialize camera, simulation, and model component for interactions
     camera <- Some (scene.GetCamera())
-    simulation <- game.SceneSystem.SceneInstance.GetProcessor<PhysicsProcessor>().Simulation |> Option.ofObj
+    simulation <- camera |> Option.map (fun c -> c.Entity.GetSimulation())
     cube1Component <- primitive1.Get<ModelComponent>() |> Option.ofObj
 
     // Create and display a UI text block
@@ -176,11 +182,13 @@ let Update (scene: Scene) (time: GameTime) =
     // Handle physics-based movement for cube2
     match cube2 with
     | Some cube ->
-        let rigidBody = cube.Get<RigidbodyComponent>()
+        let rigidBody = cube.Get<BodyComponent>()
         if game.Input.IsKeyPressed(Keys.C) then
-            rigidBody.ApplyImpulse(Vector3(-force, 0.0f, 0.0f))
+            rigidBody.Awake <- true
+            rigidBody.ApplyImpulse(Vector3(-force, 0.0f, 0.0f), Vector3.Zero)
         elif game.Input.IsKeyPressed(Keys.V) then
-            rigidBody.ApplyImpulse(Vector3(force, 0.0f, 0.0f))
+            rigidBody.Awake <- true
+            rigidBody.ApplyImpulse(Vector3(force, 0.0f, 0.0f), Vector3.Zero)
     | None -> ()
 
     if game.Input.IsKeyDown(Keys.Space) then
@@ -188,7 +196,7 @@ let Update (scene: Scene) (time: GameTime) =
             Material = game.CreateMaterial(Color.Green),
             Size = new Vector3(0.5f)
         ))
-        entity.Transform.Position <- Vector3(0f, 10f, 0f)
+        entity.Transform.Position <- VectorHelper.RandomVector3([| -3f; 3f |], [| 10f; 13f |], [| -3f; 3f |])
         entity.Scene <- scene
 
     // Ensure camera and simulation are initialized before handling mouse input
@@ -196,26 +204,30 @@ let Update (scene: Scene) (time: GameTime) =
         ()
     else
         if game.Input.IsMouseButtonDown(MouseButton.Middle) then
-            let hitResult = camera.Value.RaycastMouse(simulation.Value, game.Input.MousePosition)
-            if hitResult.Succeeded then
-                let rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>()
+            let mutable hitInfo = Unchecked.defaultof<HitInfo>
+            let hitResult = camera.Value.Raycast(game.Input.MousePosition, 100f, &hitInfo)
+            if hitResult then
+                let rigidBody = hitInfo.Collidable.Entity.Get<BodyComponent>()
                 if rigidBody <> null then
                     let direction = VectorHelper.RandomVector3([| -20.0f; 20.0f |], [| 0.0f; 20.0f |], [| -20.0f; 20.0f |])
-                    rigidBody.ApplyImpulse(direction)
+                    rigidBody.Awake <- true
+                    rigidBody.ApplyImpulse(direction, Vector3.Zero)
             // Return after handling middle mouse input
 
         // Handle left mouse button input
         if game.Input.IsMouseButtonPressed(MouseButton.Left) then
-            let hitResult = camera.Value.RaycastMouse(simulation.Value, game.Input.MousePosition)
-            if hitResult.Succeeded then
-                let message = sprintf "Hit: %s" hitResult.Collider.Entity.Name
+            let mutable hitInfo = Unchecked.defaultof<HitInfo>
+            let hitResult = camera.Value.Raycast(game.Input.MousePosition, 100f, &hitInfo)
+            if hitResult then
+                let message = sprintf "Hit: %s" hitInfo.Collidable.Entity.Name
                 Console.WriteLine(message)
                 GlobalLogger.GetLogger("Program.fs").Info(message)
 
-                let rigidBody = hitResult.Collider.Entity.Get<RigidbodyComponent>()
+                let rigidBody = hitInfo.Collidable.Entity.Get<BodyComponent>()
                 if rigidBody <> null then
                     let direction = Vector3(0.0f, 3.0f, 0.0f) // Apply upward impulse
-                    rigidBody.ApplyImpulse(direction)
+                    rigidBody.Awake <- true
+                    rigidBody.ApplyImpulse(direction, Vector3.Zero)
             else
                 Console.WriteLine("No hit detected.")
 
@@ -242,7 +254,10 @@ let main argv =
 
 In this article, you learned how to use the Stride Community Toolkit's **code-only** feature with F# for game development in the Stride engine. We explored the basics of integrating F# with Stride to create 3D scenes, handle input, and manage entities—all while leveraging functional programming techniques.
 
-If you'd like to see the full project, you can access it on [GitHub](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp). Feel free to check it out and experiment! 💻
+If you'd like to see the full project, you can access it on GitHub. Feel free to check it out and experiment! 💻:
+
+- [Bepu Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp).
+- [Bullet Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysicsFSharp). 
 
 ## Support Stride Engine 🌟
 
