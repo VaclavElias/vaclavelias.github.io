@@ -154,7 +154,7 @@ dotnet <span class="token function">add</span> package Stride.CommunityToolkit.B
     entity<span class="token punctuation">.</span>Scene <span class="token operator">&lt;-</span> scene
 
     <span class="token comment">// Create the first cube (no collider)</span>
-    <span class="token keyword">let</span> primitive1 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+    <span class="token keyword">let</span> primitive1 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Bepu3DPhysicsOptions</span><span class="token punctuation">(</span>
         Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Gold<span class="token punctuation">)</span><span class="token punctuation">,</span>
         IncludeCollider <span class="token operator">=</span> <span class="token keyword">false</span>
     <span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -162,7 +162,7 @@ dotnet <span class="token function">add</span> package Stride.CommunityToolkit.B
     cube1 <span class="token operator">&lt;-</span> Some primitive1
 
     <span class="token comment">// Create the second cube (with collider)</span>
-    <span class="token keyword">let</span> primitive2 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+    <span class="token keyword">let</span> primitive2 <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Bepu3DPhysicsOptions</span><span class="token punctuation">(</span>
         Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Orange<span class="token punctuation">)</span>
     <span class="token punctuation">)</span><span class="token punctuation">)</span>
     primitive2<span class="token punctuation">.</span>Transform<span class="token punctuation">.</span>Position <span class="token operator">&lt;-</span> <span class="token function">Vector3</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">3.0f</span><span class="token punctuation">,</span> <span class="token number">5.0f</span><span class="token punctuation">,</span> <span class="token number">0.0f</span><span class="token punctuation">)</span>
@@ -238,7 +238,7 @@ dotnet <span class="token function">add</span> package Stride.CommunityToolkit.B
     <span class="token operator">|</span> None <span class="token operator">-></span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     <span class="token keyword">if</span> game<span class="token punctuation">.</span>Input<span class="token punctuation">.</span><span class="token function">IsKeyDown</span><span class="token punctuation">(</span>Keys<span class="token punctuation">.</span>Space<span class="token punctuation">)</span> <span class="token keyword">then</span>
-        <span class="token keyword">let</span> entity <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Primitive3DCreationOptions</span><span class="token punctuation">(</span>
+        <span class="token keyword">let</span> entity <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">Create3DPrimitive</span><span class="token punctuation">(</span>PrimitiveModelType<span class="token punctuation">.</span>Cube<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Bepu3DPhysicsOptions</span><span class="token punctuation">(</span>
             Material <span class="token operator">=</span> game<span class="token punctuation">.</span><span class="token function">CreateMaterial</span><span class="token punctuation">(</span>Color<span class="token punctuation">.</span>Green<span class="token punctuation">)</span><span class="token punctuation">,</span>
             Size <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0.5f</span><span class="token punctuation">)</span>
         <span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -315,8 +315,10 @@ dotnet <span class="token function">add</span> package Stride.CommunityToolkit.B
 <p>In this article, you learned how to use the Stride Community Toolkit's <strong>code-only</strong> feature with F# for game development in the Stride engine. We explored the basics of integrating F# with Stride to create 3D scenes, handle input, and manage entities—all while leveraging functional programming techniques.</p>
 <p>If you'd like to see the full project, you can access it on GitHub. Feel free to check it out and experiment! 💻:</p>
 <ul>
-<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp">Bepu Physics version</a>.</li>
-<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysicsFSharp">Bullet Physics version</a>.</li>
+<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp">Bepu F# Physics version</a>.</li>
+<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysicsFSharp">Bullet F# Physics version</a>.</li>
+<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasics">Bepu C# Physics version</a>.</li>
+<li><a href="https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysics">Bullet C# Physics version</a>.</li>
 </ul>
 <h2 id="support-stride-engine-%F0%9F%8C%9F" tabindex="-1">Support Stride Engine 🌟 <a class="direct-link" href="#support-stride-engine-%F0%9F%8C%9F">🔗</a></h2>
 <p>Stride is an open-source project that thrives on community contributions and support. By using Stride, sharing your experiences, and contributing to the community, you help improve the engine for everyone. 🚀</p>
