@@ -20,15 +20,15 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-plugin-rss": "^2.0.4",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.1"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2"
   },
   "dependencies": {
     "@11ty/eleventy-fetch": "^5.1.0",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "lunr": "^2.3.9",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-table-of-contents": "^0.9.0",
-    "sass": "^1.89.2",
-    "terser": "^5.43.1"
+    "sass": "^1.92.1",
+    "terser": "^5.44.0"
   }
 }
