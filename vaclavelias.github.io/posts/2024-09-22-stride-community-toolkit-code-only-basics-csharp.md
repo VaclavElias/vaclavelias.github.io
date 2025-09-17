@@ -27,7 +27,7 @@ This blog post is part 1 of a 3-part series:
 - Stride Community Toolkit Preview - Code-Only Feature - Refactoring
 
 {% include _alert-svg.html %}
-{% include _alert.html type:'info' title: "Note: This blog post currently uses Bullet Physics. A separate blog post will be published using Bepu Physics, which is now the preferred physics engine for Stride. In the meantime, feel free to continue with this tutorial to get familiar with the core concepts, which remain the same." %}
+{% include _alert.html type:'info' title: "Note: This blog post currently uses Bullet Physics. A separate blog post was published [using Bepu Physics](/stride3d/stride-community-toolkit-code-only-basics-csharp-bepu-physics), which is now the preferred physics engine for Stride. Feel free to continue with this tutorial to get familiar with the core concepts, which remain the same." %}
 
 Table of Contents:
 
@@ -607,7 +607,7 @@ You can still add custom code or use Stride's <a href="https://doc.stride3d.net/
 
 ### Moving Entities Using Physics (With Colliders)
 
-This approach leverages [Stride's physics engine](https://doc.stride3d.net/latest/en/manual/physics/index.html) to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
+This approach leverages [Stride's Bullet physics engine](https://doc.stride3d.net/latest/en/manual/physics-bullet/index.html) to handle movement. By applying forces and impulses to an entity's `RigidbodyComponent`, we can create realistic interactions that respond to gravity, collisions, and other physical phenomena. Key aspects of this approach include:
 
 - **Realistic Movement:** Entities move according to the laws of physics, making this method suitable for objects that need to interact with the environment.
 - **Collisions:** The entity will collide with other objects, allowing for dynamic interactions, such as objects bouncing off surfaces or pushing each other.
@@ -708,7 +708,6 @@ void Update(Scene scene, GameTime time)
         cube1.Transform.Position -= new Vector3(movementSpeed * deltaTime, 0, 0);
     }
 }
-
 ```
 
 - `movementSpeed` determines how fast the cube moves.
