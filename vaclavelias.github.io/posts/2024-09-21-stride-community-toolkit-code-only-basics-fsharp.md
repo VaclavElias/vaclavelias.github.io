@@ -108,7 +108,7 @@ let Start (scene: Scene) =
     entity.Scene <- scene
 
     // Create the first cube (no collider)
-    let primitive1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new Primitive3DCreationOptions(
+    let primitive1 = game.Create3DPrimitive(PrimitiveModelType.Cube, new Bepu3DPhysicsOptions(
         Material = game.CreateMaterial(Color.Gold),
         IncludeCollider = false
     ))
@@ -116,7 +116,7 @@ let Start (scene: Scene) =
     cube1 <- Some primitive1
 
     // Create the second cube (with collider)
-    let primitive2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new Primitive3DCreationOptions(
+    let primitive2 = game.Create3DPrimitive(PrimitiveModelType.Cube, new Bepu3DPhysicsOptions(
         Material = game.CreateMaterial(Color.Orange)
     ))
     primitive2.Transform.Position <- Vector3(-3.0f, 5.0f, 0.0f)
@@ -192,7 +192,7 @@ let Update (scene: Scene) (time: GameTime) =
     | None -> ()
 
     if game.Input.IsKeyDown(Keys.Space) then
-        let entity = game.Create3DPrimitive(PrimitiveModelType.Cube, new Primitive3DCreationOptions(
+        let entity = game.Create3DPrimitive(PrimitiveModelType.Cube, new Bepu3DPhysicsOptions(
             Material = game.CreateMaterial(Color.Green),
             Size = new Vector3(0.5f)
         ))
@@ -256,8 +256,10 @@ In this article, you learned how to use the Stride Community Toolkit's **code-on
 
 If you'd like to see the full project, you can access it on GitHub. Feel free to check it out and experiment! 💻:
 
-- [Bepu Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp).
-- [Bullet Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysicsFSharp). 
+- [Bepu F# Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsFSharp).
+- [Bullet F# Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysicsFSharp).
+- [Bepu C# Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasics).
+- [Bullet C# Physics version](https://github.com/VaclavElias/stride-examples/tree/main/src/CommunityToolkit/CodeOnlyBasicsBulletPhysics). 
 
 ## Support Stride Engine 🌟
 
