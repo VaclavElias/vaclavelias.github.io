@@ -79,9 +79,9 @@
 <p>To follow this tutorial, you should have a solid understanding of F# and .NET.</p>
 <p>These steps were tested on a fresh installation of Windows 11.</p>
 <ol>
-<li>Install the <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">Microsoft Visual C++ 2015-2022 Redistributable</a> (approximately 25MB) and restart your system if prompted.</li>
-<li>Install the <a href="https://dotnet.microsoft.com/en-us/download">.NET 8 SDK x64</a> (around 200MB).</li>
-<li>Install the IDE of your choice. I will be using <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2022</a> (the Community version is free), but you can also use:
+<li>Install the <a href="https://aka.ms/vc14/vc_redist.x64.exe">Microsoft Visual C++ v14 Redistributable (x64)</a> (approximately 19MB) and restart your system if prompted.</li>
+<li>Install the <a href="https://dotnet.microsoft.com/en-us/download">.NET 10 SDK x64</a> (around 215MB).</li>
+<li>Install the IDE of your choice. I will be using <a href="https://visualstudio.microsoft.com/downloads/">Visual Studio 2026</a> (the Community version is free), but you can also use:
 <ul>
 <li><a href="https://code.visualstudio.com/">Visual Studio Code</a> - Free</li>
 <li><a href="https://www.jetbrains.com/rider/download/#section=windows">Rider</a> - Free for non-commercial use</li>
@@ -91,7 +91,7 @@
 </ol>
 <h2 id="getting-started-%F0%9F%9A%80" tabindex="-1">Getting Started 🚀 <a class="direct-link" href="#getting-started-%F0%9F%9A%80">🔗</a></h2>
 <ol>
-<li>Create a new F# Console App (.NET Core) project in your IDE.</li>
+<li>Create a new F# Console App (.NET) project in your IDE.</li>
 <li>Add the Stride Community Toolkit NuGet packages to your project.<pre class="language-bash"><code class="language-bash">dotnet <span class="token function">add</span> package Stride.CommunityToolkit.Windows <span class="token parameter variable">--prerelease</span>
 dotnet <span class="token function">add</span> package Stride.CommunityToolkit.Skyboxes <span class="token parameter variable">--prerelease</span>
 dotnet <span class="token function">add</span> package Stride.CommunityToolkit.Bepu <span class="token parameter variable">--prerelease</span></code></pre>
@@ -114,7 +114,6 @@ dotnet <span class="token function">add</span> package Stride.CommunityToolkit.B
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Core<span class="token punctuation">.</span>Mathematics
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Engine
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Rendering<span class="token punctuation">.</span>Compositing
-<span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Physics
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Games
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>Input
 <span class="token keyword">open</span> Stride<span class="token punctuation">.</span>CommunityToolkit<span class="token punctuation">.</span>Helpers
