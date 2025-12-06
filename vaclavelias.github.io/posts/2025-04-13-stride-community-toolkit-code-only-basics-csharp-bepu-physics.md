@@ -44,7 +44,7 @@ You can also access the [full source code for this post on GitHub](https://githu
 
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
-We will be using a standard [.NET 8 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
+We will be using a standard [.NET 10 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
 
 Here’s the process I found to be the easiest way to begin with the code-only approach:
 
@@ -107,9 +107,9 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 
 These prerequisites were tested on a clean Windows 11 installation.
 
-1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (approximately 25MB) and restart your system if prompted.
-2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 200MB).
-3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
+1. Install the [Microsoft Visual C++ v14 Redistributable (x64)](https://aka.ms/vc14/vc_redist.x64.exe) (approximately 19MB) and restart your system if prompted.
+2. Install the [.NET 10 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 215MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2026](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
    - [Visual Studio Code](https://code.visualstudio.com/) - Free
    - [Rider](https://www.jetbrains.com/rider/download/#section=windows) - Free for non-commercial use
    - Any other IDE that supports .NET development
@@ -138,7 +138,7 @@ While Stride is a cross-platform engine and you can build your game on Windows a
 
 🌍 Welcome, brave explorers of the digital wilderness! Today, we embark on an exciting journey into the heart of the Stride game engine. Our guide? None other than the Stride Community Toolkit.
 
-In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 8 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
+In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 10 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
 
 As we venture further, we'll bring light into our world, transforming the empty void into a vibrant blue expanse. But what's a world without inhabitants? We'll conjure a 3D capsule, our first digital lifeform, into existence.
 
@@ -150,11 +150,11 @@ Finally, we’ll display messages and feedback with both console output and on-s
 
 So, refresh your mouse agility skills 🖱️, and join us on this exhilarating expedition. Let's dive into the code! 💻
 
-## Step 1: Create a New C# .NET 8 Console App - Nothingness ⚫
+## Step 1: Create a New C# .NET 10 Console App - Nothingness ⚫
 
-1. Create a new C# .NET 8 Console App in your IDE or use the command line:
+1. Create a new C# .NET 10 Console App in your IDE or use the command line:
     ```bash
-    dotnet new console --framework net8.0 --name YourProjectName
+    dotnet new console --framework net10.0 --name YourProjectName
     ```
 1. Add the following NuGet package: 📦
     ```bash
@@ -180,6 +180,8 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
 1. Behold the black void of nothingness 🙀.
 
 {% include _alert-svg.html %}
+{% include _alert.html type:'info' title:'If you\'re still on Stride 4.2, use <code>--version 1.0.0-preview.61</code> instead of <code>--prerelease</code>, which targets Stride 4.3. This applies to all NuGet packages mentioned below.' %}
+
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
 {% include _alert.html type:'success' title: "You’ve learned how to set up a Stride game window using the Stride Community Toolkit. Even though it's just a black screen, the game window is running, marking the first step in your journey." %}

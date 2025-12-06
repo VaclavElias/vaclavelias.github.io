@@ -47,7 +47,7 @@ You can also access the [full source code for this post on GitHub](https://githu
 
 Additional details on the benefits of the code-only approach can be found [here](https://stride3d.github.io/stride-community-toolkit/manual/code-only/index.html) in the toolkit documentation.
 
-We will be using a standard [.NET 8 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
+We will be using a standard [.NET 10 Console App](https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio) to create a simple game by adding some NuGet packages to get started.
 
 Here’s the process I found to be the easiest way to begin with the code-only approach:
 
@@ -109,9 +109,9 @@ Before diving into the steps, it's helpful to understand some key terms that wil
 
 These prerequisites were tested on a clean Windows 11 installation.
 
-1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (approximately 25MB) and restart your system if prompted.
-2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 200MB).
-3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
+1. Install the [Microsoft Visual C++ v14 Redistributable (x64)](https://aka.ms/vc14/vc_redist.x64.exe) (approximately 19MB) and restart your system if prompted.
+2. Install the [.NET 10 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 215MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2026](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
    - [Visual Studio Code](https://code.visualstudio.com/) - Free
    - [Rider](https://www.jetbrains.com/rider/download/#section=windows) - Free for non-commercial use
    - Any other IDE that supports .NET development
@@ -128,7 +128,7 @@ Also, the code snippets contain comments which part of the code is new or update
 
 The code-only approach is currently available only on Windows. The toolkit provides a set of NuGet packages that you can use to create a game without the need for the Game Studio.
 
-## Code-Only on Other Platforms 🐧 
+## Code-Only on Other Platforms 🐧
 
 Code-only development isn't fully supported on non-Windows platforms yet, but progress is being made. Thanks to [this PR](https://github.com/stride3d/stride/pull/2279), the build tool `Stride.Core.Assets.CompilerApp`, which is responsible for building assets, now works on Linux as a cross-platform binary.
 
@@ -140,7 +140,7 @@ While Stride is a cross-platform engine and you can build your game on Windows a
 
 🌍 Welcome, brave explorers of the digital wilderness! Today, we embark on an exciting journey into the heart of the Stride game engine. Our guide? None other than the Stride Community Toolkit.
 
-In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 8 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
+In the vast expanse of the coding universe, we'll create a new world from nothing but a .NET 10 Console App. Prepare to witness the birth of a game window, a black void of nothingness that will soon teem with life 🫎.
 
 As we venture further, we'll bring light into our world, transforming the empty void into a vibrant blue expanse. But what's a world without inhabitants? We'll conjure a 3D capsule, our first digital lifeform, into existence.
 
@@ -152,11 +152,11 @@ Finally, we’ll display messages and feedback with both console output and on-s
 
 So, refresh your mouse agility skills 🖱️, and join us on this exhilarating expedition. Let's dive into the code! 💻
 
-## Step 1: Create a New C# .NET 8 Console App - Nothingness ⚫
+## Step 1: Create a New C# .NET 10 Console App - Nothingness ⚫
 
-1. Create a new C# .NET 8 Console App in your IDE or use the command line:
+1. Create a new C# .NET 10 Console App in your IDE or use the command line:
     ```bash
-    dotnet new console --framework net8.0 --name YourProjectName
+    dotnet new console --framework net10.0 --name YourProjectName
     ```
 1. Add the following NuGet package: 📦
     ```bash
@@ -180,6 +180,9 @@ So, refresh your mouse agility skills 🖱️, and join us on this exhilarating 
     ``` 
 1. Run the application.
 1. Behold the black void of nothingness 🙀.
+
+{% include _alert-svg.html %}
+{% include _alert.html type:'info' title:'If you\'re still on Stride 4.2, use <code>--version 1.0.0-preview.61</code> instead of <code>--prerelease</code>, which targets Stride 4.3. This applies to all NuGet packages mentioned below.' %}
 
 {% include _alert.html type:'info' title:'The NuGet package <code>Stride.CommunityToolkit.Windows</code> is used specifically for code-only projects. You should use the <code>Stride.CommunityToolkit</code> NuGet package when referencing from a regular Stride project generated from the Game Studio.' %}
 
@@ -318,6 +321,8 @@ Run the application again and use right-click and hold to rotate the camera towa
 ## Step 5: Reposition the Capsule - More Excitement! 📍
 
 Let's reposition the capsule to add a bit more excitement and give us a few extra seconds to admire it before it falls. Update the `Start()` method as shown below, and don't forget to add the `Stride.Core.Mathematics` namespace for handling the 3D positioning.
+
+{% include _alert.html type:'info' title:'Make sure that <code>Stride.Core.Mathematics</code> is used instead of <code>System.Numerics</code> which also contains <code>Vector3</code>.' %}
 
 Update the `Program.cs` file to look like this, or simply replace the entire file:
 
@@ -1389,7 +1394,6 @@ void Update(Scene scene, GameTime time)
         }
     }
 }
-
 ```
 
 - `font` stores the `SpriteFont` used for the UI text block.
@@ -1402,6 +1406,8 @@ void Update(Scene scene, GameTime time)
 - `RenderGroup.Group31` specifies the rendering order of the UI element, ensuring it appears on top of other elements.
 
 Save and run the application. You should now see the text **"Hello, Stride!"** displayed at the bottom left corner of the screen. 📺
+
+{% include _alert.html type:'info' title:'Make sure that you added <code>AddCleanUIStage()</code> .' %}
 
 Congratulations! 🎉 You've successfully added output to the screen, using both simple debugging text and a more polished UI element. This visual feedback enhances the player experience by providing real-time information and interactions. 🚀
 
@@ -1438,10 +1444,13 @@ if (game.Input.IsKeyDown(Keys.Space))
         Size = new Vector3(0.5f),
     });
 
-    entity.Transform.Position = new Vector3(0, 10, 0);
+    entity.Transform.Position = VectorHelper.RandomVector3(
+        xRange: [-3, 3],
+        yRange: [10, 13],
+        zRange: [-3, 3]
+    );
     entity.Scene = scene;
 }
-
 ```
 
 Now, run the application, zoom out the camera to view the entire ground, and press the **Space** key. Watch as new cubes spawn, pushing your FPS to its limits! 🚀 You can still use the left mouse button to apply forces to the cubes and the capsule, but that’s getting a bit old, isn’t it? 🥱

@@ -33,16 +33,16 @@ To follow this tutorial, you should have a solid understanding of F# and .NET.
 
 These steps were tested on a fresh installation of Windows 11.
 
-1. Install the [Microsoft Visual C++ 2015-2022 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) (approximately 25MB) and restart your system if prompted.
-2. Install the [.NET 8 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 200MB).
-3. Install the IDE of your choice. I will be using [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
+1. Install the [Microsoft Visual C++ v14 Redistributable (x64)](https://aka.ms/vc14/vc_redist.x64.exe) (approximately 19MB) and restart your system if prompted.
+2. Install the [.NET 10 SDK x64](https://dotnet.microsoft.com/en-us/download) (around 215MB).
+3. Install the IDE of your choice. I will be using [Visual Studio 2026](https://visualstudio.microsoft.com/downloads/) (the Community version is free), but you can also use:
    - [Visual Studio Code](https://code.visualstudio.com/) - Free
    - [Rider](https://www.jetbrains.com/rider/download/#section=windows) - Free for non-commercial use
    - Any other IDE that supports .NET development
 
 ## Getting Started 🚀
 
-1. Create a new F# Console App (.NET Core) project in your IDE.
+1. Create a new F# Console App (.NET) project in your IDE.
 1. Add the Stride Community Toolkit NuGet packages to your project.
     ```bash
     dotnet add package Stride.CommunityToolkit.Windows --prerelease
@@ -68,7 +68,6 @@ open Stride.CommunityToolkit.Rendering.ProceduralModels
 open Stride.Core.Mathematics
 open Stride.Engine
 open Stride.CommunityToolkit.Rendering.Compositing
-open Stride.Physics
 open Stride.Games
 open Stride.Input
 open Stride.CommunityToolkit.Helpers
